@@ -1,6 +1,6 @@
 import "../styles/Login.css";
 
-export default function Login( {nomeUsuario} ) {
+export default function Login( {nomeUsuario,irParaEsqueceuSenha } ) {
 
     const enviarFormulario = (e) => {
         e.preventDefault(); //página não recarrega
@@ -10,9 +10,9 @@ export default function Login( {nomeUsuario} ) {
 
 
     return (
-        <div className="login-container">
-            <div className="login-card">
-                <div className="login-retangulo">
+        <div className="card-container">
+            <div className="card-fundo">
+                <div className="logo-retangulo">
                     <div className="logo">
                         <svg
                             width="32"
@@ -26,11 +26,11 @@ export default function Login( {nomeUsuario} ) {
                             <circle cx="20" cy="12" r="4" fill="#7C7C7C" />
                             </svg>
                     </div>
-                    <h1 className="login-titulo">FBP</h1>
+                    <h1 className="logo-titulo">FBP</h1>
                 </div>
 
 
-                <form onSubmit={enviarFormulario} className="login-form">
+                <form onSubmit={enviarFormulario} className="form">
                     <div className="form-container">
                         <label htmlFor="email" className="form-label">Email</label>
                         <input type="email" id="email" className="form-input" required />
@@ -42,9 +42,9 @@ export default function Login( {nomeUsuario} ) {
                     </div>
 
                     <div className="form-acoes">
-                    <a href="#" className="esqueceu-senha">Esqueceu a senha?</a>
+                    <button type="button" className="esqueceu-senha" onClick={irParaEsqueceuSenha}>Esqueceu a senha?</button>
                     
-                    <button type="submit" className="login-botao">Logar</button>
+                    <button type="submit" className="botao">Logar</button>
                     </div>
                 </form>
             </div>

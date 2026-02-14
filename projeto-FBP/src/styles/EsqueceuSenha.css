@@ -7,7 +7,7 @@ body {
     justify-content: center;
     background: linear-gradient(135deg, #7C7C7C 0%, #8A8A8A 100%);
     margin: 0;
-    }
+}
 
 .card-container {
     width: 100vw;
@@ -49,6 +49,14 @@ body {
     color: #7C7C7C;
 }
 
+.logo-subtitulo {
+    font-size: 20px; 
+    font-weight: bold;
+    color: #7C7C7C;
+    text-align: center;
+    margin-bottom: 32px;
+}
+
 .form {
     display: flex;
     flex-direction: column;
@@ -63,10 +71,9 @@ body {
 .form-label {
     margin-bottom: 8px; 
     font-size: 14px;
-    font-weight: 500;
     color: #7C7C7C;
 }
-  
+
 .form-input {
     padding: 15px 16px; 
     border-radius: 8px; 
@@ -87,19 +94,22 @@ body {
     gap: 16px;
 }
 
-.esqueceu-senha {
+.botao1 {
+    padding: 15px 32px; 
+    border-radius: 8px;
     border: none;
     cursor: pointer;
+    background-color: #F4E87C;
     color: #7C7C7C;
-    background-color: #ffffff;
-    font-size: 12px; 
+    font-size: 14px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
   
-.esqueceu-senha:hover {
-    text-decoration: underline;
+.botao1:hover {
+    opacity: 0.9;
 }
 
-.botao {
+.botao2 {
     padding: 15px 32px; 
     border-radius: 8px;
     border: none;
@@ -110,6 +120,6 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
   
-.botao:hover {
+.botao2:hover {
     opacity: 0.9;
 }
