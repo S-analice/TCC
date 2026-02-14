@@ -2,21 +2,39 @@ import "../styles/Login.css";
 import { useState } from "react";
 import Carregando from "../components/Carregando";
 
-export default function Login( {nomeUsuario,irParaEsqueceuSenha, irParaHome } ) {
+export default function Login( {nomeUsuario, irParaEsqueceuSenha, irParaHome } ) {
 
     const [carregando, setCarregando] = useState(false);
 
-    const enviarFormulario = (e) => {
-        e.preventDefault(); //página não recarrega
+    const [email, setEmail] = useState("");
+    const [senha, setSenha] = useState("");
+    const [erro, setErro] = useState("");
 
-        nomeUsuario("João Silva");
+    const enviarFormulario = (e) => {
+        e.preventDefault(); // página não recarrega
 
         setCarregando(true);
+        setErro(""); // apaga erro anterior
 
         // simular carregamento
         setTimeout(() => {
-           setCarregando(false); 
-           irParaHome();
+
+            const funcionario = {
+                nome:"João Silva",
+                email:"joao@gmail.com",
+                senha:"123456"
+            }
+
+           if(email === funcionario.email && senha === funcionario.senha) {
+            nomeUsuario(funcionario.nome);
+            setCarregando(false); 
+            irParaHome();
+           }
+
+           else{
+            setCarregando(false);
+            setErro("Email ou senha inválidos!");
+           }
         }, 2000);
     }
 
@@ -28,19 +46,8 @@ export default function Login( {nomeUsuario,irParaEsqueceuSenha, irParaHome } ) 
 
             <div className="card-fundo">
                 <div className="logo-retangulo">
-                    <div className="logo">
-                        <svg
-                            width="32"
-                            height="32"
-                            viewBox="0 0 32 32"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                            >
-                            <path d="M8 8H16V16H8V8Z" fill="#F4E87C" />
-                            <path d="M16 16H24V24H16V16Z" fill="#F4E87C" />
-                            <circle cx="20" cy="12" r="4" fill="#7C7C7C" />
-                            </svg>
-                    </div>
+                    
+                    <img src="/logo.jpeg" alt="Logo FBP" className="logo-img" />    
                     <h1 className="logo-titulo">FBP</h1>
                 </div>
 
@@ -48,13 +55,15 @@ export default function Login( {nomeUsuario,irParaEsqueceuSenha, irParaHome } ) 
                 <form onSubmit={enviarFormulario} className="form">
                     <div className="form-container">
                         <label htmlFor="email" className="form-label">Email</label>
-                        <input type="email" id="email" className="form-input" required />
+                        <input type="email" id="email" className="form-input" value={email} onChange={(e) => setEmail(e.target.value)} required />
                     </div>
 
                     <div className="form-container">
                         <label htmlFor="password" className="form-label">Senha</label>
-                        <input type="password" id="password" className="form-input" required />
+                        <input type="password" id="password" className="form-input" value={senha} onChange={(e) => setSenha(e.target.value)} required />
                     </div>
+
+                    {erro && <p className="erro-texto">{erro}</p>}
 
                     <div className="form-acoes">
                     <button type="button" className="esqueceu-senha" onClick={irParaEsqueceuSenha}>Esqueceu a senha?</button>

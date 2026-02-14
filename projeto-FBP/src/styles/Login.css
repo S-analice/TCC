@@ -33,14 +33,11 @@ body {
     margin-bottom: 32px; 
 }
 
-.logo {
-    width: 64px;  
+.logo-img {
+    width: 64px; 
     height: 64px; 
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #98D8C8;
+    border-radius: 50%; 
+    object-fit: cover; 
 }
 
 .logo-titulo {
@@ -112,4 +109,13 @@ body {
   
 .botao:hover {
     opacity: 0.9;
+    transform: scale(1.1);
 }
+
+.erro-texto {
+    color: #c0392b;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 8px;
+  }  

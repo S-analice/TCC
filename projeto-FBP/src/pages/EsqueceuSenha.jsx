@@ -8,15 +8,31 @@ export default function EsqueceuSenha({ voltarParaLogin }) {
     const [carregando, setCarregando] = useState(false);
     const [mostrarMensagem, setMostrarMensagem] = useState(false);
 
+    const [email, setEmail] = useState("");
+    const [erro, setErro] = useState("");
+
     const enviarFormulario = (e) => {
         e.preventDefault();
 
         setCarregando(true);
+        setErro(""); // apaga erro anterior
 
         // simular carregamento
         setTimeout(() => {
-            setCarregando(false);
+        
+            const funcionario = {
+                email:"joao@gmail.com",
+            }
+
+           if(email === funcionario.email) {
+            setCarregando(false); 
             setMostrarMensagem(true);
+           }
+
+           else{
+            setCarregando(false);
+            setErro("Email inválido!");
+           }
         }, 2000);
     };
     
@@ -42,19 +58,8 @@ export default function EsqueceuSenha({ voltarParaLogin }) {
 
             <div className="card-fundo">
                 <div className="logo-retangulo">
-                    <div className="logo">
-                        <svg
-                            width="32"
-                            height="32"
-                            viewBox="0 0 32 32"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                            >
-                            <path d="M8 8H16V16H8V8Z" fill="#F4E87C" />
-                            <path d="M16 16H24V24H16V16Z" fill="#F4E87C" />
-                            <circle cx="20" cy="12" r="4" fill="#7C7C7C" />
-                            </svg>
-                    </div>
+
+                    <img src="/logo.jpeg" alt="Logo FBP" className="logo-img" />    
                     <h1 className="logo-titulo">FBP</h1>
                 </div>
 
@@ -66,8 +71,10 @@ export default function EsqueceuSenha({ voltarParaLogin }) {
 
                     <div className="form-container">
                         <label htmlFor="email" className="form-label">Email</label>
-                        <input type="email" id="email" className="form-input" required />
+                        <input type="email" id="email" className="form-input" value={email} onChange={(e) => setEmail(e.target.value)} required />
                     </div>
+
+                    {erro && <p className="erro-texto">{erro}</p>}
 
                     <div className="form-acoes">
                     <button type="button" className="botao1" onClick={voltarParaLogin}>Voltar</button>
