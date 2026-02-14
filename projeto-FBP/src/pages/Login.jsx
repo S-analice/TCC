@@ -1,16 +1,31 @@
 import "../styles/Login.css";
+import { useState } from "react";
+import Carregando from "../components/Carregando";
 
-export default function Login( {nomeUsuario,irParaEsqueceuSenha } ) {
+export default function Login( {nomeUsuario,irParaEsqueceuSenha, irParaHome } ) {
+
+    const [carregando, setCarregando] = useState(false);
 
     const enviarFormulario = (e) => {
         e.preventDefault(); //página não recarrega
 
         nomeUsuario("João Silva");
+
+        setCarregando(true);
+
+        // simular carregamento
+        setTimeout(() => {
+           setCarregando(false); 
+           irParaHome();
+        }, 2000);
     }
 
 
     return (
         <div className="card-container">
+
+            {carregando &&<Carregando />}
+
             <div className="card-fundo">
                 <div className="logo-retangulo">
                     <div className="logo">
