@@ -1,0 +1,55 @@
+.is-fundo {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial;
+    z-index: 1000;
+  }
+  
+  .is-container {
+    background: white;
+    color: #7c7c7c;
+    padding: 30px;
+    border-radius: 20px;
+    width: 350px;
+  }
+  
+  .is-foto {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background-color: #98d8c8;
+    margin: 15px auto;
+  }
+  
+  .is-caixinha {
+    background: #f5f5f5;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .is-caixinha span {
+    font-size: 12px;
+  }
+  
+  .is-botao-fechar {
+    width: 100%;
+    margin-top: 15px;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: #98d8c8;
+    color: #7c7c7c;
+    cursor: pointer;
+  }
+
+  .is-botao-fechar:hover {
+    opacity: 0.9;
+    transform: scale(1.1);
+  }

@@ -1,0 +1,123 @@
+.barra-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #f5f5f5;
+
+    font-family: Arial;
+  }
+  
+.barra-superior {
+    background-color: #e0e0e0;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+}
+
+.usuario-retangulo span:hover {
+    opacity: 0.9;
+}
+  
+.usuario-botao {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    color: #7c7c7c;
+}
+  
+.usuario-icon-fundo {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: #98d8c8;
+}
+
+.menu-usuario {
+    position: absolute;
+    top: 60px;
+    right: 0px;
+    background: white;
+    margin-top: 5px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+    z-index: 10;
+}
+  
+.menu-usuario button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background: white;
+    cursor: pointer;
+}
+  
+.menu-usuario button:hover {
+    background-color: #f0f0f0;
+}
+  
+.barra-navegacao {
+    background-color: #7c7c7c;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+  
+.logo-retangulo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+}
+  
+.logo-img {
+    width: 40px; 
+    height: 40px; 
+    border-radius: 50%; 
+    object-fit: cover;
+}
+  
+.menu-navegacao {
+    display: flex;
+    gap: 20px;
+}
+  
+.menu-navegacao button {
+    background: transparent;
+    border: none;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+}
+  
+.menu-navegacao button:hover {
+    background-color: rgba(255,255,255,0.2);
+}
+  
+.menu-navegacao .ativo {
+    background-color: #98d8c8;
+    color: #7c7c7c;
+}
+
+.menu-navegacao .ativo:hover {
+    background-color: #98d8c8;
+}
+  
+.conteudo {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+}

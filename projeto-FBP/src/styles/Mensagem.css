@@ -1,62 +1,62 @@
-.container {
-    position: fixed;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 100;
-  }
+.msg-container {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial;
+  z-index: 100;
+}
   
-  .card {
-    background-color: #ffffff;
-    border-radius: 16px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-    padding: 32px;
-    max-width: 400px;
-    width: 100vw;
-    margin: 0 16px;
-  }
+.msg-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  padding: 32px;
+  max-width: 400px;
+  width: 100vw;
+  margin: 0 16px;
+}
   
-  .card-retangulo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+.msg-retangulo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
   
-  .card-icon {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    background-color: #98D8C8;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 16px;
-  }
+.msg-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: #98D8C8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
   
-  .texto {
-    font-size: 18px;
-    text-align: center;
-    margin-bottom: 24px;
-    color: #7C7C7C;
-    font-family: Arial;
-  }
+.msg-texto {
+  font-size: 18px;
+  text-align: center;
+  margin-bottom: 24px;
+  color: #7C7C7C;
+  font-family: Arial;
+}
   
-  .botao {
-    padding: 12px 32px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    background-color: #98D8C8;
-    color: #7C7C7C;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    font-size: 14px;
-    font-family: Arial;
-  }
+.msg-botao {
+  padding: 12px 32px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background-color: #98D8C8;
+  color: #7C7C7C;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  font-size: 14px;
+  font-family: Arial;
+}
   
-  .botao:hover {
-    opacity: 0.9;
-    transform: scale(1.1);
-  }
-  
+.msg-botao:hover {
+  opacity: 0.9;
+  transform: scale(1.1);
+}

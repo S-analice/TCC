@@ -1,31 +1,29 @@
 /*sendo uma classe a margin não funcionava*/
 body {
-    width: 100vw;
-    height: 100vh;
+    margin: 0;
+}
+
+.login-container {
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     background: linear-gradient(135deg, #7C7C7C 0%, #8A8A8A 100%);
-    margin: 0;
-    }
-
-.card-container {
-    width: 100vw;
-    max-width: 400px; 
-    padding-left: 32px;  
-    padding-right: 32px; 
 
     font-family: Arial;
 }
 
-.card-fundo {
+.login-card {
+    width: 100vh;
+    max-width: 400px;
+    padding: 32px;
     background-color: #ffffff;
     border-radius: 16px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
     padding: 32px;
 }
 
-.logo-retangulo {
+.login-retangulo {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -33,20 +31,20 @@ body {
     margin-bottom: 32px; 
 }
 
-.logo-img {
+.login-img {
     width: 64px; 
     height: 64px; 
     border-radius: 50%; 
     object-fit: cover; 
 }
 
-.logo-titulo {
+.login-titulo {
     font-size: 36px; 
     font-weight: bold;
     color: #7C7C7C;
 }
 
-.form {
+.login-form {
     display: flex;
     flex-direction: column;
     gap: 24px; 
@@ -96,7 +94,7 @@ body {
     text-decoration: underline;
 }
 
-.botao {
+.login-botao {
     padding: 15px 32px; 
     border-radius: 8px;
     border: none;
@@ -107,7 +105,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
   
-.botao:hover {
+.login-botao:hover {
     opacity: 0.9;
     transform: scale(1.1);
 }
@@ -118,4 +116,4 @@ body {
     font-weight: bold;
     text-align: center;
     margin-top: 8px;
-  }  
+}  
