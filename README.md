@@ -4,7 +4,7 @@ cd projeto-FBP
 npm install
 npm run dev
 
-São 17 arquivos ao todo: 7/17
+São 19 arquivos ao todo: 7/19
 
 12/02 - Iniciei o projeto em react + js, fazendo a tela de login 
 
@@ -14,4 +14,4 @@ São 17 arquivos ao todo: 7/17
 
 16/02 - Componente da barra de navegação e infos do usuario
 
-*foto no quase back e o caminho nos nav 
+17/02 - Tela, modais e mensagem de motorista

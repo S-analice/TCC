@@ -23,11 +23,12 @@ export default function Login( {definirUsuario, irParaEsqueceuSenha, irParaHome 
         setTimeout(() => {
 
             const usuario = {
-                nome:"João Silva",
-                email:"joao.silva@gmail.com",
-                telefone: "(41) 99258-7344",
-                senha:"123456J",
-                turno:"6:00 - 18:00"
+                nome:"Senhor Cabeça de Batata",
+                email:"srbatata@gmail.com",
+                telefone: "(41) 99123-4567",
+                senha:"123456Sr",
+                turno:"6:00 - 18:00",
+                foto:"/usuario.jpg"
             };
 
            if(email === usuario.email && senha === usuario.senha) {

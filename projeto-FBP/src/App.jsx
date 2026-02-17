@@ -1,7 +1,14 @@
 import Login from "./pages/Login"
 import EsqueceuSenha from "./pages/EsqueceuSenha";
+
 import Barra from "./components/Barra";
 import InfoUsuarioModal from "./components/InfoUsuarioModal";
+
+import Home from "./pages/Home";
+import Funcionario from "./pages/Funcionario";
+import Motorista from "./pages/Motorista";
+import Patio from "./pages/Patio";
+import Relatorio from "./pages/Relatorio";
 
 import { useState } from "react";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
@@ -31,6 +38,24 @@ function App() {
     navigate("/");
   }
 
+  const renderizarPaginaInterna = () => {
+    switch (paginaInterna) {
+      case "home":
+        return <Home usuario={usuario} />;
+      case "funcionario":
+        return <Funcionario usuario={usuario} />;
+      case "motorista":
+        return <Motorista usuario={usuario} />;
+      case "patio":
+        return <Patio usuario={usuario} />;
+      case "relatorio":
+        return <Relatorio usuario={usuario} />;
+      default:
+        return <Home usuario={usuario} />;
+    }
+  };
+
+
   return (
     <>
       {/*mapa*/} 
@@ -47,13 +72,7 @@ function App() {
               mostrarInfoUsuario={() => setMostrarModalUsuario(true)}
               voltarParaLogin={voltarParaLogin}
             >
-              <div>
-                {paginaInterna === "home" && <h2>Página Home</h2>}
-                {paginaInterna === "funcionario" && <h2>Página Funcionário</h2>}
-                {paginaInterna === "motorista" && <h2>Página Motorista</h2>}
-                {paginaInterna === "patio" && <h2>Página Pátio</h2>}
-                {paginaInterna === "relatorio" && <h2>Página Relatório</h2>}
-              </div>
+              {renderizarPaginaInterna()}
             </Barra>
           }
         />
