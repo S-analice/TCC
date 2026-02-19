@@ -1,0 +1,100 @@
+.fm-fundo {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial;
+    z-index: 1000;
+}
+  
+.fm-card {
+    background: white;
+    color: #7c7c7c;
+    padding: 30px;
+    border-radius: 20px;
+    width: 350px;
+}
+
+.fm-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px; 
+}
+
+.fm-form-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.fm-form-container select {
+    color: #7C7C7C;
+}
+
+.fm-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #7C7C7C;
+}
+
+.fm-input {
+    padding: 15px 16px; 
+    border-radius: 8px; 
+    border: 2px solid #98D8C8;
+    background-color: #FEFDFB;
+    font-size: 14px;
+    outline: none;
+   
+}
+  
+.fm-input:focus {
+    border: 2px solid #7C7C7C;
+}
+  
+.fm-form-acoes {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.fm-cancelar {
+    padding: 15px 32px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 8px;
+    background-color: #F4E87C;
+    color: #7C7C7C;
+}
+
+.fm-cancelar:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+}
+
+.fm-salvar {
+    padding: 15px 32px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 8px;
+    background-color: #98D8C8;
+    color: #7C7C7C;
+}
+
+.fm-salvar:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+}
+
+.erro-texto {
+    color: #c0392b;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 8px;
+}  

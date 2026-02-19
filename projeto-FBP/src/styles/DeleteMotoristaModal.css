@@ -1,0 +1,90 @@
+.dmm-fundo {
+    position: fixed;
+    inset: 0; /* top, right, bottom, left = 0 */
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial;
+    z-index: 1000;
+}
+  
+.dmm-card {
+    background: white;
+    color: #7c7c7c;
+    padding: 30px;
+    border-radius: 20px;
+    width: 350px;
+}
+
+.dmm-card h2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dmm-card > p {
+    text-align: center;
+    font-size: 14px;
+    margin-bottom: 20px;
+    color: #7C7C7C;
+}
+
+.dmm-caixinha {
+    background: #f5f5f5;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+  
+.dmm-caixinha p {
+    font-size: 12px;
+    color: #7C7C7C;
+    margin: 0;
+}
+
+.dmm-caixinha strong {
+    font-size: 14px;
+    margin-top: 6px;
+}
+
+.dmm-form-acoes {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.botao1 {
+    padding: 15px 32px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 8px;
+    background-color: #F4E87C;
+    color: #7C7C7C;
+}
+
+.botao1:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+}
+
+.botao2 {
+    padding: 15px 32px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 8px;
+    background-color: #98D8C8;
+    color: #7C7C7C;
+}
+
+.botao2:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+}

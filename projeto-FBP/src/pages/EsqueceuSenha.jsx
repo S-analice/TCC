@@ -11,7 +11,7 @@ export default function EsqueceuSenha({ voltarParaLogin }) {
     const [email, setEmail] = useState("");
 
     const enviarFormulario = (e) => {
-        e.preventDefault();
+        e.preventDefault(); // página não recarrega
 
         setCarregando(true);
 
@@ -24,7 +24,7 @@ export default function EsqueceuSenha({ voltarParaLogin }) {
     
     const fecharMensagem = () => {
         setMostrarMensagem(false);
-
+    
         if (voltarParaLogin) {
           voltarParaLogin();
         }
@@ -55,13 +55,13 @@ export default function EsqueceuSenha({ voltarParaLogin }) {
                 
                 <form onSubmit={enviarFormulario} className="es-form">
 
-                    <div className="form-container">
-                        <label htmlFor="email" className="form-label">Email</label>
-                        <input type="email" id="email" className="form-input" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                    <div className="es-form-container">
+                        <label htmlFor="email" className="es-label">Email</label>
+                        <input type="email" id="email" className="es-input" value={email} onChange={(e) => setEmail(e.target.value)} required />
                     </div>
 
 
-                    <div className="form-acoes">
+                    <div className="es-form-acoes">
                     <button type="button" className="botao1" onClick={voltarParaLogin}>Voltar</button>
                     
                     <button type="submit" className="botao2">Enviar</button>

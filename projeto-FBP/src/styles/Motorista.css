@@ -1,0 +1,117 @@
+body {
+    margin: 0;
+}
+
+.motorista-container {
+    min-height: 100vh;
+    font-family: Arial;
+}
+
+.motorista-topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.motorista-topo h2 {
+    font-size: 20px;
+    color: #7C7C7C;
+}
+
+.motorista-topo button {
+    padding: 15px 32px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    background-color: #98D8C8;
+    color: #7C7C7C;
+    font-size: 14px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.motorista-topo button:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+}
+
+.motorista-pesquisa {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 15px 16px;
+    border-radius: 8px;
+    border: 2px solid #98D8C8;
+    background-color: #FEFDFB;
+    font-size: 14px;
+    outline: none;
+    margin-bottom: 24px;
+}
+
+.motorista-pesquisa:focus {
+    border: 2px solid #7C7C7C;
+}
+
+.motorista-linha {
+    height: 2px;
+    background-color: #7C7C7C;
+    margin-bottom: 24px;
+}
+
+.motorista-tabela {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.motorista-tabela th {
+    padding: 16px;
+    text-align: left;
+    background-color: #7C7C7C;
+    color: white;
+    font-weight: bold;
+}
+
+.motorista-tabela td {
+    padding: 15px 16px;
+    color: #7C7C7C;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.motorista-tabela tr:hover {
+    background-color: #F5F5F5;
+}
+
+.motorista-atualizar {
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 8px;
+    background-color: #F4E87C;
+    color: #7C7C7C;
+}
+
+.motorista-atualizar:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+}
+
+.motorista-remover {
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 8px;
+    background-color: #98D8C8;
+    color: #7C7C7C;
+}
+
+.motorista-remover:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+}

@@ -43,9 +43,9 @@ function App() {
       case "home":
         return <Home usuario={usuario} />;
       case "funcionario":
-        return <Funcionario usuario={usuario} />;
+        return <Funcionario />;
       case "motorista":
-        return <Motorista usuario={usuario} />;
+        return <Motorista  />;
       case "patio":
         return <Patio usuario={usuario} />;
       case "relatorio":

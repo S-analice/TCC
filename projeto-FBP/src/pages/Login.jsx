@@ -59,22 +59,22 @@ export default function Login( {definirUsuario, irParaEsqueceuSenha, irParaHome 
 
 
                 <form onSubmit={enviarFormulario} className="login-form">
-                    <div className="form-container">
-                        <label htmlFor="email" className="form-label">Email</label>
-                        <input type="email" id="email" className="form-input" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                    <div className="login-form-container">
+                        <label htmlFor="email" className="login-label">Email</label>
+                        <input type="email" id="email" className="login-input" value={email} onChange={(e) => setEmail(e.target.value)} required />
                     </div>
 
-                    <div className="form-container">
-                        <label htmlFor="password" className="form-label">Senha</label>
-                        <input type="password" id="password" className="form-input" value={senha} onChange={(e) => setSenha(e.target.value)} required />
+                    <div className="login-form-container">
+                        <label htmlFor="password" className="login-label">Senha</label>
+                        <input type="password" id="password" className="login-input" value={senha} onChange={(e) => setSenha(e.target.value)} required />
                     </div>
 
                     {erro && <p className="erro-texto">{erro}</p>}
 
-                    <div className="form-acoes">
-                    <button type="button" className="esqueceu-senha" onClick={irParaEsqueceuSenha}>Esqueceu a senha?</button>
-                    
-                    <button type="submit" className="login-botao">Logar</button>
+                    <div className="login-form-acoes">
+                        <button type="button" className="esqueceu-senha" onClick={irParaEsqueceuSenha}>Esqueceu a senha?</button>
+                        
+                        <button type="submit" className="login-botao">Logar</button>
                     </div>
                 </form>
             </div>

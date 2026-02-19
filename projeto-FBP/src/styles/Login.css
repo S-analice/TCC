@@ -14,7 +14,7 @@ body {
 }
 
 .login-card {
-    width: 100vh;
+    width: 100%;
     max-width: 400px;
     padding: 32px;
     background-color: #ffffff;
@@ -50,19 +50,19 @@ body {
     gap: 24px; 
 }
 
-.form-container {
+.login-form-container {
     display: flex;
     flex-direction: column;
 }
 
-.form-label {
+.login-label {
     margin-bottom: 8px; 
     font-size: 14px;
     font-weight: 500;
     color: #7C7C7C;
 }
   
-.form-input {
+.login-input {
     padding: 15px 16px; 
     border-radius: 8px; 
     border: 2px solid #98D8C8;
@@ -71,11 +71,11 @@ body {
     outline: none;
 }
   
-.form-input:focus {
+.login-input:focus {
     border: 2px solid #7C7C7C;
 }
   
-.form-acoes {
+.login-form-acoes {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -107,7 +107,7 @@ body {
   
 .login-botao:hover {
     opacity: 0.9;
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 .erro-texto {
