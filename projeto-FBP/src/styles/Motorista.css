@@ -93,6 +93,7 @@ body {
     margin-right: 8px;
     background-color: #F4E87C;
     color: #7C7C7C;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .motorista-atualizar:hover {
@@ -109,6 +110,7 @@ body {
     margin-right: 8px;
     background-color: #98D8C8;
     color: #7C7C7C;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .motorista-remover:hover {

@@ -5,7 +5,7 @@ export default function UsuarioInfoModal({ usuario, fechar }) {
   return (
     <div className="is-fundo" onClick={fechar}>
       <div className="is-card" onClick={(e) => e.stopPropagation()}>
-        <h2>Informações do Funcionário</h2>
+        <h2>Informações do Usuário</h2>
 
         <div className="is-foto">
 

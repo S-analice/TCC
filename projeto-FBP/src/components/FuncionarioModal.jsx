@@ -3,6 +3,7 @@ import { useState } from "react";
 
 export default function FuncionarioModal({ modo, funcionario, fechar, salvar }) {
 
+    const [foto, setFoto] = useState(funcionario?.foto || "");
     const [nome, setNome] = useState(funcionario?.nome || "");
     const [email, setEmail] = useState(funcionario?.email || "");
     const [senha, setSenha] = useState(funcionario?.senha || "");
@@ -22,6 +23,16 @@ export default function FuncionarioModal({ modo, funcionario, fechar, salvar }) 
         return "";
     };
 
+    const converterParaBase64 = (arquivo) => {
+        const reader = new FileReader();
+    
+        reader.onloadend = () => {
+            setFoto(reader.result);
+        };
+    
+        reader.readAsDataURL(arquivo);
+    };;
+
     const enviarFormulario = (e) => {
         e.preventDefault();
 
@@ -34,7 +45,7 @@ export default function FuncionarioModal({ modo, funcionario, fechar, salvar }) 
             return;
         }
 
-        salvar({ nome, email, senha, telefone, turno });
+        salvar({ foto, nome, email, senha, telefone, turno });
     };
 
     return (
@@ -46,6 +57,20 @@ export default function FuncionarioModal({ modo, funcionario, fechar, salvar }) 
                 </h2>
 
                 <form onSubmit={enviarFormulario} className="fm-form">
+
+                    <div className="fm-form-container">
+                        <label className="fm-label">Foto</label>
+                        <input
+                            type="file"
+                            accept="image/*"
+                            className="fm-input"
+                            onChange={(e) => {
+                                if (e.target.files[0]) {
+                                    converterParaBase64(e.target.files[0]);
+                                }
+                            }}
+                        />
+                    </div>
 
                     <div className="fm-form-container">
                         <label className="fm-label">Nome</label>

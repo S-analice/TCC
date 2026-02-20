@@ -17,6 +17,9 @@
   width: 350px;
 }
 
+.is-card h2 {
+  text-align: center;
+}
 
 .is-foto {
   display: flex;
@@ -71,6 +74,7 @@
   background-color: #98d8c8;
   color: #7c7c7c;
   cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .is-botao-fechar:hover {

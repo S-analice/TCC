@@ -44,6 +44,7 @@ export default function Motorista() {
     };
 
     const salvarMotorista = (dados) => {
+        setMostrarModal(false);
         setCarregando(true);
 
         setTimeout(() => {
@@ -70,12 +71,12 @@ export default function Motorista() {
             }
 
             setCarregando(false);
-            setMostrarModal(false);
             setMostrarMensagem(true);
         }, 2000);
     };
 
     const confirmarDelete = () => {
+        setMostrarDelete(false);
         setCarregando(true);
 
         setTimeout(() => {
@@ -84,7 +85,6 @@ export default function Motorista() {
             );
 
             setCarregando(false);
-            setMostrarDelete(false);
             setTextoMensagem("Motorista removido com sucesso!");
             setMostrarMensagem(true);
         }, 2000);

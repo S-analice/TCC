@@ -6,6 +6,7 @@ import Mensagem from "../components/Mensagem";
 
 import FuncionarioModal from "../components/FuncionarioModal";
 import DeleteFuncionarioModal from "../components/DeleteFuncionarioModal";
+import FotoModal from "../components/FotoModal";
 
 export default function Funcionario() {
 
@@ -21,6 +22,7 @@ export default function Funcionario() {
 
     const [mostrarDelete, setMostrarDelete] = useState(false);
     
+    const [mostrarFoto, setMostrarFoto] = useState(false);
 
     const abrirAdicionar = () => {
         setModoModal("adicionar");
@@ -39,9 +41,15 @@ export default function Funcionario() {
         setMostrarDelete(true);
     };
 
-    const salvarFuncionario = (dados) => {
-        setCarregando(true);
+    const abrirFoto = (funcionario) => {
+        setFuncionarioSelecionado(funcionario);
+        setMostrarFoto(true);
+    };
 
+    const salvarFuncionario = (dados) => {
+        setMostrarModal(false);
+        setCarregando(true);
+        
         setTimeout(() => {
             if (modoModal === "adicionar") {
 
@@ -66,12 +74,12 @@ export default function Funcionario() {
             }
 
             setCarregando(false);
-            setMostrarModal(false);
             setMostrarMensagem(true);
         }, 2000);
     };
 
     const confirmarDelete = () => {
+        setMostrarDelete(false);
         setCarregando(true);
 
         setTimeout(() => {
@@ -80,7 +88,6 @@ export default function Funcionario() {
             );
 
             setCarregando(false);
-            setMostrarDelete(false);
             setTextoMensagem("Funcionário removido com sucesso!");
             setMostrarMensagem(true);
         }, 2000);
@@ -115,6 +122,13 @@ export default function Funcionario() {
                 />
             )}
 
+            {mostrarFoto && (
+                <FotoModal
+                    funcionario={funcionarioSelecionado}
+                    fechar={() => setMostrarFoto(false)}
+                />
+            )}
+
             <div className="funcionario-topo">
                 <h2>Lista de Funcionários</h2>
                 <button onClick={abrirAdicionar}>+ Adicionar</button>
@@ -137,7 +151,20 @@ export default function Funcionario() {
                 <tbody>
                     {funcionarios.map((f) => (
                         <tr key={f.id}>
-                            <td></td>
+                            <td>
+                                <div className="funcionario-foto" onClick={() => abrirFoto(f)}>
+                                    {f.foto ? (
+                                        <img src={f.foto} alt="Foto Funcionário" />
+                                    )
+                                    : 
+                                    (<div className="funcionario-icone">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10 10C12.2091 10 14 8.20914 14 6C14 3.79086 12.2091 2 10 2C7.79086 2 6 3.79086 6 6C6 8.20914 7.79086 10 10 10Z" fill="#7C7C7C"/>
+                                            <path d="M10 12C5.58172 12 2 13.7909 2 16V18H18V16C18 13.7909 14.4183 12 10 12Z" fill="#7C7C7C"/>
+                                        </svg> 
+                                    </div>)}
+                                </div>
+                            </td>
                             <td>{f.nome}</td>
                             <td>{f.email}</td>
                             <td>{"*".repeat(f.senha.length)}</td>

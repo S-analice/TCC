@@ -1,0 +1,64 @@
+.foto-fundo {
+    position: fixed;
+    inset: 0; /* top, right, bottom, left = 0 */
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial;
+    z-index: 2000;
+}
+
+.foto-card {
+    background: white;
+    color: #7c7c7c;
+    padding: 30px;
+    border-radius: 20px;
+    width: 350px;
+}
+
+.foto-card h2{
+    text-align: center;
+}
+
+.foto-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px auto;
+  }
+
+.foto-container img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #98d8c8;
+}
+
+.foto-icone {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: #98D8C8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.foto-botao-fechar {
+    width: 100%;
+    margin-top: 15px;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: #98d8c8;
+    color: #7c7c7c;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .foto-botao-fechar:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+  }
