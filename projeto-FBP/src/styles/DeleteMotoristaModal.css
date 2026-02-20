@@ -57,7 +57,7 @@
     gap: 16px;
 }
 
-.botao1 {
+.dmm-cancelar {
     padding: 15px 32px;
     border-radius: 6px;
     border: none;
@@ -69,12 +69,12 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.botao1:hover {
+.dmm-cancelar:hover {
     opacity: 0.9;
     transform: scale(1.05);
 }
 
-.botao2 {
+.dmm-salvar {
     padding: 15px 32px;
     border-radius: 6px;
     border: none;
@@ -86,7 +86,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.botao2:hover {
+.dmm-salvar:hover {
     opacity: 0.9;
     transform: scale(1.05);
 }

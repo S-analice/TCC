@@ -1,0 +1,94 @@
+.em-fundo {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial;
+    z-index: 1000;
+}
+  
+.em-card {
+    background: white;
+    color: #7c7c7c;
+    padding: 30px;
+    border-radius: 20px;
+    width: 350px;
+}
+
+.em-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px; 
+}
+
+.em-form-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.em-form-container select {
+    color: #7C7C7C;
+}
+
+.em-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #7C7C7C;
+}
+
+.em-input {
+    padding: 15px 16px; 
+    border-radius: 8px; 
+    border: 2px solid #98D8C8;
+    background-color: #FEFDFB;
+    font-size: 14px;
+    outline: none;
+    color: #7C7C7C;
+}
+  
+.em-input:focus {
+    border: 2px solid #7C7C7C;
+}
+  
+.em-form-acoes {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.em-cancelar {
+    padding: 15px 32px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 8px;
+    background-color: #F4E87C;
+    color: #7C7C7C;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.em-cancelar:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+}
+
+.em-salvar {
+    padding: 15px 32px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 8px;
+    background-color: #98D8C8;
+    color: #7C7C7C;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.em-salvar:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+}

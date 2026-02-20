@@ -76,6 +76,7 @@ body {
     background-color: #FEFDFB;
     font-size: 14px;
     outline: none;
+    color: #7C7C7C;
 }
   
 .es-input:focus {
@@ -89,7 +90,7 @@ body {
     gap: 16px;
 }
 
-.botao1 {
+.es-cancelar {
     padding: 15px 32px; 
     border-radius: 8px;
     border: none;
@@ -100,12 +101,12 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
   
-.botao1:hover {
+.es-cancelar:hover {
     opacity: 0.9;
     transform: scale(1.05);
 }
 
-.botao2 {
+.es-enviar {
     padding: 15px 32px; 
     border-radius: 8px;
     border: none;
@@ -117,7 +118,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
   
-.botao2:hover {
+.es-enviar:hover {
     opacity: 0.9;
     transform: scale(1.05);
 }

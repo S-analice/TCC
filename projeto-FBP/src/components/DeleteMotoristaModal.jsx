@@ -21,8 +21,8 @@ export default function DeleteMotoristaModal({ motorista, fechar, confirmar }) {
                 </div>
 
                 <div className="dmm-form-acoes">
-                    <button onClick={fechar} className="botao1">Cancelar</button>
-                    <button onClick={confirmar} className="botao2">Confirmar</button>
+                    <button onClick={fechar} className="dmm-cancelar">Cancelar</button>
+                    <button onClick={confirmar} className="dmm-salvar">Confirmar</button>
                 </div>
 
             </div>

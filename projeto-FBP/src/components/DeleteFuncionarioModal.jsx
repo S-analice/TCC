@@ -16,8 +16,8 @@ export default function DeleteFuncionarioModal({ funcionario, fechar, confirmar 
                 </div>
 
                 <div className="dfm-form-acoes">
-                    <button onClick={fechar} className="botao1">Cancelar</button>
-                    <button onClick={confirmar} className="botao2">Confirmar</button>
+                    <button onClick={fechar} className="dfm-cancelar">Cancelar</button>
+                    <button onClick={confirmar} className="dfm-salvar">Confirmar</button>
                 </div>
 
             </div>

@@ -4,7 +4,7 @@ cd projeto-FBP
 npm install
 npm run dev
 
-São 19 arquivos ao todo: 13/19
+São 19 arquivos ao todo: 17/19
 
 12/02 - Iniciei o projeto em react + js, fazendo a tela de login 
 
@@ -17,3 +17,5 @@ São 19 arquivos ao todo: 13/19
 18/02 - Tela, modais e verificação de caracteres no input de motorista e funcionario
 
 19/02 - Modal de foto de funcionario
+
+20/02 - Tela e modais de patio

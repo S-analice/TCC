@@ -62,9 +62,9 @@ export default function EsqueceuSenha({ voltarParaLogin }) {
 
 
                     <div className="es-form-acoes">
-                    <button type="button" className="botao1" onClick={voltarParaLogin}>Voltar</button>
+                    <button type="button" className="es-cancelar" onClick={voltarParaLogin}>Voltar</button>
                     
-                    <button type="submit" className="botao2">Enviar</button>
+                    <button type="submit" className="es-enviar">Enviar</button>
                     </div>
                 </form>
             </div>
