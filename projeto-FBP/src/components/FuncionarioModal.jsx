@@ -17,8 +17,8 @@ export default function FuncionarioModal({ modo, funcionario, fechar, salvar }) 
         if (senha.length !== 6)
             return "Senha deve ter 6 números!";
 
-        if (telefone.length !== 9)
-            return "Telefone deve ter 9 números!";
+        if (telefone.length !== 11)
+            return "Telefone deve ter 11 números!";
 
         return "";
     };

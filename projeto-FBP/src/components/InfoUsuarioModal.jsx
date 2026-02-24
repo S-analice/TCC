@@ -2,6 +2,18 @@ import "../styles/InfoUsuarioModal.css";
 
 export default function UsuarioInfoModal({ usuario, fechar }) {
 
+  const formatarTelefone = (telefone) => {
+    if (!telefone) return "";
+  
+    const numeros = telefone.replace(/\D/g, "");
+  
+    if (numeros.length === 11) {
+      return numeros.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
+    }
+  
+    return telefone;
+  };
+
   return (
     <div className="is-fundo" onClick={fechar}>
       <div className="is-card" onClick={(e) => e.stopPropagation()}>
@@ -33,7 +45,7 @@ export default function UsuarioInfoModal({ usuario, fechar }) {
 
         <div className="is-caixinha">
           <span>Telefone</span>
-          <p>{usuario.telefone}</p>
+          <p>{formatarTelefone(usuario.telefone)}</p>
         </div>
 
         <div className="is-caixinha">

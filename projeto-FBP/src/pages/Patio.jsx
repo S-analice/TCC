@@ -9,7 +9,35 @@ import SaidaModal from "../components/SaidaModal";
 
 export default function Patio({ usuario }) {
 
-    const [registros, setRegistros] = useState([]);
+    const [registros, setRegistros] = useState([
+        {
+            id: 1,
+            cpf: "12345678900",
+            placa: "ABC1234",
+            entrada: "2026-02-23T08:30:00",
+            saida: null,
+            funcionario: "João Silva",
+            removido: false
+        },
+        {
+            id: 2,
+            cpf: "98765432100",
+            placa: "DEF5678",
+            entrada: "2026-02-23T09:15:00",
+            saida: null,
+            funcionario: "Maria Santos",
+            removido: false
+        },
+        {
+            id: 3,
+            cpf: "45678912300",
+            placa: "GHI9012",
+            entrada: "2026-02-23T07:40:00",
+            saida: "2026-02-23T11:10:00",
+            funcionario: "Carlos Oliveira",
+            removido: true
+        }
+    ]);
     const [pesquisa, setPesquisa] = useState("");
 
     const [carregando, setCarregando] = useState(false);
@@ -23,7 +51,7 @@ export default function Patio({ usuario }) {
     const [mostrarSaida, setMostrarSaida] = useState(false);
 
     const registrosFiltrados = registros.filter((r) =>
-        r.cpf.includes(pesquisa) || r.placa.includes(pesquisa)
+        !r.removido && (r.cpf.includes(pesquisa) || r.placa.includes(pesquisa))
     );
 
     const abrirAdicionar = () => {
@@ -82,7 +110,11 @@ export default function Patio({ usuario }) {
 
         setTimeout(() => {
             setRegistros(
-                registros.filter(r => r.id !== registroSelecionado.id)
+                registros.map(r =>
+                    r.id === registroSelecionado.id
+                        ? { ...r, removido: true }
+                        : r
+                )
             );
 
             setCarregando(false);
@@ -90,6 +122,33 @@ export default function Patio({ usuario }) {
             setMostrarMensagem(true);
         }, 2000);
     };
+
+    const formatarCPF = (cpf) => {
+        if (!cpf) return "";
+        const numeros = cpf.replace(/\D/g, "");
+        return numeros.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+      };
+      
+      const formatarPlaca = (placa) => {
+        if (!placa) return "";
+        const valor = placa.replace(/[^a-zA-Z0-9]/g, "").toUpperCase();
+      
+        if (valor.length === 7) {
+          return valor.replace(/([A-Z]{3})(\d[A-Z]\d{2}|\d{4})/, "$1-$2");
+        }
+      
+        return placa;
+      };
+
+    function formatarData(data) {
+        return new Date(data).toLocaleString("pt-BR", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit"
+        });
+    }
 
     return (
         <div className="patio-container">
@@ -150,9 +209,9 @@ export default function Patio({ usuario }) {
                 <tbody>
                     {registrosFiltrados.map((r) => (
                         <tr key={r.id}>
-                            <td>{r.cpf}</td>
-                            <td>{r.placa}</td>
-                            <td>{r.entrada}</td>
+                            <td>{formatarCPF(r.cpf)}</td>
+                            <td>{formatarPlaca(r.placa)}</td>
+                            <td>{formatarData(r.entrada)}</td>
                             <td>{r.funcionario}</td>
                             <td>
                                 <button className="motorista-atualizar" onClick={() => abrirEditar(r)}>Atualizar</button>

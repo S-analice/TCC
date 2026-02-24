@@ -4,8 +4,8 @@ import "../styles/EntradaModal.css";
 export default function EntradaModal({ modo, registro, usuario, fechar, salvar }) {
 
     const motoristasCadastrados = [
-        { cpf: "1234567", placa: "ABC1234", convenio: "Sem Convênio" },
-        { cpf: "9999999", placa: "XYZ9999", convenio: "Convênio A" }
+        { cpf: "12345678900", placa: "ABC1234", convenio: "Sem Convênio" },
+        { cpf: "99999999999", placa: "XYZ9999", convenio: "Convênio A" }
     ];
 
     const [cpf, setCpf] = useState(registro?.cpf || "");

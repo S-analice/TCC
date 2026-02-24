@@ -25,7 +25,7 @@ export default function Login( {definirUsuario, irParaEsqueceuSenha, irParaHome 
             const usuario = {
                 nome:"Senhor Cabeça de Batata",
                 email:"srbatata@gmail.com",
-                telefone: "(41) 99123-4567",
+                telefone: "41991234567",
                 senha:"123456Sr",
                 turno:"6:00 - 18:00",
                 foto:"/usuario.jpg"

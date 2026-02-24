@@ -9,7 +9,32 @@ import DeleteMotoristaModal from "../components/DeleteMotoristaModal";
 
 export default function Motorista() {
 
-    const [motoristas, setMotoristas] = useState([]);
+    const [motoristas, setMotoristas] = useState([
+        {
+            id: 1,
+            cpf: "12345678900",
+            placa: "ABC1234",
+            telefone: "41999991111",
+            cnpj: "12345678000100",
+            convenio: "Empresa A"
+        },
+        {
+            id: 2,
+            cpf: "98765432100",
+            placa: "DEF5678",
+            telefone: "41988882222",
+            cnpj: "98765432000100",
+            convenio: "Empresa B"
+        },
+        {
+            id: 3,
+            cpf: "456.789.123-00",
+            placa: "GHI-9012",
+            telefone: "41977773333",
+            cnpj: "45678912000100",
+            convenio: "Empresa C"
+        }
+    ]);
     const [pesquisa, setPesquisa] = useState("");
 
     const [carregando, setCarregando] = useState(false);
@@ -90,6 +115,41 @@ export default function Motorista() {
         }, 2000);
     };
 
+    
+    const formatarCPF = (cpf) => {
+        if (!cpf) return "";
+        const numeros = cpf.replace(/\D/g, "");
+        return numeros.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+      };
+      
+      const formatarCNPJ = (cnpj) => {
+        if (!cnpj) return "";
+        const numeros = cnpj.replace(/\D/g, "");
+        return numeros.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, "$1.$2.$3/$4-$5");
+      };
+      
+      const formatarTelefone = (telefone) => {
+        if (!telefone) return "";
+        const numeros = telefone.replace(/\D/g, "");
+      
+        if (numeros.length === 11) {
+          return numeros.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
+        }
+        return telefone;
+      };
+      
+      const formatarPlaca = (placa) => {
+        if (!placa) return "";
+        const valor = placa.replace(/[^a-zA-Z0-9]/g, "").toUpperCase();
+      
+        if (valor.length === 7) {
+          return valor.replace(/([A-Z]{3})(\d[A-Z]\d{2}|\d{4})/, "$1-$2");
+        }
+      
+        return placa;
+      };
+
+
     return (
         <div className="motorista-container">
 
@@ -148,10 +208,10 @@ export default function Motorista() {
                 <tbody>
                     {motoristasFiltrados.map((m) => (
                         <tr key={m.id}>
-                            <td>{m.cpf}</td>
-                            <td>{m.placa}</td>
-                            <td>{m.telefone}</td>
-                            <td>{m.cnpj}</td>
+                            <td>{formatarCPF(m.cpf)}</td>
+                            <td>{formatarPlaca(m.placa)}</td>
+                            <td>{formatarTelefone(m.telefone)}</td>
+                            <td>{formatarCNPJ(m.cnpj)}</td>
                             <td>{m.convenio}</td>
                             <td >
                                 <button className="motorista-atualizar" onClick={() => abrirEditar(m)}>Atualizar</button>

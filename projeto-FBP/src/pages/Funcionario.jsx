@@ -10,7 +10,35 @@ import FotoModal from "../components/FotoModal";
 
 export default function Funcionario() {
 
-    const [funcionarios, setFuncionarios] = useState([]);
+    const [funcionarios, setFuncionarios] = useState([
+        {
+            id: 1,
+            nome: "João Silva",
+            email: "joao.silva@email.com",
+            senha: "123456",
+            telefone: "41999991111",
+            turno: "06:00 - 18:00",
+            foto: ""
+        },
+        {
+            id: 2,
+            nome: "Maria Santos",
+            email: "maria.santos@email.com",
+            senha: "123456",
+            telefone: "41988882222",
+            turno: "18:00 - 06:00",
+            foto: ""
+        },
+        {
+            id: 3,
+            nome: "Carlos Oliveira",
+            email: "carlos.oliveira@email.com",
+            senha: "123456",
+            telefone: "41977773333",
+            turno: "18:00 - 06:00",
+            foto: ""
+        }
+    ]);
 
     const [carregando, setCarregando] = useState(false);
     const [mostrarMensagem, setMostrarMensagem] = useState(false);
@@ -78,6 +106,7 @@ export default function Funcionario() {
         }, 2000);
     };
 
+    
     const confirmarDelete = () => {
         setMostrarDelete(false);
         setCarregando(true);
@@ -92,6 +121,19 @@ export default function Funcionario() {
             setMostrarMensagem(true);
         }, 2000);
     };
+
+    const formatarTelefone = (telefone) => {
+        if (!telefone) return "";
+      
+        const numeros = telefone.replace(/\D/g, "");
+      
+        if (numeros.length === 11) {
+          return numeros.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
+        }
+      
+        return telefone;
+      };
+
 
     return (
         <div className="funcionario-container">
@@ -168,7 +210,7 @@ export default function Funcionario() {
                             <td>{f.nome}</td>
                             <td>{f.email}</td>
                             <td>{"*".repeat(f.senha.length)}</td>
-                            <td>{f.telefone}</td>
+                            <td>{formatarTelefone(f.telefone)}</td>
                             <td>{f.turno}</td>
                             <td >
                                 <button className="funcionario-atualizar" onClick={() => abrirEditar(f)}>Atualizar</button>

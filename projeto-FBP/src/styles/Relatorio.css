@@ -1,0 +1,154 @@
+.relatorio-container{
+    font-family: Arial;
+  }
+  
+  .relatorio-filtro{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.1);
+    margin-bottom:30px;
+  }
+  
+  .relatorio-filtro h2{
+    color:#7C7C7C;
+    margin-bottom:20px;
+  }
+  
+  .inputsFiltro{
+    display:flex;
+    gap:15px;
+    align-items:flex-end;
+  }
+  
+  .campo{
+    display:flex;
+    flex-direction:column;
+    flex:1;
+  }
+  
+  .campo label{
+    margin-bottom:5px;
+    color:#7C7C7C;
+  }
+  
+  .campo input{
+    padding:10px;
+    border-radius:8px;
+    border:2px solid #98D8C8;
+    background:#FEFDFB;
+    color: #7C7C7C;
+  }
+  
+  .inputsFiltro button{
+    padding:10px 25px;
+    border:none;
+    border-radius:8px;
+    background:#98D8C8;
+    color:#7C7C7C;
+    font-weight:bold;
+    cursor:pointer;
+  }
+
+  
+  .relatorio-cards{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:25px;
+  }
+  
+  .card{
+    background:white;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 3px 8px rgba(0,0,0,0.1);
+  }
+  
+  .cardHeader{
+    padding:20px;
+    text-align:center;
+  }
+  
+  .cardHeader h3{
+    color: #7C7C7C;
+    font-weight: 500;
+  }
+
+  .cardHeader.entrada{
+    background:#98D8C8;
+  }
+  
+  .cardHeade.saida{
+    background:#F4E87C;
+  }
+  
+  .relatorio-numero{
+    font-size:40px;
+    font-weight:bold;
+    margin-top:10px;
+    color:#7C7C7C;
+  }
+  
+  .relatorio-lista{
+    padding:20px;
+    max-height:400px;
+    overflow-y:auto;
+  }
+  
+  .item{
+    background:#F5F5F5;
+    padding:12px;
+    border-radius:8px;
+    margin-bottom:10px;
+  }
+  
+  .itemTopo{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:6px;
+  }
+  
+  .placa{
+    font-weight:bold;
+    color:#7C7C7C;
+  }
+  
+  .data{
+    font-size:13px;
+    color:#7C7C7C;
+  }
+  
+  .itemInfo{
+    font-size:14px;
+    color:#7C7C7C;
+  }
+  
+  .semDados{
+    text-align:center;
+    padding:20px;
+    color:#7C7C7C;
+  }
+  
+  .relatorio-entrada{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border:none;
+    border-radius:8px;
+    background:#98D8C8;
+    color:#7C7C7C;
+    font-weight:bold;
+    cursor:pointer;
+  }
+  
+  .relatorio-saida {
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border:none;
+    border-radius:8px;
+    background:#F4E87C;
+    color:#7C7C7C;
+    font-weight:bold;
+    cursor:pointer;
+  }

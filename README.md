@@ -4,7 +4,10 @@ cd projeto-FBP
 npm install
 npm run dev
 
-São 19 arquivos ao todo: 17/19
+.env VITE_API_URL=https://api.openweathermap.org/data/2.5
+     VITE_API_KEY=ad5c2867dcf6cc19700761baeb1b120c       
+
+São 19 arquivos ao todo: 19/19 
 
 12/02 - Iniciei o projeto em react + js, fazendo a tela de login 
 
@@ -12,10 +15,12 @@ São 19 arquivos ao todo: 17/19
 
 14/02 - Verificação de submit invalido nos input e troca de logo 
 
-16/02 - Componente da barra de navegação e infos do usuario
+16/02 - Componente da barra de navegação e infos do usuário
 
-18/02 - Tela, modais e verificação de caracteres no input de motorista e funcionario
+18/02 - Tela, modais e verificação de caracteres no input de motorista e funcionário
 
-19/02 - Modal de foto de funcionario
+19/02 - Modal de foto de funcionário
 
-20/02 - Tela e modais de patio
+20/02 - Tela e modais de pátio
+
+23/02 - Finalizando o front com a tela de home e geração de relatório, arrumando como aparece as infos na tabela 
