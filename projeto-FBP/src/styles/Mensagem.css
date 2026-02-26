@@ -11,7 +11,7 @@
   
 .msg-card {
   background-color: #ffffff;
-  border-radius: 16px;
+  border-radius: 12px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
   padding: 32px;
   max-width: 400px;
@@ -29,7 +29,8 @@
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  background-color: #98D8C8;
+  background-color: #436850;
+  color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -41,22 +42,19 @@
   text-align: center;
   margin-bottom: 24px;
   color: #7C7C7C;
-  font-family: Arial;
 }
   
 .msg-botao {
   padding: 12px 32px;
-  border-radius: 8px;
+  border-radius: 6px;
   border: none;
   cursor: pointer;
-  background-color: #98D8C8;
-  color: #7C7C7C;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  background-color: #436850;
+  color: #ffffff;
+  font-weight: 600;
   font-size: 14px;
-  font-family: Arial;
 }
   
 .msg-botao:hover {
-  opacity: 0.9;
-  transform: scale(1.05);
+  background-color: #35563f;
 }

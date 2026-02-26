@@ -28,11 +28,11 @@ export default function Motorista() {
         },
         {
             id: 3,
-            cpf: "456.789.123-00",
-            placa: "GHI-9012",
+            cpf: "45678912300",
+            placa: "GHI9012",
             telefone: "41977773333",
             cnpj: "45678912000100",
-            convenio: "Empresa C"
+            convenio: "Sem Convênio"
         }
     ]);
     const [pesquisa, setPesquisa] = useState("");

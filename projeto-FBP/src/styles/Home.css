@@ -3,22 +3,22 @@
 }
     
 .home-saudacao-box{
-    background:white;
-    border-left:6px solid #98D8C8;
+    background: #ffffff;
+    border-left:6px solid #436850;
     padding:20px;
     border-radius:12px;
     margin-bottom:30px;
-    box-shadow:0 3px 8px rgba(0,0,0,0.1);
+    box-shadow:0 3px 8px rgba(0,0,0,0.2);
     color:#7C7C7C;
-    font-size:18px;
+    font-size: 18px;
 }
   
 .home-info-dia{
-    background:white;
+    background: #ffffff;
     padding:20px;
-    border-radius:12px;
+    border-radius: 8px;
     margin-bottom:30px;
-    box-shadow:0 3px 8px rgba(0,0,0,0.1);
+    box-shadow:0 3px 8px rgba(0,0,0,0.2);
 }
     
 .home-info-dia h3{
@@ -35,7 +35,7 @@
 .home-info-card{
     background:#F5F5F5;
     padding:20px;
-    border-radius:10px;
+    border-radius:8px;
     text-align:center;
 }
     
@@ -86,12 +86,12 @@
 }
 
 .home-mov-baixa{
-    color:#2e7d32;
+    color:#436850;
     font-weight:bold;
 }
     
 .home-mov-media{
-    color:#f4b400;
+    color: #f2c14e;
     font-weight:bold;
 }
     

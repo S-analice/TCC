@@ -1,5 +1,6 @@
 import "../styles/Funcionario.css";
 import { useState } from "react";
+import { User, Pencil, Trash2, Search } from "lucide-react"
 
 import Carregando from "../components/Carregando";
 import Mensagem from "../components/Mensagem";
@@ -18,7 +19,9 @@ export default function Funcionario() {
             senha: "123456",
             telefone: "41999991111",
             turno: "06:00 - 18:00",
-            foto: ""
+            foto: "",
+            cargo: "Equipe",
+            status: "Ativo"
         },
         {
             id: 2,
@@ -27,7 +30,9 @@ export default function Funcionario() {
             senha: "123456",
             telefone: "41988882222",
             turno: "18:00 - 06:00",
-            foto: ""
+            foto: "",
+            cargo: "Equipe",
+            status: "Ativo"
         },
         {
             id: 3,
@@ -36,9 +41,12 @@ export default function Funcionario() {
             senha: "123456",
             telefone: "41977773333",
             turno: "18:00 - 06:00",
-            foto: ""
+            foto: "",
+            cargo: "Equipe",
+            status: "Ativo"
         }
     ]);
+    const [pesquisa, setPesquisa] = useState("");
 
     const [carregando, setCarregando] = useState(false);
     const [mostrarMensagem, setMostrarMensagem] = useState(false);
@@ -51,6 +59,10 @@ export default function Funcionario() {
     const [mostrarDelete, setMostrarDelete] = useState(false);
     
     const [mostrarFoto, setMostrarFoto] = useState(false);
+
+    const funcionariosFiltrados = funcionarios.filter((f) =>
+        f.nome.toUpperCase().includes(pesquisa) || f.nome.toLowerCase().includes(pesquisa)
+    );
 
     const abrirAdicionar = () => {
         setModoModal("adicionar");
@@ -113,11 +125,15 @@ export default function Funcionario() {
 
         setTimeout(() => {
             setFuncionarios(
-                funcionarios.filter(f => f.id !== funcionarioSelecionado.id)
+                funcionarios.map(f =>
+                    f.id === funcionarioSelecionado.id
+                        ? { ...f, status: "Inativo" }
+                        : f
+                )
             );
 
             setCarregando(false);
-            setTextoMensagem("Funcionário removido com sucesso!");
+            setTextoMensagem("Funcionário rmarcado como inativo!");
             setMostrarMensagem(true);
         }, 2000);
     };
@@ -171,12 +187,20 @@ export default function Funcionario() {
                 />
             )}
 
-            <div className="funcionario-topo">
-                <h2>Lista de Funcionários</h2>
-                <button onClick={abrirAdicionar}>+ Adicionar</button>
-            </div>
+            <h2 className="funcionario-subtitulo">Lista de Funcionários</h2>
 
-            <div className="funcionario-linha"></div>
+            <div className="funcionario-topo">
+               <div className="funcionario-busca">
+                    <Search size={18} className="funcionario-busca-icone" />
+                    <input
+                    type="text"
+                    placeholder="Pesquisar por nome"
+                    value={pesquisa}
+                    onChange={(e) => setPesquisa(e.target.value)}
+                    />
+               </div>
+                <button onClick={abrirAdicionar}>+ Adicionar Funcionário</button>
+            </div>
 
             <table className="funcionario-tabela">
                 <thead>
@@ -187,11 +211,13 @@ export default function Funcionario() {
                         <th>Senha</th>
                         <th>Telefone</th>
                         <th>Turno</th>
+                        <th>Cargo</th>
+                        <th>Status</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {funcionarios.map((f) => (
+                    {funcionariosFiltrados.map((f) => (
                         <tr key={f.id}>
                             <td>
                                 <div className="funcionario-foto" onClick={() => abrirFoto(f)}>
@@ -200,10 +226,7 @@ export default function Funcionario() {
                                     )
                                     : 
                                     (<div className="funcionario-icone">
-                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M10 10C12.2091 10 14 8.20914 14 6C14 3.79086 12.2091 2 10 2C7.79086 2 6 3.79086 6 6C6 8.20914 7.79086 10 10 10Z" fill="#7C7C7C"/>
-                                            <path d="M10 12C5.58172 12 2 13.7909 2 16V18H18V16C18 13.7909 14.4183 12 10 12Z" fill="#7C7C7C"/>
-                                        </svg> 
+                                        <User size={20}/>
                                     </div>)}
                                 </div>
                             </td>
@@ -212,9 +235,22 @@ export default function Funcionario() {
                             <td>{"*".repeat(f.senha.length)}</td>
                             <td>{formatarTelefone(f.telefone)}</td>
                             <td>{f.turno}</td>
-                            <td >
-                                <button className="funcionario-atualizar" onClick={() => abrirEditar(f)}>Atualizar</button>
-                                <button className="funcionario-remover" onClick={() => abrirDelete(f)}>Remover</button>
+                            <td>{f.cargo}</td>
+                            <td>
+                                <span className={`status ${f.status.toLowerCase()}`}>
+                                    {f.status}
+                                </span>
+                            </td>
+                            <td>
+                            <div className="funcionario-acoes">
+                                <button className="funcionario-atualizar" onClick={() => abrirEditar(f)}>
+                                    <Pencil size={16}/>
+                                </button>
+
+                                <button className="funcionario-remover" onClick={() => abrirDelete(f)}>
+                                    <Trash2 size={16}/>
+                                </button>
+                            </div>
                             </td>
                         </tr>
                     ))}

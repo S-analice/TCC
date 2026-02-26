@@ -1,6 +1,8 @@
 #TCC (Que deus nós ajude)
 
 cd projeto-FBP
+nvm install 22
+npm install lucide-react
 npm install
 npm run dev
 
@@ -24,3 +26,5 @@ São 19 arquivos ao todo: 19/19
 20/02 - Tela e modais de pátio
 
 23/02 - Finalizando o front com a tela de home e geração de relatório, arrumando como aparece as infos na tabela 
+
+25/02 - Alteração de cor, adicionado icones e mensagens (login, esqueceu senha, mensagem, carregando, modal foto funcionário, funcionário e modais)

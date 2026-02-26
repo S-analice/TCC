@@ -32,17 +32,17 @@ export default function Home({ usuario }) {
   let classeMovimentacao = "";
 
   if (totalMovimentacao <= 20) {
-    textoMovimentacao = "Baixa";
+    textoMovimentacao = "baixa";
     classeMovimentacao = "home-mov-baixa";
   } 
 
   else if (totalMovimentacao <= 50) {
-    textoMovimentacao = "Média";
+    textoMovimentacao = "média";
     classeMovimentacao = "home-mov-media";
   } 
 
   else {
-    textoMovimentacao = "Alta";
+    textoMovimentacao = "alta";
     classeMovimentacao = "home-mov-alta";
   }
 

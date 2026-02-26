@@ -15,10 +15,6 @@
     position: relative;
 }
 
-.usuario-retangulo span:hover {
-    opacity: 0.9;
-}
-  
 .usuario-botao {
     display: flex;
     align-items: center;
@@ -29,7 +25,7 @@
     font-weight: 500;
     color: #7c7c7c;
 }
-  
+
 .usuario-icon-fundo {
     width: 40px;
     height: 40px;
@@ -37,35 +33,119 @@
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background-color: #98d8c8;
+    background-color: #436850;
+    color: #ffffff;
 }
+
 
 .menu-usuario {
     position: absolute;
-    top: 60px;
-    right: 0px;
-    background: white;
-    margin-top: 5px;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    top: calc(100% + 5px);
+    width: 350px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
     overflow: hidden;
     z-index: 10;
 }
-  
-.menu-usuario button {
+
+.menu-usuario-topo{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+    background: #e0e0e0;
+}
+
+.avatar-usuario{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: #436850;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    overflow: hidden;
+    border: 2px solid #436850;
+}
+
+.avatar-usuario-img{
     width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.avatar-icone{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.usuario-info{
+    display: flex;
+    flex-direction: column;
+    color: #7c7c7c;
+}
+
+.usuario-info span{
+    font-size: 12px;
+    color: #7c7c7c;
+}
+
+.menu-usuario-detalhes{
+    padding: 12px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 12px;
+}
+
+.detalhe{
+    display: flex;
+    align-items: center;
+    color: #436850;
+    gap: 2px;
+}
+
+.detalhe span{
+    color: #7c7c7c;
+}
+
+.menu-usuario-acoes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid #e0e0e0;
     padding: 10px;
+    gap: 5px;
+}
+
+.menu-usuario-acoes button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 2px;
     border: none;
-    background: white;
+    background: #f5f5f5;
+    padding: 8px;
+    border-radius: 6px;
     cursor: pointer;
 }
-  
-.menu-usuario button:hover {
-    background-color: #f0f0f0;
+
+.botao-sair{
+    background: #c0392b !important;
+    color: #ffffff;
 }
-  
+
+.botao-sair:hover{
+    background: #99211d !important;
+}
+
 .barra-navegacao {
-    background-color: #7c7c7c;
+    background-color: #ffffff;
     padding: 15px 20px;
     display: flex;
     justify-content: space-between;
@@ -76,14 +156,14 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    color: white;
+    color: #436850;
     font-weight: bold;
     font-size: 20px;
 }
   
 .logo-img {
-    width: 40px; 
-    height: 40px; 
+    width: 45px; 
+    height: 45px; 
     border-radius: 50%; 
     object-fit: cover;
 }
@@ -96,24 +176,27 @@
 .menu-navegacao button {
     background: transparent;
     border: none;
-    color: white;
+    color: #7c7c7c;
     padding: 8px 15px;
     border-radius: 8px;
     cursor: pointer;
     font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 2px;
 }
   
 .menu-navegacao button:hover {
-    background-color: rgba(255,255,255,0.2);
+    background-color: #e0e0e0;
 }
   
 .menu-navegacao .ativo {
-    background-color: #98d8c8;
-    color: #7c7c7c;
+    background-color: #436850;
+    color: #ffffff;
 }
 
 .menu-navegacao .ativo:hover {
-    background-color: #98d8c8;
+    background-color: #35563f;
 }
   
 .conteudo {
