@@ -1,0 +1,168 @@
+body {
+    margin: 0;
+}
+
+.funcionario-container {
+    min-height: 100vh;
+    font-family: Arial;
+}
+
+.funcionario-subtitulo {
+    color: #7C7C7C;
+}
+
+.funcionario-topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.funcionario-topo button {
+    padding: 15px 32px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    background-color: #436850;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.funcionario-topo button:hover {
+    background-color: #35563f;
+}
+
+.funcionario-busca{
+    position:relative;
+    width:100%;
+    max-width:350px;
+}
+
+.funcionario-busca input{
+    width:100%;
+    padding:14px 12px 10px 36px;
+    border-radius:6px;
+    border: 2px solid #e0e0e0;
+    color: #7C7C7C;
+    outline:none;
+    font-size:14px;
+}
+
+.funcionario-busca input:focus{
+    border-color:#436850;
+}
+
+.funcionario-busca-icone{
+    position:absolute;
+    left:10px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#7C7C7C;
+}
+
+.funcionario-tabela {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.funcionario-tabela th {
+    padding: 16px;
+    text-align: left;
+    background-color: #e0e0e0;
+    color: #7C7C7C;
+    font-weight: bold;
+}
+
+.funcionario-tabela td {
+    padding: 15px 16px;
+    color: #7C7C7C;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.funcionario-tabela tr:hover {
+    background-color: #F5F5F5;
+}
+
+.funcionario-acoes {
+    display: flex;
+    gap: 2px;
+}
+
+.funcionario-atualizar {
+    display: flex;
+    align-items: center;
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 8px;
+    background-color: #f2c14e;
+    color: #ffffff;
+}
+
+.funcionario-atualizar:hover {
+    background-color: #e0af3c;
+}
+
+.funcionario-remover {
+    display: flex;
+    align-items: center;
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 8px;
+    background-color: #c0392b;
+    color: #ffffff;
+}
+
+.funcionario-remover:hover {
+    background-color: #99211d;
+}
+
+.funcionario-foto {
+    cursor: pointer;
+}
+
+.funcionario-foto img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #436850;
+}
+
+.funcionario-icone {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #436850;
+    color:#ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.status{
+    padding:4px 10px;
+    border-radius:8px;
+    font-size: 12px;
+    font-weight:bold;
+}
+
+.status.ativo{
+    background:#d4edda;
+    color:#436850;
+}
+
+.status.inativo{
+    background:#e0e0e0;
+    color:#7C7C7C;
+}

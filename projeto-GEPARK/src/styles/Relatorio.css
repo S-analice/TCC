@@ -1,0 +1,185 @@
+.relatorio-container {
+  font-family: Arial;
+}
+
+.relatorio-filtros {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+  margin-bottom: 25px;
+}
+
+.relatorio-titulo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #7C7C7C;
+  margin-bottom: 15px;
+}
+
+.relatorio-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.relatorio-input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.relatorio-input-group label {
+  font-size: 14px;
+  color: #7C7C7C;
+  margin-bottom: 6px;
+}
+
+.input {
+  padding: 12px;
+  border-radius: 6px;
+  border: 2px solid #e0e0e0;
+}
+
+.input:focus {
+  border-color: #436850;
+  outline: none;
+}
+
+.relatorio-botoes {
+  display: flex;
+  gap: 10px;
+}
+
+.verde-botao {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #436850;
+  color: white;
+  font-weight: bold;
+}
+
+.verde-botao:hover {
+  background: #35563f;
+}
+
+.amarelo-botao {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #f2c14e;
+  color: white;
+  font-weight: bold;
+}
+
+.amarelo-botao:hover {
+  background: #e0af3c;
+}
+
+.relatorio-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.relatorio-header h3 {
+  color: #7C7C7C;
+}
+
+.relatorio-header p {
+  color: #7C7C7C;
+  font-size: 12px;
+}
+
+.relatorio-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.relatorio-card {
+  background: #ffffff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.relatorio-card p {
+  font-size: 13px;
+  color: #7C7C7C;
+}
+
+.relatorio-card span {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.verde {
+  color: #436850;
+}
+
+.amarelo {
+  color: #f2c14e;
+}
+
+.marrom {
+  color: #5c4033;
+}
+
+.relatorio-tabela-container {
+  background: #ffffff;
+  color: #7C7C7C;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.relatorio-tabela {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.relatorio-tabela th {
+  background: #e0e0e0;
+  padding: 12px;
+  text-align: left;
+}
+
+.relatorio-tabela td {
+  padding: 12px;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.convenio {
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.convenio.a {
+  background: #dbeafe;
+  color: #3b82f6;
+}
+
+.convenio.b {
+  background: #ede9fe;
+  color: #7c3aed;
+}
+
+.convenio.sem {
+  background: #e0e0e0;
+  color: #7C7C7C;
+}

@@ -1,0 +1,96 @@
+.dmm-fundo {
+    position: fixed;
+    inset: 0; /* top, right, bottom, left = 0 */
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial;
+    z-index: 1000;
+}
+  
+.dmm-card {
+    background: #ffffff;
+    color: #7c7c7c;
+    padding: 30px;
+    border-radius: 12px;
+    width: 450px;
+}
+
+.dmm-card h2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dmm-card > p {
+    text-align: center;
+    font-size: 14px;
+    margin-bottom: 20px;
+    color: #7C7C7C;
+}
+
+.dmm-caixinha {
+    background: #f5f5f5;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+  
+.dmm-caixinha p {
+    font-size: 12px;
+    color: #7C7C7C;
+    margin: 0;
+}
+
+.dmm-caixinha strong {
+    font-size: 14px;
+    margin-top: 6px;
+}
+
+.dmm-form-acoes {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.dmm-cancelar {
+    padding: 15px 32px;
+    border-radius: 6px;
+    border: 1px solid #e0e0e0;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    margin-right: 8px;
+    background-color: #ffffff;
+    color: #7C7C7C;
+}
+
+.dmm-cancelar:hover {
+    background-color: #e0e0e0;
+}
+
+.dmm-salvar {
+    padding: 15px 32px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    margin-right: 8px;
+    background-color: #436850;
+    color: #ffffff;
+}
+
+.dmm-salvar:hover {
+    background-color: #35563f; 
+}
+
+.dmm-linha{
+    height:1px;
+    background:#e0e0e0;
+    margin:16px 0;
+}

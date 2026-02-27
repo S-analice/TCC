@@ -1,0 +1,157 @@
+body {
+    margin: 0;
+}
+
+.motorista-container {
+    min-height: 100vh;
+    font-family: Arial;
+}
+
+.motorista-topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.motorista-subtitulo {
+    color: #7C7C7C;
+}
+
+.motorista-topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.motorista-topo button {
+    padding: 15px 32px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    background-color: #436850;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.motorista-topo button:hover {
+    background-color: #35563f;
+}
+
+.motorista-busca{
+    position:relative;
+    width:100%;
+    max-width:350px;
+}
+
+.motorista-busca input{
+    width:100%;
+    padding:14px 12px 10px 36px;
+    border-radius:6px;
+    border: 2px solid #e0e0e0;
+    color: #7C7C7C;
+    outline:none;
+    font-size:14px;
+}
+
+.motorista-busca input:focus{
+    border-color:#436850;
+}
+
+.motorista-busca-icone{
+    position:absolute;
+    left:10px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#7C7C7C;
+}
+
+.motorista-tabela {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.motorista-tabela th {
+    padding: 16px;
+    text-align: left;
+    background-color: #e0e0e0;
+    color: #7C7C7C;
+    font-weight: bold;
+}
+
+.motorista-tabela td {
+    padding: 15px 16px;
+    color: #7C7C7C;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.motorista-tabela tr:hover {
+    background-color: #F5F5F5;
+}
+
+.motorista-acoes {
+    display: flex;
+    gap: 2px;
+}
+
+.motorista-atualizar {
+    display: flex;
+    align-items: center;
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 8px;
+    background-color: #f2c14e;
+    color: #ffffff;
+}
+
+.motorista-atualizar:hover {
+    background-color: #e0af3c;
+}
+
+.motorista-remover {
+    display: flex;
+    align-items: center;
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 8px;
+    background-color: #c0392b;
+    color: #ffffff;
+}
+
+.motorista-remover:hover {
+    background-color: #99211d;
+}
+
+.convenio{
+    padding:4px 10px;
+    border-radius:8px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.convenio.a{
+    background:#dbeafe;
+    color:#3b82f6;
+}
+
+.convenio.b{
+    background:#ede9fe;
+    color:#7c3aed;
+}
+
+.convenio.sem{
+    background:#e0e0e0;
+    color:#7C7C7C;
+}

@@ -1,0 +1,119 @@
+.sm-fundo {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial;
+    z-index: 1000;
+}
+  
+.sm-card {
+    background: #ffffff;
+    color: #7c7c7c;
+    padding: 30px;
+    border-radius: 12px;
+    width: 450px;
+}
+
+.sm-caixinha-linha {
+    background: #f5f5f5;
+    padding: 12px;
+    margin-bottom: 16px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.sm-caixinha-linha p {
+    font-size: 12px;
+    color: #7C7C7C;
+    margin: 0;
+}
+
+.sm-caixinha-linha strong {
+    font-size: 14px;
+    margin-top: 6px;
+}
+
+.sm-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px; 
+}
+
+.sm-form-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.sm-form-container select {
+    color: #7C7C7C;
+}
+
+.sm-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #7C7C7C;
+}
+
+.sm-input {
+    padding: 15px 16px;
+    border-radius: 6px;
+    border: 2px solid #e0e0e0;
+    font-size: 14px;
+    outline: none;
+    color: #7C7C7C;
+}
+  
+.sm-input:focus {
+    border: 2px solid #436850;
+}
+  
+.sm-form-acoes {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.sm-cancelar {
+    padding: 15px 32px;
+    border-radius: 6px;
+    border: 1px solid #e0e0e0;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    background-color: #ffffff;
+    color: #7C7C7C;
+}
+
+.sm-cancelar:hover {
+    background-color: #e0e0e0;
+}
+
+.sm-salvar {
+    padding: 15px 32px;
+    border-radius: 6px;
+    padding: 15px 32px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    background-color: #436850;
+    color: #ffffff;
+}
+
+.sm-salvar:hover {
+    background-color: #35563f;
+}
+
+.erro-texto {
+    color: #c0392b;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 8px;
+} 

@@ -1,15 +1,15 @@
 #TCC (Que deus nós ajude)
 
-cd projeto-FBP
+cd projeto-GEPARK
 nvm install 22
-npm install lucide-react
 npm install
 npm run dev
 
-.env VITE_API_URL=https://api.openweathermap.org/data/2.5
-     VITE_API_KEY=ad5c2867dcf6cc19700761baeb1b120c       
+.env 
+VITE_API_URL=https://api.openweathermap.org/data/2.5
+VITE_API_KEY=ad5c2867dcf6cc19700761baeb1b120c       
 
-São 19 arquivos ao todo: 19/19 
+São 18 arquivos ao todo: 18/18 
 
 12/02 - Iniciei o projeto em react + js, fazendo a tela de login 
 
@@ -28,3 +28,5 @@ São 19 arquivos ao todo: 19/19
 23/02 - Finalizando o front com a tela de home e geração de relatório, arrumando como aparece as infos na tabela 
 
 25/02 - Alteração de cor, adicionado icones e mensagens (login, esqueceu senha, mensagem, carregando, modal foto funcionário, funcionário e modais)
+
+26/02 - Alteração de cor, adicionado icones e mensagens (motorista, pátio, home ), alterei a logo e nome, mudei a tela de relatório
