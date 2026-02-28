@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import "../styles/Home.css";
 import { Truck, TrendingUp, TrendingDown, Users } from "lucide-react";
 
-export default function Home({ usuario }) {
+export default function Home({ funcionario }) {
 
   const hoje = new Date();
   const dataHoje = hoje.toLocaleDateString("pt-BR"); // mostra na saudação
   const hojeISO = new Date().toISOString().split("T")[0]; // formato dd-mm-aaaa para filtro
 
 
-  const nomeUsuario = usuario?.nome || "Usuário";
-  const turno = usuario?.turno || "... - ...";
+  const nomeFuncionario = funcionario?.nome || "Funcionário";
+  const turno = funcionario?.turno || "... - ...";
   const [inicioTurno, fimTurno] = turno.split(" - ");
 
 
@@ -21,7 +21,8 @@ export default function Home({ usuario }) {
       placa: "ABC1234",
       entrada: "2026-02-23T08:30:00",
       saida: null,
-      funcionario: "João Silva",
+      funcionarioEntrada: "João Silva",
+      funcionarioSaida: null,
       tipo: "Entrada",
       status: "No Pátio"
     },
@@ -31,7 +32,8 @@ export default function Home({ usuario }) {
       placa: "DEF5678",
       entrada: "2026-02-23T09:15:00",
       saida: null,
-      funcionario: "Maria Santos",
+      funcionarioEntrada: "Maria Santos",
+      funcionarioSaida: null,
       tipo: "Entrada",
       status: "No Pátio"
     },
@@ -41,7 +43,8 @@ export default function Home({ usuario }) {
       placa: "GHI9012",
       entrada: "2026-02-23T07:40:00",
       saida: "2026-02-23T11:10:00",
-      funcionario: "Carlos Oliveira",
+      funcionarioEntrada: "Carlos Oliveira",
+      funcionarioSaida: "Sr Cabeça de Batata",
       tipo: "Saída",
       status: "Finalizado"
     }
@@ -77,7 +80,6 @@ export default function Home({ usuario }) {
   const registrosHoje = registros.filter(r => r.entrada.startsWith(hojeISO));
 
   const entradasHoje = registrosHoje.filter(r => r.tipo === "Entrada").length;
-
   const saidasHoje = registrosHoje.filter(r => r.tipo === "Saída").length;
 
   const noPatio = registros.filter(r => r.status === "No Pátio").length;
@@ -156,7 +158,7 @@ export default function Home({ usuario }) {
 
       <div className="home-saudacao-box">
         <p>
-          Olá <strong>{nomeUsuario}</strong>, seu turno começa hoje
+          Olá <strong>{nomeFuncionario}</strong>, seu turno começa hoje
           <strong> {dataHoje}</strong> às
           <strong> {inicioTurno}</strong> e termina às
           <strong> {fimTurno}</strong>, bom trabalho!
@@ -262,6 +264,7 @@ export default function Home({ usuario }) {
               <th>Data/Hora</th>
               <th>Tipo</th>
               <th>Status</th>
+              <th>Funcionário</th>
             </tr>
           </thead>
 
@@ -300,10 +303,14 @@ export default function Home({ usuario }) {
                     </span>
                   </td>
 
+                  <td>
+                    {r.tipo === "Entrada"
+                      ? r.funcionarioEntrada
+                      : r.funcionarioSaida}
+                  </td>
+
                 </tr>
-
               ))}
-
           </tbody>
         </table>
       </div>

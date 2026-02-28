@@ -1,6 +1,6 @@
 import "../styles/FuncionarioModal.css";
 import { useState } from "react";
-import { Upload, X, User } from "lucide-react";
+import { Upload, Trash2, User } from "lucide-react";
 
 export default function FuncionarioModal({ modo, funcionario, fechar, salvar }) {
 
@@ -70,9 +70,9 @@ export default function FuncionarioModal({ modo, funcionario, fechar, salvar }) 
 
                             <div className="fm-upload-preview">
                                 {foto ? (
-                                    <img src={foto} alt="Foto funcionário"/>
+                                    <img src={foto} alt="Foto funcionário" />
                                 ) : (
-                                    <User size={40}/>
+                                    <User size={40} />
                                 )}
                             </div>
 
@@ -91,8 +91,11 @@ export default function FuncionarioModal({ modo, funcionario, fechar, salvar }) 
                                 />
 
                                 <div className="fm-upload-botao-acoes">
-                                    <label htmlFor="foto-upload" className="fm-upload-label">
-                                        <Upload size={16}/>
+                                    <label
+                                        htmlFor="foto-upload"
+                                        className={`fm-upload-label ${foto ? "alterar" : "carregar"}`}
+                                    >
+                                        <Upload size={16} />
                                         {foto ? "Alterar" : "Carregar"}
                                     </label>
 
@@ -102,7 +105,7 @@ export default function FuncionarioModal({ modo, funcionario, fechar, salvar }) 
                                             className="fm-upload-remover"
                                             onClick={() => setFoto("")}
                                         >
-                                            <X size={14}/>Excluir 
+                                            <Trash2 size={14} />
                                         </button>
                                     )}
                                 </div>

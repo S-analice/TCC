@@ -1,15 +1,12 @@
 import React, { useState } from "react";
+
 import { User, House, Users, Truck, FileText, Mail, Phone, Clock, LogOut } from "lucide-react";
 import "../styles/Barra.css";
 
-export default function Barra( {usuario, paginaAtual, irParaPagina, mostrarInfoUsuario, voltarParaLogin, children} ) {
+export default function Barra( {funcionario, paginaAtual, irParaPagina, mostrarInfoUsuario, voltarParaLogin, children} ) {
 
-    const [mostrarMenuUsuario, setMostrarMenuUsuario] = useState(false);
+    const [mostrarMenuFuncionario, setMostrarMenuFuncionario] = useState(false);
 
-    const aoMostrarInfo = () => {
-        mostrarInfoUsuario();
-        setMostrarMenuUsuario(false);
-    }
 
     const formatarTelefone = (telefone) => {
         if (!telefone) return "";
@@ -28,50 +25,50 @@ export default function Barra( {usuario, paginaAtual, irParaPagina, mostrarInfoU
 
             <div className="barra-superior">
 
-            <button onClick={() => setMostrarMenuUsuario(!mostrarMenuUsuario)} className="usuario-botao">
-                <div className="usuario-icon-fundo">
+            <button onClick={() => setMostrarMenuFuncionario(!mostrarMenuFuncionario)} className="barra-botao">
+                <div className="barra-icon">
                     <User size={20}/>
                 </div>
-                <span>{usuario?.nome}</span>
+                <span>{funcionario?.nome}</span>
             </button>
 
-            {mostrarMenuUsuario && (
-                <div className="menu-usuario">
+            {mostrarMenuFuncionario && (
+                <div className="menu-funcionario">
 
-                    <div className="menu-usuario-topo">
-                        <div className="avatar-usuario">
-                            {usuario?.foto ? 
-                            (<img src={usuario.foto} alt="Foto do usuário" className="avatar-usuario-img"/>) 
+                    <div className="menu-funcionario-topo">
+                        <div className="avatar-funcionario">
+                            {funcionario?.foto ? 
+                            (<img src={funcionario.foto} alt="Foto Funcionário" className="avatar-img"/>) 
                             : 
                             (<div className="avatar-icone">
                                 <User size={28}/>
                             </div>)}
                         </div>
 
-                        <div className="usuario-info">
-                            <strong>{usuario?.nome}</strong>
-                            <span>{usuario?.cargo}</span>
+                        <div className="funcionario-info">
+                            <strong>{funcionario?.nome}</strong>
+                            <span>{funcionario?.cargo}</span>
                         </div>
                     </div>
 
-                    <div className="menu-usuario-detalhes">
+                    <div className="menu-funcionario-detalhes">
                         <div className="detalhe">
                             <Mail size={20} />
-                            <span>{usuario?.email}</span>
+                            <span>{funcionario?.email}</span>
                         </div>
 
                         <div className="detalhe">
                             <Phone size={20} />
-                            <span>{formatarTelefone(usuario?.telefone)}</span>
+                            <span>{formatarTelefone(funcionario?.telefone)}</span>
                         </div>
 
                         <div className="detalhe">
                             <Clock size={20} />
-                            <span>{usuario?.turno}</span>
+                            <span>{funcionario?.turno}</span>
                         </div>
                     </div>
 
-                    <div className="menu-usuario-acoes">
+                    <div className="menu-funcionario-acoes">
                         <button className="botao-sair" onClick={voltarParaLogin}>
                             <LogOut size={20} />Sair do sistema
                         </button>
@@ -82,7 +79,7 @@ export default function Barra( {usuario, paginaAtual, irParaPagina, mostrarInfoU
             </div>
 
             <div className="barra-navegacao">
-                <div className="logo-retangulo">
+                <div className="logo-container">
                     <img src="/logo.png" alt="Logo GEPARK" className="logo-img" />    
                 </div>
 

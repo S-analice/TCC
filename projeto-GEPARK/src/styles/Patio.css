@@ -25,22 +25,50 @@ body {
     margin-bottom: 32px;
 }
 
-.patio-topo button {
-    display: flex;
-    align-items: center;
-    padding: 15px 32px;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-    background-color: #436850;
-    color: #ffffff;
-    font-size: 14px;
-    font-weight: 600;
-    gap: 2px;
+.patio-botoes{
+    display:flex;
+    gap:10px;
+    align-items:center;
 }
 
-.patio-topo button:hover {
+.patio-botoes svg{
+    color:#ffffff;
+}
+
+.patio-topo-button-verde{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    padding:12px 20px;
+    border-radius:6px;
+    border:none;
+    cursor:pointer;
+    font-size:14px;
+    font-weight:600;
+    color:#ffffff;
+    background-color:#436850;
+}
+
+.patio-topo-button-verde:hover {
     background-color: #35563f;
+}
+
+.patio-topo-button-amarelo{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    padding:12px 20px;
+    border-radius:6px;
+    border:none;
+    cursor:pointer;
+    font-size:14px;
+    font-weight:600;
+    color:#ffffff;
+    background-color: #f2c14e;
+}
+
+.patio-topo-button-amarelo:hover {
+    background-color: #e0af3c;
 }
 
 .patio-busca{

@@ -30,3 +30,5 @@ São 18 arquivos ao todo: 18/18
 25/02 - Alteração de cor, adicionado icones e mensagens (login, esqueceu senha, mensagem, carregando, modal foto funcionário, funcionário e modais)
 
 26/02 - Alteração de cor, adicionado icones e mensagens (motorista, pátio, home ), alterei a logo e nome, mudei a tela de relatório
+
+27/02 - esqueci o botão de pdf no pátio, adicinei mensagem com tipo sucesso ou erro 

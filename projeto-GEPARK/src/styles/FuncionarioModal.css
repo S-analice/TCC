@@ -114,8 +114,20 @@
     cursor:pointer;
 }
 
-.fm-upload-label:hover{
+.fm-upload-label.carregar{
+    background:#436850;
+}
+
+.fm-upload-label.carregar:hover{
     background:#35563f;
+}
+
+.fm-upload-label.alterar{
+    background:#f2c14e;
+}
+
+.fm-upload-label.alterar:hover{
+    background:#e0af3c;
 }
 
 .fm-upload-texto{

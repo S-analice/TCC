@@ -1,6 +1,7 @@
 import "../styles/Motorista.css";
-import { useState } from "react";
 import { Pencil, Trash2, Search } from "lucide-react"
+
+import { useState } from "react";
 
 import Carregando from "../components/Carregando";
 import Mensagem from "../components/Mensagem";
@@ -40,7 +41,9 @@ export default function Motorista() {
     const [pesquisa, setPesquisa] = useState("");
 
     const [carregando, setCarregando] = useState(false);
+
     const [mostrarMensagem, setMostrarMensagem] = useState(false);
+    const [tipoMensagem, setTipoMensagem] = useState("sucesso");
     const [textoMensagem, setTextoMensagem] = useState("");
 
     const [mostrarModal, setMostrarModal] = useState(false);
@@ -83,10 +86,11 @@ export default function Motorista() {
                 };
 
                 setMotoristas([...motoristas, novo]);
-                setTextoMensagem("Motorista cadastrado com sucesso!");
-            }
 
-            else {
+                setTipoMensagem("sucesso");
+                setTextoMensagem("Motorista cadastrado com sucesso!");
+
+            } else if (modoModal === "editar") {
                 setMotoristas(
                     motoristas.map(m =>
                         m.id === motoristaSelecionado.id
@@ -94,7 +98,14 @@ export default function Motorista() {
                             : m
                     )
                 );
+
+                setTipoMensagem("sucesso");
                 setTextoMensagem("Motorista atualizado com sucesso!");
+            } else {
+
+                setTipoMensagem("erro");
+                setTextoMensagem("Não foi possível salvar motorista!");
+
             }
 
             setCarregando(false);
@@ -160,6 +171,7 @@ export default function Motorista() {
             {mostrarMensagem && (
                 <Mensagem
                     mensagem={textoMensagem}
+                    tipo={tipoMensagem}
                     fechar={() => setMostrarMensagem(false)}
                 />
             )}
@@ -216,10 +228,10 @@ export default function Motorista() {
                             <td>{formatarCNPJ(m.cnpj)}</td>
                             <td>
                                 <span className={`convenio ${m.convenio === "Convênio A"
-                                        ? "a"
-                                        : m.convenio === "Convênio B"
-                                            ? "b"
-                                            : "sem"
+                                    ? "a"
+                                    : m.convenio === "Convênio B"
+                                        ? "b"
+                                        : "sem"
                                     }`}>
                                     {m.convenio}
                                 </span>

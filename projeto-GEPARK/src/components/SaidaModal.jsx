@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "../styles/SaidaModal.css";
 
-export default function SaidaModal({ registro, fechar, confirmar }) {
+export default function SaidaModal({ usuario, registro, fechar, confirmar }) {
 
     const [saida, setSaida] = useState(new Date().toISOString().slice(0,16));
     const [tipoPagamento, setTipoPagamento] = useState("");
@@ -105,6 +105,16 @@ export default function SaidaModal({ registro, fechar, confirmar }) {
                             className="sm-input"
                             type="text"
                             value={`R$ ${valor}`}
+                            readOnly
+                        />
+                    </div>
+
+                    <div className="sm-form-container">
+                        <label className="sm-label">Funcionário</label>
+                        <input
+                            className="sm-input"
+                            type="text"
+                            value={usuario?.nome}
                             readOnly
                         />
                     </div>

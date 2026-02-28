@@ -49,7 +49,9 @@ export default function Funcionario() {
     const [pesquisa, setPesquisa] = useState("");
 
     const [carregando, setCarregando] = useState(false);
+
     const [mostrarMensagem, setMostrarMensagem] = useState(false);
+    const [tipoMensagem, setTipoMensagem] = useState("sucesso");
     const [textoMensagem, setTextoMensagem] = useState("");
 
     const [mostrarModal, setMostrarModal] = useState(false);
@@ -61,7 +63,7 @@ export default function Funcionario() {
     const [mostrarFoto, setMostrarFoto] = useState(false);
 
     const funcionariosFiltrados = funcionarios.filter((f) =>
-        f.nome.toUpperCase().includes(pesquisa) || f.nome.toLowerCase().includes(pesquisa)
+        f.nome.toLowerCase().includes(pesquisa.toLowerCase())
     );
 
     const abrirAdicionar = () => {
@@ -87,22 +89,25 @@ export default function Funcionario() {
     };
 
     const salvarFuncionario = (dados) => {
+
         setMostrarModal(false);
         setCarregando(true);
-
+    
         setTimeout(() => {
+    
             if (modoModal === "adicionar") {
-
                 const novo = {
                     id: Date.now(),
                     ...dados
                 };
-
-                setFuncionarios([...funcionarios, novo]);
+    
+                setFuncionarios([...f, novo]);
+    
+                setTipoMensagem("sucesso");
                 setTextoMensagem("Funcionário cadastrado com sucesso!");
-            }
-
-            else {
+    
+            } else if (modoModal === "editar") {
+    
                 setFuncionarios(
                     funcionarios.map(f =>
                         f.id === funcionarioSelecionado.id
@@ -110,20 +115,39 @@ export default function Funcionario() {
                             : f
                     )
                 );
+    
+                setTipoMensagem("sucesso");
                 setTextoMensagem("Funcionário atualizado com sucesso!");
+    
+            } else {
+    
+                setTipoMensagem("erro");
+                setTextoMensagem("Não foi possível salvar funcionário!");
+    
             }
-
+    
             setCarregando(false);
             setMostrarMensagem(true);
+    
         }, 2000);
     };
 
-
     const confirmarDelete = () => {
+
         setMostrarDelete(false);
         setCarregando(true);
-
+    
         setTimeout(() => {
+    
+            if (funcionarioSelecionado.status === "Inativo") {
+    
+                setCarregando(false);
+                setTipoMensagem("erro");
+                setTextoMensagem("Este funcionário já está inativo.");
+                setMostrarMensagem(true);
+                return;
+            }
+    
             setFuncionarios(
                 funcionarios.map(f =>
                     f.id === funcionarioSelecionado.id
@@ -131,10 +155,12 @@ export default function Funcionario() {
                         : f
                 )
             );
-
+    
             setCarregando(false);
-            setTextoMensagem("Funcionário rmarcado como inativo!");
+            setTipoMensagem("sucesso");
+            setTextoMensagem("Funcionário marcado como inativo!");
             setMostrarMensagem(true);
+    
         }, 2000);
     };
 
@@ -159,6 +185,7 @@ export default function Funcionario() {
             {mostrarMensagem && (
                 <Mensagem
                     mensagem={textoMensagem}
+                    tipo={tipoMensagem}
                     fechar={() => setMostrarMensagem(false)}
                 />
             )}

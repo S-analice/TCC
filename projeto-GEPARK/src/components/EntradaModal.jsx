@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "../styles/EntradaModal.css";
 
-export default function EntradaModal({ modo, registro, usuario, fechar, salvar }) {
+export default function EntradaModal({ modo, registro, funcionario, fechar, salvar }) {
 
     const motoristasCadastrados = [
         { cpf: "12345678900", placa: "ABC1234", convenio: "Sem Convênio" },
@@ -26,7 +26,7 @@ export default function EntradaModal({ modo, registro, usuario, fechar, salvar }
     const enviarFormulario = (e) => {
         e.preventDefault();
 
-        salvar({ cpf, placa, entrada, funcionario: usuario?.nome });
+        salvar({ cpf, placa, entrada, funcionario: funcionario?.nome });
     };
 
     return (
@@ -79,7 +79,7 @@ export default function EntradaModal({ modo, registro, usuario, fechar, salvar }
                         <input
                             className="em-input"
                             type="text"
-                            value={usuario?.nome}
+                            value={funcionario?.nome}
                             readOnly
                         />
                     </div>
@@ -90,6 +90,7 @@ export default function EntradaModal({ modo, registro, usuario, fechar, salvar }
                         <button className="em-cancelar" type="button" onClick={fechar}>
                             Cancelar
                         </button>
+                        
                         <button className="em-salvar" type="submit">
                             Salvar
                         </button>

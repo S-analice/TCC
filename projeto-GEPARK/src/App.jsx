@@ -2,6 +2,7 @@ import Login from "./pages/Login"
 import EsqueceuSenha from "./pages/EsqueceuSenha";
 
 import Barra from "./components/Barra";
+
 import Home from "./pages/Home";
 import Funcionario from "./pages/Funcionario";
 import Motorista from "./pages/Motorista";
@@ -12,15 +13,14 @@ import { useState } from "react";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 
 function App() {
-  const [usuario, setUsuario] = useState(null);
+  const [funcionario, setFuncionario] = useState(null);
   const [paginaInterna, setPaginaInterna] = useState("home");
-  const [mostrarModalUsuario, setMostrarModalUsuario] = useState(false);
 
   // caminho de uma página a outra
   const navigate = useNavigate();
 
-  const definirUsuario = (usuarioCompleto) => {
-    setUsuario(usuarioCompleto);
+  const definirFuncionario = (funcionarioCompleto) => {
+    setFuncionario(funcionarioCompleto);
   };
 
   const irParaEsqueceuSenha = () => {
@@ -32,49 +32,48 @@ function App() {
   };
 
   const voltarParaLogin = () => {
-    setUsuario(null);
+    setFuncionario(null);
     navigate("/");
   }
 
   const renderizarPaginaInterna = () => {
     switch (paginaInterna) {
       case "home":
-        return <Home usuario={usuario} />;
+        return <Home funcionario={funcionario} />;
       case "funcionario":
-        return <Funcionario usuario={usuario}/>;
+        return <Funcionario funcionario={funcionario} />;
       case "motorista":
-        return <Motorista usuario={usuario} />;
+        return <Motorista funcionario={funcionario} />;
       case "patio":
-        return <Patio usuario={usuario} />;
+        return <Patio funcionario={funcionario} />;
       case "relatorio":
-        return <Relatorio usuario={usuario} />;
+        return <Relatorio funcionario={funcionario} />;
       default:
-        return <Home usuario={usuario} />;
+        return <Home funcionario={funcionario} />;
     }
   };
 
 
   return (
     <>
-      {/*mapa*/} 
+      {/*mapa*/}
       <Routes>
-        <Route path="/" element={<Login definirUsuario={definirUsuario} irParaEsqueceuSenha={irParaEsqueceuSenha} irParaHome={irParaHome}/>} />
-        <Route path="/esqueceu-senha" element={<EsqueceuSenha voltarParaLogin={voltarParaLogin}/>} />
-          
+        <Route path="/" element={<Login definirFuncionario={definirFuncionario} irParaEsqueceuSenha={irParaEsqueceuSenha} irParaHome={irParaHome} />} />
+        <Route path="/esqueceu-senha" element={<EsqueceuSenha voltarParaLogin={voltarParaLogin} />} />
+
         <Route path="/home"
           element={
             <Barra
-              usuario={usuario}
+              funcionario={funcionario}
               paginaAtual={paginaInterna}
               irParaPagina={setPaginaInterna}
-              mostrarInfoUsuario={() => setMostrarModalUsuario(true)}
               voltarParaLogin={voltarParaLogin}
             >
               {renderizarPaginaInterna()}
             </Barra>
           }
         />
-      </Routes> n  
+      </Routes>
     </>
   );
 }

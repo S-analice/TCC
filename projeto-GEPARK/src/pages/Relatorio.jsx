@@ -1,8 +1,10 @@
 import { useState } from "react";
+
 import "../styles/Relatorio.css";
+import { FileText, Download, Filter } from "lucide-react";
+
 import Carregando from "../components/Carregando";
 import Mensagem from "../components/Mensagem";
-import { FileText, Download, Filter } from "lucide-react";
 
 export default function Relatorio() {
 
@@ -10,30 +12,37 @@ export default function Relatorio() {
   const [dataFim, setDataFim] = useState("");
   const [mostrarResultados, setMostrarResultados] = useState(false);
 
-  const [dadosFiltrados, setDadosFiltrados] = useState([]);
-  const [carregando, setCarregando] = useState(false);
-  const [mensagem, setMensagem] = useState("");
+  const [registrosFiltrados, setRegistrosFiltrados] = useState([]);
 
-  const dados = [
+  const [carregando, setCarregando] = useState(false);
+
+  const [mostrarMensagem, setMostrarMensagem] = useState(false);
+  const [tipoMensagem, setTipoMensagem] = useState("sucesso");
+  const [textoMensagem, setTextoMensagem] = useState("");
+
+
+  const registros = [
     {
       id: 1,
       cpf: "12345678900",
       placa: "ABC1234",
       entrada: "2026-02-23T08:30:00",
-      saida: null,
-      funcionario: "João Silva",
-      tipo: "Entrada",
-      status: "No Pátio"
+      saida: "2026-02-24T08:30:00",
+      funcionarioEntrada: "João Silva",
+      funcionarioSaida: "Maria Santos",
+      tipo: "Saída",
+      status: "Finalizado"
     },
     {
       id: 2,
       cpf: "98765432100",
       placa: "DEF5678",
       entrada: "2026-02-23T09:15:00",
-      saida: null,
-      funcionario: "Maria Santos",
-      tipo: "Entrada",
-      status: "No Pátio"
+      saida: "2026-02-24T09:15:00",
+      funcionarioEntrada: "Maria Santos",
+      funcionarioSaida: "João Silva",
+      tipo: "Saída",
+      status: "Finalizado"
     },
     {
       id: 3,
@@ -41,7 +50,8 @@ export default function Relatorio() {
       placa: "GHI9012",
       entrada: "2026-02-23T07:40:00",
       saida: "2026-02-23T11:10:00",
-      funcionario: "Carlos Oliveira",
+      funcionarioEntrada: "Carlos Silva",
+      funcionarioSaida: "Sr Cabeça de Batata",
       tipo: "Saída",
       status: "Finalizado"
     }
@@ -87,15 +97,14 @@ export default function Relatorio() {
       const inicio = new Date(dataInicio);
       const fim = new Date(dataFim);
 
-      const filtrados = dados.filter((item) => {
-
+      const filtrados = registros.filter((item) => {
         const dataEntrada = new Date(item.entrada);
 
         return dataEntrada >= inicio && dataEntrada <= fim;
 
       });
 
-      setDadosFiltrados(filtrados);
+      setRegistrosFiltrados(filtrados);
       setMostrarResultados(true);
       setCarregando(false);
 
@@ -106,18 +115,16 @@ export default function Relatorio() {
   function exportarCSV() {
 
     setCarregando(true);
-
+  
     setTimeout(() => {
-
+  
       setCarregando(false);
-      setMensagem("Relatório exportado com sucesso!");
-
+  
+      setTipoMensagem("sucesso");
+      setTextoMensagem("Relatório exportado com sucesso!");
+      setMostrarMensagem(true);
+  
     }, 2000);
-
-  }
-
-  function buscarMotorista(cpf) {
-    return motoristas.find(m => m.cpf === cpf);
   }
 
   function formatarDataHora(data) {
@@ -130,6 +137,10 @@ export default function Relatorio() {
       hour: "2-digit",
       minute: "2-digit"
     });
+  }
+
+  function calcularTotalMovimentacoes() {
+    return registrosFiltrados.length;
   }
 
   function calcularDuracao(entrada, saida) {
@@ -147,16 +158,12 @@ export default function Relatorio() {
     return `${horas}h ${minutos}min`;
   }
 
-  function calcularTotalMovimentacoes() {
-    return dadosFiltrados.length;
-  }
-
   function calcularTempoMedio() {
 
     let totalMinutos = 0;
     let contador = 0;
 
-    dadosFiltrados.forEach((item) => {
+    registrosFiltrados.forEach((item) => {
 
       if (item.saida) {
 
@@ -180,17 +187,22 @@ export default function Relatorio() {
     return `${horas}h ${minutos}min`;
   }
 
+  function buscarMotorista(cpf) {
+    return motoristas.find(m => m.cpf === cpf);
+  }
+
   function clienteMaisFrequente() {
+
+    if (registrosFiltrados.length === 0) return "-";
 
     const contagem = {};
 
-    dados.forEach((item) => {
+    registrosFiltrados.forEach((item) => {
 
       const motorista = buscarMotorista(item.cpf);
 
       if (motorista) {
         const tipo = motorista.convenio;
-
         contagem[tipo] = (contagem[tipo] || 0) + 1;
       }
     });
@@ -204,6 +216,7 @@ export default function Relatorio() {
         maior = contagem[tipo];
         cliente = tipo;
       }
+
     }
 
     return cliente;
@@ -277,6 +290,7 @@ export default function Relatorio() {
 
           <div className="relatorio-header">
             <h3>Resultados do Relatório</h3>
+            <p>resumido</p>
           </div>
 
           <div className="relatorio-cards">
@@ -306,16 +320,16 @@ export default function Relatorio() {
                 <tr>
                   <th>CPF</th>
                   <th>Placa</th>
-                  <th>Entrada</th>
                   <th>Saída</th>
+                  <th>Funcionário Saída</th>
                   <th>Duração</th>
-                  <th>Tipo Cliente</th>
+                  <th>Convênio</th>
                 </tr>
               </thead>
 
               <tbody>
 
-                {dadosFiltrados.map((item) => {
+                {registrosFiltrados.map((item) => {
 
                   const motorista = buscarMotorista(item.cpf);
 
@@ -327,20 +341,20 @@ export default function Relatorio() {
 
                       <td>{formatarPlaca(item.placa)}</td>
 
-                      <td>{formatarDataHora(item.entrada)}</td>
-
                       <td>{formatarDataHora(item.saida)}</td>
+
+                      <td>{item.funcionarioSaida}</td>
 
                       <td>{calcularDuracao(item.entrada, item.saida)}</td>
 
                       <td>
                         <span className={`convenio ${motorista?.convenio === "Convênio A"
                           ? "a"
-                          : motorista.convenio === "Convênio B"
+                          : motorista?.convenio === "Convênio B"
                             ? "b"
                             : "sem"
                           }`}>
-                          {motorista.convenio}
+                          {motorista?.convenio || "Sem Convênio"}
                         </span>
                       </td>
 
@@ -362,10 +376,11 @@ export default function Relatorio() {
 
       {carregando && <Carregando />}
 
-      {mensagem && (
+      {mostrarMensagem && (
         <Mensagem
-          mensagem={mensagem}
-          fechar={() => setMensagem("")}
+          mensagem={textoMensagem}
+          tipo={tipoMensagem}
+          fechar={() => setMostrarMensagem(false)}
         />
       )}
     </div>

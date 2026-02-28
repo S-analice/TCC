@@ -58,3 +58,16 @@
 .msg-botao:hover {
   background-color: #35563f;
 }
+
+.msg-retangulo.erro .msg-icon {
+  background: #c0392b;
+}
+
+.msg-retangulo.erro .msg-botao {
+  background-color: #c0392b;
+
+}
+  
+.msg-retangulo.erro .msg-botao:hover {
+  background-color: #99211d;
+}

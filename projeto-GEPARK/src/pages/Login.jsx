@@ -1,14 +1,21 @@
 import "../styles/Login.css";
-import { useState } from "react";
 import { Mail, Lock } from "lucide-react";
-import Carregando from "../components/Carregando";
 
-export default function Login({ definirUsuario, irParaEsqueceuSenha, irParaHome }) {
+import { useState } from "react";
+
+import Carregando from "../components/Carregando";
+import Mensagem from "../components/Mensagem";
+
+export default function Login({ definirFuncionario, irParaEsqueceuSenha, irParaHome }) {
 
     const [carregando, setCarregando] = useState(false);
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
     const [erro, setErro] = useState("");
+
+    const [mostrarMensagem, setMostrarMensagem] = useState(false);
+    const [tipoMensagem, setTipoMensagem] = useState("sucesso");
+    const [textoMensagem, setTextoMensagem] = useState("");
 
     const enviarFormulario = (e) => {
         e.preventDefault();
@@ -18,24 +25,27 @@ export default function Login({ definirUsuario, irParaEsqueceuSenha, irParaHome 
 
         setTimeout(() => {
 
-            const usuario = {
+            const funcionario = {
+                foto: "/usuario.jpg",
                 nome: "Senhor Cabeça de Batata",
                 email: "srbatata@gmail.com",
                 telefone: "41991234567",
                 senha: "123456Sr",
                 turno: "6:00 - 18:00",
-                foto: "/usuario.jpg",
                 cargo: "Líder",
                 status: "Ativo"
             };
 
-            if (email === usuario.email && senha === usuario.senha) {
+            if (email === funcionario.email && senha === funcionario.senha) {
                 setCarregando(false);
-                definirUsuario(usuario);
+                definirFuncionario(funcionario);
                 irParaHome();
             } else {
                 setCarregando(false);
-                setErro("Email ou senha inválidos!");
+                setMostrarMensagem(true);
+                setTipoMensagem("erro");
+                setTextoMensagem("Email ou senha inválidos!");
+
             }
 
         }, 2000);
@@ -46,11 +56,19 @@ export default function Login({ definirUsuario, irParaEsqueceuSenha, irParaHome 
 
             {carregando && <Carregando />}
 
+            {mostrarMensagem && (
+                <Mensagem
+                    mensagem={textoMensagem}
+                    tipo={tipoMensagem}
+                    fechar={setMostrarMensagem(false)}
+                />
+            )}
+
             <div className="login-card">
 
                 <div className="login-logo">
-                    <img src="/logo.png" alt="Logo FBP" className="login-img" />
-                
+                    <img src="/logo.png" alt="Logo GEPARK" className="login-img" />
+
                     <p className="login-descricao">
                         Sistema de Gestão de Estacionamento BR Park
                     </p>
