@@ -10,7 +10,7 @@ export default function EntradaModal({ modo, registro, funcionario, fechar, salv
 
     const [cpf, setCpf] = useState(registro?.cpf || "");
     const [placa, setPlaca] = useState(registro?.placa || "");
-    const [entrada, setEntrada] = useState(registro?.entrada || new Date().toISOString().slice(0,16));
+    const [dataEntrada, setDataEntrada] = useState(registro?.dataEntrada || new Date().toISOString().slice(0,16));
 
     useEffect(() => {
         if (cpf.length >= 7) {
@@ -26,7 +26,7 @@ export default function EntradaModal({ modo, registro, funcionario, fechar, salv
     const enviarFormulario = (e) => {
         e.preventDefault();
 
-        salvar({ cpf, placa, entrada, funcionario: funcionario?.nome });
+        salvar({ cpf, placa, dataEntrada, funcionarioEntrada: funcionario?.nome });
     };
 
     return (
@@ -68,8 +68,8 @@ export default function EntradaModal({ modo, registro, funcionario, fechar, salv
                         <input
                             className="em-input"
                             type="datetime-local"
-                            value={entrada}
-                            onChange={(e) => setEntrada(e.target.value)}
+                            value={dataEntrada}
+                            onChange={(e) => setDataEntrada(e.target.value)}
                             required
                         />
                     </div>

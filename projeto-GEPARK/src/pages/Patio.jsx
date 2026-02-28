@@ -9,15 +9,15 @@ import Mensagem from "../components/Mensagem";
 import EntradaModal from "../components/EntradaModal";
 import SaidaModal from "../components/SaidaModal";
 
-export default function Patio({ usuario }) {
+export default function Patio({ funcionario }) {
 
     const [registros, setRegistros] = useState([
         {
             id: 1,
             cpf: "12345678900",
             placa: "ABC1234",
-            entrada: "2026-02-23T08:30:00",
-            saida: null,
+            dataEntrada: "2026-02-23T08:30:00",
+            dataSaida: null,
             funcionarioEntrada: "João Silva",
             funcionarioSaida: null,
             tipo: "Entrada",
@@ -27,8 +27,8 @@ export default function Patio({ usuario }) {
             id: 2,
             cpf: "98765432100",
             placa: "DEF5678",
-            entrada: "2026-02-23T09:15:00",
-            saida: null,
+            dataEntrada: "2026-02-23T09:15:00",
+            dataSaida: null,
             funcionarioEntrada: "Maria Santos",
             funcionarioSaida: null,
             tipo: "Entrada",
@@ -38,8 +38,8 @@ export default function Patio({ usuario }) {
             id: 3,
             cpf: "45678912300",
             placa: "GHI9012",
-            entrada: "2026-02-23T07:40:00",
-            saida: "2026-02-23T11:10:00",
+            dataEntrada: "2026-02-23T07:40:00",
+            dataSaida: "2026-02-23T11:10:00",
             funcionarioEntrada: "Carlos Oliveira",
             funcionarioSaida: "Sr Cabeça de Batata",
             tipo: "Saída",
@@ -209,7 +209,7 @@ export default function Patio({ usuario }) {
                 <EntradaModal
                     modo={modoModal}
                     registro={registroSelecionado}
-                    usuario={usuario}
+                    funcionario={funcionario}
                     fechar={() => setMostrarModal(false)}
                     salvar={salvarRegistro}
                 />
@@ -218,7 +218,7 @@ export default function Patio({ usuario }) {
             {mostrarSaida && (
                 <SaidaModal
                     registro={registroSelecionado}
-                    usuario={usuario}
+                    funcionario={funcionario}
                     fechar={() => setMostrarSaida(false)}
                     confirmar={confirmarSaida}
                 />
@@ -266,7 +266,7 @@ export default function Patio({ usuario }) {
                         <tr key={r.id}>
                             <td>{formatarCPF(r.cpf)}</td>
                             <td>{formatarPlaca(r.placa)}</td>
-                            <td>{formatarData(r.entrada)}</td>
+                            <td>{formatarData(r.dataEntrada)}</td>
                             <td>{r.funcionarioEntrada}</td>
                             <td>
                                 <div className="patio-acoes">

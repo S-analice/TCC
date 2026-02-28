@@ -19,8 +19,8 @@ export default function Home({ funcionario }) {
       id: 1,
       cpf: "12345678900",
       placa: "ABC1234",
-      entrada: "2026-02-23T08:30:00",
-      saida: null,
+      dataEntrada: "2026-02-23T08:30:00",
+      dataSaida: null,
       funcionarioEntrada: "João Silva",
       funcionarioSaida: null,
       tipo: "Entrada",
@@ -30,8 +30,8 @@ export default function Home({ funcionario }) {
       id: 2,
       cpf: "98765432100",
       placa: "DEF5678",
-      entrada: "2026-02-23T09:15:00",
-      saida: null,
+      dataEntrada: "2026-02-23T09:15:00",
+      dataSaida: null,
       funcionarioEntrada: "Maria Santos",
       funcionarioSaida: null,
       tipo: "Entrada",
@@ -41,8 +41,8 @@ export default function Home({ funcionario }) {
       id: 3,
       cpf: "45678912300",
       placa: "GHI9012",
-      entrada: "2026-02-23T07:40:00",
-      saida: "2026-02-23T11:10:00",
+      dataEntrada: "2026-02-23T07:40:00",
+      dataSaida: "2026-02-23T11:10:00",
       funcionarioEntrada: "Carlos Oliveira",
       funcionarioSaida: "Sr Cabeça de Batata",
       tipo: "Saída",
@@ -77,7 +77,7 @@ export default function Home({ funcionario }) {
     }
   ]);
 
-  const registrosHoje = registros.filter(r => r.entrada.startsWith(hojeISO));
+  const registrosHoje = registros.filter(r => r.dataEntrada.startsWith(hojeISO));
 
   const entradasHoje = registrosHoje.filter(r => r.tipo === "Entrada").length;
   const saidasHoje = registrosHoje.filter(r => r.tipo === "Saída").length;
@@ -272,7 +272,12 @@ export default function Home({ funcionario }) {
 
             {registros
               .slice()
-              .sort((a, b) => new Date(b.entrada) - new Date(a.entrada))
+              .sort((a, b) => {
+                const dataA = new Date(a.dataSaida || a.dataEntrada);
+                const dataB = new Date(b.dataSaida || b.dataEntrada);
+              
+                return dataB - dataA;
+              })
               .slice(0, 5)
               .map((r) => (
 
@@ -282,7 +287,9 @@ export default function Home({ funcionario }) {
                   <td>{formatarPlaca(r.placa)}</td>
 
                   <td>
-                    {new Date(r.entrada).toLocaleString("pt-BR", {
+                    {new Date(
+                      r.tipo === "Entrada" ? r.dataEntrada : r.dataSaida
+                    ).toLocaleString("pt-BR", {
                       day: "2-digit",
                       month: "2-digit",
                       year: "numeric",

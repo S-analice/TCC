@@ -26,8 +26,8 @@ export default function Relatorio() {
       id: 1,
       cpf: "12345678900",
       placa: "ABC1234",
-      entrada: "2026-02-23T08:30:00",
-      saida: "2026-02-24T08:30:00",
+      dataEntrada: "2026-02-23T08:30:00",
+      dataSaida: "2026-02-24T08:30:00",
       funcionarioEntrada: "João Silva",
       funcionarioSaida: "Maria Santos",
       tipo: "Saída",
@@ -37,8 +37,8 @@ export default function Relatorio() {
       id: 2,
       cpf: "98765432100",
       placa: "DEF5678",
-      entrada: "2026-02-23T09:15:00",
-      saida: "2026-02-24T09:15:00",
+      dataEntrada: "2026-02-23T09:15:00",
+      dataSaida: "2026-02-24T09:15:00",
       funcionarioEntrada: "Maria Santos",
       funcionarioSaida: "João Silva",
       tipo: "Saída",
@@ -48,8 +48,8 @@ export default function Relatorio() {
       id: 3,
       cpf: "45678912300",
       placa: "GHI9012",
-      entrada: "2026-02-23T07:40:00",
-      saida: "2026-02-23T11:10:00",
+      dataEntrada: "2026-02-23T07:40:00",
+      dataSaida: "2026-02-23T11:10:00",
       funcionarioEntrada: "Carlos Silva",
       funcionarioSaida: "Sr Cabeça de Batata",
       tipo: "Saída",
@@ -98,7 +98,7 @@ export default function Relatorio() {
       const fim = new Date(dataFim);
 
       const filtrados = registros.filter((item) => {
-        const dataEntrada = new Date(item.entrada);
+        const dataEntrada = new Date(item.dataEntrada);
 
         return dataEntrada >= inicio && dataEntrada <= fim;
 
@@ -143,12 +143,12 @@ export default function Relatorio() {
     return registrosFiltrados.length;
   }
 
-  function calcularDuracao(entrada, saida) {
+  function calcularDuracao(dataEntrada, dataSaida) {
 
-    if (!saida) return "-";
+    if (!dataSaida) return "-";
 
-    const inicio = new Date(entrada);
-    const fim = new Date(saida);
+    const inicio = new Date(dataEntrada);
+    const fim = new Date(dataSaida);
 
     const diff = (fim - inicio) / 60000;
 
@@ -165,10 +165,10 @@ export default function Relatorio() {
 
     registrosFiltrados.forEach((item) => {
 
-      if (item.saida) {
+      if (item.dataSaida) {
 
-        const inicio = new Date(item.entrada);
-        const fim = new Date(item.saida);
+        const inicio = new Date(item.dataEntrada);
+        const fim = new Date(item.dataSaida);
 
         const diff = (fim - inicio) / 60000;
 
@@ -341,11 +341,11 @@ export default function Relatorio() {
 
                       <td>{formatarPlaca(item.placa)}</td>
 
-                      <td>{formatarDataHora(item.saida)}</td>
+                      <td>{formatarDataHora(item.dataSaida)}</td>
 
                       <td>{item.funcionarioSaida}</td>
 
-                      <td>{calcularDuracao(item.entrada, item.saida)}</td>
+                      <td>{calcularDuracao(item.dataEntrada, item.dataSaida)}</td>
 
                       <td>
                         <span className={`convenio ${motorista?.convenio === "Convênio A"

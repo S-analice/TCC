@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import "../styles/SaidaModal.css";
 
-export default function SaidaModal({ usuario, registro, fechar, confirmar }) {
+export default function SaidaModal({ funcionario, registro, fechar, confirmar }) {
 
-    const [saida, setSaida] = useState(new Date().toISOString().slice(0,16));
+    const [dataSaida, setDataSaida] = useState(new Date().toISOString().slice(0,16));
     const [tipoPagamento, setTipoPagamento] = useState("");
     const [valor, setValor] = useState(0);
 
@@ -18,8 +18,8 @@ export default function SaidaModal({ usuario, registro, fechar, confirmar }) {
 
         if (!registro?.entrada) return;
 
-        const entradaData = new Date(registro.entrada);
-        const saidaData = new Date(saida);
+        const entradaData = new Date(registro.dataEntrada);
+        const saidaData = new Date(dataSaida);
 
         if (saidaData <= entradaData) {
             setErro("O horário de saída deve ser maior que o horário de entrada!");
@@ -78,7 +78,7 @@ export default function SaidaModal({ usuario, registro, fechar, confirmar }) {
                         <input
                             className="sm-input"
                             type="datetime-local"
-                            value={saida}
+                            value={dataSaida}
                             onChange={(e) => setSaida(e.target.value)}
                         />
                     </div>
@@ -114,7 +114,7 @@ export default function SaidaModal({ usuario, registro, fechar, confirmar }) {
                         <input
                             className="sm-input"
                             type="text"
-                            value={usuario?.nome}
+                            value={funcionario?.nome}
                             readOnly
                         />
                     </div>
