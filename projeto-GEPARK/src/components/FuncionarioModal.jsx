@@ -2,7 +2,7 @@ import "../styles/FuncionarioModal.css";
 import { useState } from "react";
 import { Upload, Trash2, User } from "lucide-react";
 
-export default function FuncionarioModal({ modo, funcionario, fechar, salvar }) {
+export default function FuncionarioModal({ modo, funcionario, funcionarios, fechar, salvar }) {
 
     const [foto, setFoto] = useState(funcionario?.foto || "");
     const [nome, setNome] = useState(funcionario?.nome || "");
@@ -22,6 +22,13 @@ export default function FuncionarioModal({ modo, funcionario, fechar, salvar }) 
 
         if (telefone.length !== 11)
             return "Telefone deve ter 11 números!";
+
+        const funcionarioExistente = funcionarios?.find(
+            f => f.email === email 
+        );
+    
+        if (funcionarioExistente)
+            return "Este funcionário já possui um cadastro!";
 
         return "";
     };

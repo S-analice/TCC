@@ -18,7 +18,8 @@ export default function Motorista() {
             placa: "ABC1234",
             telefone: "41999991111",
             cnpj: "12345678000100",
-            convenio: "Convênio A"
+            convenio: "Convênio A",
+            status: "Ativo"
 
         },
         {
@@ -27,7 +28,8 @@ export default function Motorista() {
             placa: "DEF5678",
             telefone: "41988882222",
             cnpj: "98765432000100",
-            convenio: "Convênio B"
+            convenio: "Convênio B",
+            status: "Ativo"
         },
         {
             id: 3,
@@ -35,7 +37,8 @@ export default function Motorista() {
             placa: "GHI9012",
             telefone: "41977773333",
             cnpj: "45678912000100",
-            convenio: "Sem Convênio"
+            convenio: "Sem Convênio",
+            status: "Ativo"
         }
     ]);
     const [pesquisa, setPesquisa] = useState("");
@@ -52,9 +55,17 @@ export default function Motorista() {
 
     const [mostrarDelete, setMostrarDelete] = useState(false);
 
-    const motoristasFiltrados = motoristas.filter((m) =>
-        m.cpf.includes(pesquisa) || m.placa.includes(pesquisa)
-    );
+    const [filtroStatus, setFiltroStatus] = useState("todos");
+
+    const motoristasFiltrados = motoristas.filter((m) => {
+        const correspondePesquisa =
+            m.cpf.includes(pesquisa) || m.placa.includes(pesquisa);
+
+        const correspondeStatus =
+            filtroStatus === "todos" || m.status === filtroStatus;
+
+        return correspondePesquisa && correspondeStatus;
+    });
 
     const abrirAdicionar = () => {
         setModoModal("adicionar");
@@ -118,13 +129,28 @@ export default function Motorista() {
         setCarregando(true);
 
         setTimeout(() => {
+
+            if (motoristaSelecionado.status === "Inativo") {
+
+                setCarregando(false);
+                setTipoMensagem("erro");
+                setTextoMensagem("Este motorista já está inativo!");
+                setMostrarMensagem(true);
+                return;
+            }
+
             setMotoristas(
-                motoristas.filter(m => m.id !== motoristaSelecionado.id)
+                motoristas.map(m =>
+                    m.id === motoristaSelecionado.id
+                        ? { ...m, status: "Inativo" }
+                        : m
+                )
             );
 
             setCarregando(false);
-            setTextoMensagem("Motorista removido com sucesso!");
+            setTextoMensagem("Motorista marcado como inativo!");
             setMostrarMensagem(true);
+
         }, 2000);
     };
 
@@ -180,6 +206,7 @@ export default function Motorista() {
                 <MotoristaModal
                     modo={modoModal}
                     motorista={motoristaSelecionado}
+                    motoristas={motoristas}
                     fechar={() => setMostrarModal(false)}
                     salvar={salvarMotorista}
                 />
@@ -196,15 +223,30 @@ export default function Motorista() {
             <h2 className="motorista-subtitulo">Lista de Motoristas</h2>
 
             <div className="motorista-topo">
-                <div className="motorista-busca">
-                    <Search size={18} className="motorista-busca-icone" />
-                    <input
-                        type="text"
-                        placeholder="Pesquisar por cpf ou placa"
-                        value={pesquisa}
-                        onChange={(e) => setPesquisa(e.target.value)}
-                    />
+                <div className="motorista-filtro-container">
+
+                    <div className="motorista-busca">
+                        <Search size={18} className="motorista-busca-icone" />
+                        <input
+                            type="text"
+                            placeholder="Pesquisar por cpf ou placa"
+                            value={pesquisa}
+                            onChange={(e) => setPesquisa(e.target.value)}
+                        />
+                    </div>
+
+                    <select
+                        className="motorista-filtro"
+                        value={filtroStatus}
+                        onChange={(e) => setFiltroStatus(e.target.value)}
+                    >
+                        <option value="todos">Todos</option>
+                        <option value="ativos">Ativos</option>
+                        <option value="inativos">Inativos</option>
+                    </select>
+
                 </div>
+
                 <button onClick={abrirAdicionar}>+ Adicionar Motorista</button>
             </div>
 
@@ -216,6 +258,7 @@ export default function Motorista() {
                         <th>Telefone</th>
                         <th>CNPJ</th>
                         <th>Convênio</th>
+                        <th>Status</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -236,15 +279,22 @@ export default function Motorista() {
                                     {m.convenio}
                                 </span>
                             </td>
+                            <td>
+                                <span className={`status ${m.status.toLowerCase()}`}>
+                                    {m.status}
+                                </span>
+                            </td>
                             <td >
                                 <div className="motorista-acoes">
                                     <button className="motorista-atualizar" onClick={() => abrirEditar(m)}>
                                         <Pencil size={16} />
                                     </button>
 
-                                    <button className="motorista-remover" onClick={() => abrirDelete(m)}>
-                                        <Trash2 size={16} />
-                                    </button>
+                                    {m.status === "Ativo" && (
+                                        <button className="motorista-remover" onClick={() => abrirDelete(m)}>
+                                            <Trash2 size={16} />
+                                        </button>
+                                    )}
                                 </div>
                             </td>
                         </tr>

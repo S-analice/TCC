@@ -209,6 +209,7 @@ export default function Patio({ funcionario }) {
                 <EntradaModal
                     modo={modoModal}
                     registro={registroSelecionado}
+                    registros={registros}
                     funcionario={funcionario}
                     fechar={() => setMostrarModal(false)}
                     salvar={salvarRegistro}

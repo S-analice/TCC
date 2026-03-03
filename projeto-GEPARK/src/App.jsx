@@ -8,6 +8,7 @@ import Funcionario from "./pages/Funcionario";
 import Motorista from "./pages/Motorista";
 import Patio from "./pages/Patio";
 import Relatorio from "./pages/Relatorio";
+import RedefinirSenha from "./pages/RedefinirSenha";
 
 import { useState } from "react";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
@@ -73,6 +74,8 @@ function App() {
             </Barra>
           }
         />
+
+        <Route path="/redefinir-senha" element={<RedefinirSenha />} />
       </Routes>
     </>
   );

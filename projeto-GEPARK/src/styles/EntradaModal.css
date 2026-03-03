@@ -95,3 +95,11 @@
 .em-salvar:hover {
     background-color: #35563f;
 }
+
+.erro-texto {
+    color: #c0392b;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 8px;
+}

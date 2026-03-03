@@ -62,9 +62,23 @@ export default function Funcionario() {
 
     const [mostrarFoto, setMostrarFoto] = useState(false);
 
-    const funcionariosFiltrados = funcionarios.filter((f) =>
-        f.nome.toLowerCase().includes(pesquisa.toLowerCase())
-    );
+    const [filtroStatus, setFiltroStatus] = useState("todos");
+
+    const funcionariosFiltrados = funcionarios.filter((f) => {
+
+        const nomeMatch = f.nome.toLowerCase().includes(pesquisa.toLowerCase());
+
+        if (filtroStatus === "ativos") {
+            return nomeMatch && f.status === "Ativo";
+        }
+
+        if (filtroStatus === "inativos") {
+            return nomeMatch && f.status === "Inativo";
+        }
+
+        return nomeMatch;
+
+    });
 
     const abrirAdicionar = () => {
         setModoModal("adicionar");
@@ -92,22 +106,22 @@ export default function Funcionario() {
 
         setMostrarModal(false);
         setCarregando(true);
-    
+
         setTimeout(() => {
-    
+
             if (modoModal === "adicionar") {
                 const novo = {
                     id: Date.now(),
                     ...dados
                 };
-    
-                setFuncionarios([...f, novo]);
-    
+
+                setFuncionarios([...funcionarios, novo]);
+
                 setTipoMensagem("sucesso");
                 setTextoMensagem("Funcionário cadastrado com sucesso!");
-    
+
             } else if (modoModal === "editar") {
-    
+
                 setFuncionarios(
                     funcionarios.map(f =>
                         f.id === funcionarioSelecionado.id
@@ -115,20 +129,20 @@ export default function Funcionario() {
                             : f
                     )
                 );
-    
+
                 setTipoMensagem("sucesso");
                 setTextoMensagem("Funcionário atualizado com sucesso!");
-    
+
             } else {
-    
+
                 setTipoMensagem("erro");
                 setTextoMensagem("Não foi possível salvar funcionário!");
-    
+
             }
-    
+
             setCarregando(false);
             setMostrarMensagem(true);
-    
+
         }, 2000);
     };
 
@@ -136,18 +150,18 @@ export default function Funcionario() {
 
         setMostrarDelete(false);
         setCarregando(true);
-    
+
         setTimeout(() => {
-    
+
             if (funcionarioSelecionado.status === "Inativo") {
-    
+
                 setCarregando(false);
                 setTipoMensagem("erro");
-                setTextoMensagem("Este funcionário já está inativo.");
+                setTextoMensagem("Este funcionário já está inativo!");
                 setMostrarMensagem(true);
                 return;
             }
-    
+
             setFuncionarios(
                 funcionarios.map(f =>
                     f.id === funcionarioSelecionado.id
@@ -155,12 +169,12 @@ export default function Funcionario() {
                         : f
                 )
             );
-    
+
             setCarregando(false);
             setTipoMensagem("sucesso");
             setTextoMensagem("Funcionário marcado como inativo!");
             setMostrarMensagem(true);
-    
+
         }, 2000);
     };
 
@@ -194,6 +208,7 @@ export default function Funcionario() {
                 <FuncionarioModal
                     modo={modoModal}
                     funcionario={funcionarioSelecionado}
+                    funcionarios={funcionarios}
                     fechar={() => setMostrarModal(false)}
                     salvar={salvarFuncionario}
                 />
@@ -217,15 +232,30 @@ export default function Funcionario() {
             <h2 className="funcionario-subtitulo">Lista de Funcionários</h2>
 
             <div className="funcionario-topo">
-                <div className="funcionario-busca">
-                    <Search size={18} className="funcionario-busca-icone" />
-                    <input
-                        type="text"
-                        placeholder="Pesquisar por nome"
-                        value={pesquisa}
-                        onChange={(e) => setPesquisa(e.target.value)}
-                    />
+                <div className="funcionario-filtro-container">
+
+                    <div className="funcionario-busca">
+                        <Search size={18} className="funcionario-busca-icone" />
+                        <input
+                            type="text"
+                            placeholder="Pesquisar por nome"
+                            value={pesquisa}
+                            onChange={(e) => setPesquisa(e.target.value)}
+                        />
+                    </div>
+
+                    <select
+                        className="funcionario-filtro"
+                        value={filtroStatus}
+                        onChange={(e) => setFiltroStatus(e.target.value)}
+                    >
+                        <option value="todos">Todos</option>
+                        <option value="ativos">Ativos</option>
+                        <option value="inativos">Inativos</option>
+                    </select>
+
                 </div>
+
                 <button onClick={abrirAdicionar}>+ Adicionar Funcionário</button>
             </div>
 
@@ -274,9 +304,11 @@ export default function Funcionario() {
                                         <Pencil size={16} />
                                     </button>
 
-                                    <button className="funcionario-remover" onClick={() => abrirDelete(f)}>
-                                        <Trash2 size={16} />
-                                    </button>
+                                    {f.status === "Ativo" && (
+                                        <button className="funcionario-remover" onClick={() => abrirDelete(f)}>
+                                            <Trash2 size={16} />
+                                        </button>
+                                    )}
                                 </div>
                             </td>
                         </tr>

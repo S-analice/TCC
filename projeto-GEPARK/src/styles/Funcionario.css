@@ -35,8 +35,7 @@ body {
 
 .funcionario-busca{
     position:relative;
-    width:100%;
-    max-width:350px;
+    width:350px;
 }
 
 .funcionario-busca input{
@@ -165,4 +164,30 @@ body {
 .status.inativo{
     background:#e0e0e0;
     color:#7C7C7C;
+}
+
+.funcionario-filtro-container {
+    display: flex;
+    align-items: center;
+    gap: 70px;
+}
+
+.funcionario-filtro {
+    padding: 12px 12px;
+    border-radius: 6px;
+    border: 2px solid #e0e0e0;
+    color: #7C7C7C;
+    font-size: 14px;
+    outline: none;
+    cursor: pointer;
+    background-color: #ffffff;
+    width: 140px
+}
+
+.funcionario-filtro:focus {
+    border-color: #436850;
+}
+
+.funcionario-filtro:hover {
+    border-color: #436850;
 }

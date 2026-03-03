@@ -1,14 +1,15 @@
 import "../styles/MotoristaModal.css";
 import { useState } from "react";
 
-export default function MotoristaModal({ modo, motorista, fechar, salvar }) {
+export default function MotoristaModal({ modo, motorista, motoristas, fechar, salvar }) {
 
     const [cpf, setCpf] = useState(motorista?.cpf || "");
     const [placa, setPlaca] = useState(motorista?.placa || "");
     const [telefone, setTelefone] = useState(motorista?.telefone || "");
     const [cnpj, setCnpj] = useState(motorista?.cnpj || "");
     const [convenio, setConvenio] = useState(motorista?.convenio || "");
-    
+    const [status, setStatus] = useState(motorista?.status || "Ativo");
+
     const [erro, setErro] = useState("");
 
     const validar = () => {
@@ -23,6 +24,13 @@ export default function MotoristaModal({ modo, motorista, fechar, salvar }) {
 
         if (placa.length !== 7)
             return "Placa deve ter 7 caracteres!";
+
+        const motoristaExistente = motoristas?.find(
+            m => m.cpf === cpf 
+        );
+    
+        if (motoristaExistente)
+            return "Este motorista já possui um cadastro!";
 
         return "";
     };
@@ -39,7 +47,7 @@ export default function MotoristaModal({ modo, motorista, fechar, salvar }) {
             return;
         }
 
-        salvar({ cpf, placa, telefone, cnpj, convenio });
+        salvar({ cpf, placa, telefone, cnpj, convenio, status });
     };
 
     return (
@@ -116,6 +124,20 @@ export default function MotoristaModal({ modo, motorista, fechar, salvar }) {
                             <option value="Sem Convênio">Sem Convênio</option>
                         </select>
                     </div>
+
+                    {modo === "editar" && (
+                        <div className="mm-form-container">
+                            <label className="mm-label">Status</label>
+                            <select
+                                className="mm-input"
+                                value={status}
+                                onChange={(e) => setStatus(e.target.value)}
+                            >
+                                <option value="Ativo">Ativo</option>
+                                <option value="Inativo">Inativo</option>
+                            </select>
+                        </div>
+                    )}
 
                     {erro && <p className="erro-texto">{erro}</p>}
 

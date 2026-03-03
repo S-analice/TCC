@@ -91,7 +91,7 @@ export default function EsqueceuSenha({ voltarParaLogin }) {
                 <Mensagem
                     mensagem={textoMensagem}
                     tipo={tipoMensagem}
-                    fechar={setMostrarMensagem(false)}
+                    fechar={() => setMostrarMensagem(false)}
                 />
             )}
 

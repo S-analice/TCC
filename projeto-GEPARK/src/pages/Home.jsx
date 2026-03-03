@@ -57,7 +57,8 @@ export default function Home({ funcionario }) {
       placa: "ABC1234",
       telefone: "41999991111",
       cnpj: "12345678000100",
-      convenio: "Convênio A"
+      convenio: "Convênio A",
+      status: "Ativo"
     },
     {
       id: 2,
@@ -65,7 +66,8 @@ export default function Home({ funcionario }) {
       placa: "DEF5678",
       telefone: "41988882222",
       cnpj: "98765432000100",
-      convenio: "Convênio B"
+      convenio: "Convênio B",
+      status: "Ativo"
     },
     {
       id: 3,
@@ -73,7 +75,8 @@ export default function Home({ funcionario }) {
       placa: "GHI9012",
       telefone: "41977773333",
       cnpj: "45678912000100",
-      convenio: "Sem Convênio"
+      convenio: "Sem Convênio",
+      status: "Ativo"
     }
   ]);
 
