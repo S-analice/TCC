@@ -75,8 +75,8 @@ export default function RedefinirSenha() {
 
                 <form onSubmit={enviarFormulario} className="rs-form">
 
-                    <div className="em-form-container">
-                        <label className="em-label">Senha</label>
+                    <div className="rs-form-container">
+                        <label className="rs-label">Senha</label>
 
                         <div className="rs-input-icon">
                             <Lock size={18} />
@@ -91,7 +91,7 @@ export default function RedefinirSenha() {
                         </div>
                     </div>
 
-                    <div className="em-form-container">
+                    <div className="rs-form-container">
                         <label className="em-label">Confirmar Senha</label>
 
                         <div className="rs-input-icon">
