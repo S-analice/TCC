@@ -27,10 +27,10 @@ export default function Login({ definirFuncionario, irParaEsqueceuSenha, irParaH
 
             const funcionario = {
                 foto: "/usuario.jpg",
-                nome: "Senhor Cabeça de Batata",
-                email: "srbatata@gmail.com",
+                nome: "Lilo",
+                email: "lilo@gmail.com",
                 telefone: "41991234567",
-                senha: "123456Sr",
+                senha: "123456",
                 turno: "6:00 - 18:00",
                 cargo: "Líder",
                 status: "Ativo"
@@ -70,7 +70,7 @@ export default function Login({ definirFuncionario, irParaEsqueceuSenha, irParaH
                     <img src="/logo.png" alt="Logo GEPARK" className="login-img" />
 
                     <p className="login-descricao">
-                        Sistema de Gestão de Estacionamento BR Park
+                        Sistema de Gestão de Estacionamento
                     </p>
                 </div>
 
