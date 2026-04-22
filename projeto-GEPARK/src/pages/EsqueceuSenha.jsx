@@ -101,7 +101,7 @@ export default function EsqueceuSenha({ voltarParaLogin }) {
                     <img src="/logo.png" alt="Logo GEPARK" className="es-img" />
 
                     <p className="es-descricao">
-                        Sistema de Gestão de Estacionamento BR Park
+                        Sistema de Gestão de Estacionamento 
                     </p>
                 </div>
 
