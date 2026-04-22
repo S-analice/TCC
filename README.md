@@ -114,8 +114,8 @@ Total de arquivos no projeto: 19 / 19
 
 
 👩‍💻 Tecnologias Utilizadas
+* Vite
 * React
 * JavaScript
 * CSS
-* Vite
 * API WetherMap
