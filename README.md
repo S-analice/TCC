@@ -26,6 +26,7 @@ Total de arquivos no projeto: 19 / 19
 
 
 🗓️ Registro de Desenvolvimento
+
 **12/02**
 * Início do projeto em React + JavaScript
 * Criação da tela de login
