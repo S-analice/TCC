@@ -12,11 +12,11 @@ export default function SaidaModal({ funcionario, registro, fechar, confirmar })
     useEffect(() => {
         calcularValor();
         setErro("")
-    }, [saida]); // calcula quando muda o horario saida  
+    }, [dataSaida]); // calcula quando muda o horario saida  
 
     const calcularValor = () => {
 
-        if (!registro?.entrada) return;
+        if (!registro?.dataEntrada) return;
 
         const entradaData = new Date(registro.dataEntrada);
         const saidaData = new Date(dataSaida);

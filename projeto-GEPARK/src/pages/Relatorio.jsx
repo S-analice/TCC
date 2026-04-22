@@ -191,7 +191,7 @@ export default function Relatorio() {
     return motoristas.find(m => m.cpf === cpf);
   }
 
-  function clienteMaisFrequente() {
+  function convenioMaisFrequente() {
 
     if (registrosFiltrados.length === 0) return "-";
 
@@ -220,6 +220,27 @@ export default function Relatorio() {
     }
 
     return cliente;
+  }
+
+  function obterTop5Motoristas() {
+   
+    const contagem = {};
+    registrosFiltrados.forEach((reg) => {
+      contagem[reg.cpf] = (contagem[reg.cpf] || 0) + 1;
+    });
+
+   
+    return Object.entries(contagem)
+      .map(([cpf, frequencia]) => {
+        const ultimoReg = registrosFiltrados.findLast((r) => r.cpf === cpf);
+        return {
+          cpf,
+          frequencia,
+          placa: ultimoReg?.placa || "-"
+        };
+      })
+      .sort((a, b) => b.frequencia - a.frequencia) 
+      .slice(0, 5); 
   }
 
   const formatarCPF = (cpf) => {
@@ -290,7 +311,7 @@ export default function Relatorio() {
 
           <div className="relatorio-header">
             <h3>Resultados do Relatório</h3>
-            <p>resumido</p>
+            <p>mais frequências</p>
           </div>
 
           <div className="relatorio-cards">
@@ -307,7 +328,7 @@ export default function Relatorio() {
 
             <div className="relatorio-card marrom">
               <p>Cliente Mais Frequente</p>
-              <span>{clienteMaisFrequente()}</span>
+              <span>{convenioMaisFrequente()}</span>
             </div>
 
           </div>
@@ -318,50 +339,33 @@ export default function Relatorio() {
 
               <thead>
                 <tr>
+                  <th>Rank</th>
                   <th>CPF</th>
                   <th>Placa</th>
-                  <th>Saída</th>
-                  <th>Funcionário Saída</th>
-                  <th>Duração</th>
-                  <th>Convênio</th>
+                  <th>Frequência</th>
                 </tr>
               </thead>
 
               <tbody>
 
-                {registrosFiltrados.map((item) => {
+              {obterTop5Motoristas().map((item, index) => {
 
                   const motorista = buscarMotorista(item.cpf);
 
                   return (
 
-                    <tr key={item.id}>
+                    <tr key={item.cpf}>
 
+                      <td><strong>{index + 1}º</strong></td>       
+                             
                       <td>{formatarCPF(item.cpf)}</td>
-
+                            
                       <td>{formatarPlaca(item.placa)}</td>
-
-                      <td>{formatarDataHora(item.dataSaida)}</td>
-
-                      <td>{item.funcionarioSaida}</td>
-
-                      <td>{calcularDuracao(item.dataEntrada, item.dataSaida)}</td>
-
-                      <td>
-                        <span className={`convenio ${motorista?.convenio === "Convênio A"
-                          ? "a"
-                          : motorista?.convenio === "Convênio B"
-                            ? "b"
-                            : "sem"
-                          }`}>
-                          {motorista?.convenio || "Sem Convênio"}
-                        </span>
-                      </td>
-
+ 
+                      <td>{item.frequencia} estadias</td>
+                          
                     </tr>
-
                   );
-
                 })}
 
               </tbody>

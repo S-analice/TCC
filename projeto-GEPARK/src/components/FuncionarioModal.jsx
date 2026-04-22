@@ -118,7 +118,7 @@ export default function FuncionarioModal({ modo, funcionario, funcionarios, fech
                                 </div>
 
                                 <p className="fm-upload-texto">
-                                    JPG, PNG ou GIF
+                                    JPG ou PNG 
                                 </p>
 
                             </div>

@@ -106,6 +106,12 @@ Total de arquivos no projeto: 19 / 19
   - Apenas quem não possui registro aberto
 
 
+**22/04**
+* Top 5 funcionários no relatório
+* Mudanças de legendas
+
+
+
 👩‍💻 Tecnologias Utilizadas
 * React
 * JavaScript
