@@ -108,7 +108,7 @@ Total de arquivos no projeto: 19 / 19
 
 
 **22/04**
-* Top 5 funcionários no relatório
+* Top 5 motoristas no relatório
 * Mudanças de legendas
 
 
