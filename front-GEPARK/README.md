@@ -5,7 +5,7 @@
 
 📦 Instalação do Projeto
 ```bash
-cd projeto-GEPARK
+cd front-GEPARK
 nvm install 22
 npm install
 npm run dev
