@@ -2,7 +2,7 @@
 
 
 
-Instalação do Projeto
+**Instalação do Projeto**
 ```bash
 cd front-GEPARK
 nvm install 22
@@ -12,19 +12,21 @@ npm run dev
 
 
 
-Variáveis de Ambiente
+**Variáveis de Ambiente**
+
 Crie um arquivo **.env** na raiz do projeto:
 VITE_API_URL=https://api.openweathermap.org/data/2.5
 VITE_API_KEY=SEU_API_KEY_AQUI
 
 
 
-Estrutura Atual
+**Estrutura Atual**
+
 Total de arquivos no projeto:  / 
 
 
 
-Registro de Desenvolvimento
+**Registro de Desenvolvimento**
 
 **12/02**
 * Início do projeto em React + JavaScript
@@ -115,7 +117,7 @@ Registro de Desenvolvimento
 * Transformando a arquitetura 
 
 
-Tecnologias Utilizadas
+**Tecnologias Utilizadas**
 * Vite
 * React
 * JavaScript
