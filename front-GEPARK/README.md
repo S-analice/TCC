@@ -1,9 +1,8 @@
-# TCC – GEPARK
-(Que Deus nos ajude)
+# TCC – FRONT GEPARK
 
 
 
-📦 Instalação do Projeto
+Instalação do Projeto
 ```bash
 cd front-GEPARK
 nvm install 22
@@ -13,19 +12,19 @@ npm run dev
 
 
 
-⚙️ Variáveis de Ambiente
+Variáveis de Ambiente
 Crie um arquivo **.env** na raiz do projeto:
 VITE_API_URL=https://api.openweathermap.org/data/2.5
 VITE_API_KEY=SEU_API_KEY_AQUI
 
 
 
-📁 Estrutura Atual
-Total de arquivos no projeto: 19 / 19
+Estrutura Atual
+Total de arquivos no projeto:  / 
 
 
 
-🗓️ Registro de Desenvolvimento
+Registro de Desenvolvimento
 
 **12/02**
 * Início do projeto em React + JavaScript
@@ -112,10 +111,14 @@ Total de arquivos no projeto: 19 / 19
 * Mudanças de legendas
 
 
+**08/05**
+* Transformando a arquitetura 
 
-👩‍💻 Tecnologias Utilizadas
+
+Tecnologias Utilizadas
 * Vite
 * React
 * JavaScript
 * CSS
 * API WetherMap
+* MVVM
