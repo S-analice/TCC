@@ -21,7 +21,6 @@ VITE_API_KEY=SEU_API_KEY_AQUI
 
 
 **Estrutura Atual**
-
 Total de arquivos no projeto:  / 
 
 
@@ -115,6 +114,7 @@ Total de arquivos no projeto:  /
 
 **08/05**
 * Transformando a arquitetura 
+
 
 
 **Tecnologias Utilizadas**
