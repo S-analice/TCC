@@ -1,135 +1,76 @@
-import { useState, useEffect } from "react";
 import "../styles/SaidaModal.css";
+import React, { useState, useEffect } from "react";
+import { MovimentacaoModel } from "../models/MovimentacaoModel";
 
-export default function SaidaModal({ funcionario, registro, fechar, confirmar }) {
+export default function SaidaModal({ registro, funcionario, fechar, confirmar }) {
+  const [dataSaida, setDataSaida] = useState(new Date().toISOString().slice(0, 16));
+  const [tipoPagamento, setTipoPagamento] = useState("");
+  const [valores, setValores] = useState({ valor: 0, erro: null });
 
-    const [dataSaida, setDataSaida] = useState(new Date().toISOString().slice(0,16));
-    const [tipoPagamento, setTipoPagamento] = useState("");
-    const [valor, setValor] = useState(0);
+  useEffect(() => {
+    const calc = MovimentacaoModel.calcularValor(registro.dataEntrada, dataSaida, registro.convenio);
+    setValores(calc);
+  }, [dataSaida, registro]);
 
-    const [erro, setErro] = useState("");
+  const handleConfirmar = () => {
+    if (!tipoPagamento) return alert("Selecione o pagamento");
+    confirmar(registro.id, { 
+      dataSaida, 
+      tipoPagamento, 
+      valorFinal: valores.valor,
+      funcionarioSaida: funcionario.nome 
+    });
+    fechar();
+  };
 
-    useEffect(() => {
-        calcularValor();
-        setErro("")
-    }, [dataSaida]); // calcula quando muda o horario saida  
-
-    const calcularValor = () => {
-
-        if (!registro?.dataEntrada) return;
-
-        const entradaData = new Date(registro.dataEntrada);
-        const saidaData = new Date(dataSaida);
-
-        if (saidaData <= entradaData) {
-            setErro("O horário de saída deve ser maior que o horário de entrada!");
-            setValor(0);
-            return;
-        }
-
-        const diferencaMs = saidaData - entradaData;
-        const diferencaHoras = Math.ceil(diferencaMs / (1000 * 60 * 60));
-
-        let valorHora = 10;
-        let valorDiaria = 100;
-
-        if (registro?.convenio === "Convênio A" || registro?.convenio === "Convênio B") {
-            valorHora = 6;
-            valorDiaria = 60;
-        }
-
-        let valorCalculado = 0;
-
-        if (diferencaHoras >= 24) {
-            valorCalculado = valorDiaria;
-        } 
-        
-        else {
-            valorCalculado = diferencaHoras * valorHora;
-        }
-
-
-        setValor(valorCalculado);
-    };
-
-    return (
-        <div className="sm-fundo" onClick={fechar}>
-            <div className="sm-card" onClick={(e) => e.stopPropagation()}>
-
-                <h2>Saída do Caminhão</h2>
-
-                <div className="sm-linha"></div>
-
-                <div className="sm-caixinha-linha">
-                    <div>
-                        <p>CPF:</p>
-                        <strong>{registro?.cpf}</strong>
-                    </div>
-
-                    <div>
-                        <p>Placa:</p>
-                        <strong>{registro?.placa}</strong>
-                    </div>
-                </div>
-
-                <div className="sm-form">
-                    <div className="sm-form-container">
-                        <label className="sm-label">Horário Saída</label>
-                        <input
-                            className="sm-input"
-                            type="datetime-local"
-                            value={dataSaida}
-                            onChange={(e) => setSaida(e.target.value)}
-                        />
-                    </div>
-
-                    <div className="sm-form-container">
-                        <label className="sm-label">Tipo de Pagamento</label>
-                        <select
-                            className="sm-input"
-                            value={tipoPagamento}
-                            onChange={(e) => setTipoPagamento(e.target.value)}
-                        >
-                            <option value="">Selecione</option>
-                            <option value="Dinheiro">Dinheiro</option>
-                            <option value="Pix">Pix</option>
-                            <option value="Cartão Débito">Cartão Débito</option>
-                            <option value="Cartão Crédito">Cartão Crédito</option>
-                            <option value="Convênio">Convênio</option>
-                        </select>
-                    </div>
-
-                    <div className="sm-form-container">
-                        <label className="sm-label">Valor (R$)</label>
-                        <input
-                            className="sm-input"
-                            type="text"
-                            value={`R$ ${valor}`}
-                            readOnly
-                        />
-                    </div>
-
-                    <div className="sm-form-container">
-                        <label className="sm-label">Funcionário</label>
-                        <input
-                            className="sm-input"
-                            type="text"
-                            value={funcionario?.nome}
-                            readOnly
-                        />
-                    </div>
-
-                    {erro && <p className="erro-texto">{erro}</p>}
-
-                    <div className="sm-linha"></div>
-                    
-                    <div className="sm-form-acoes">
-                        <button onClick={fechar} className="sm-cancelar">Cancelar</button>
-                        <button onClick={confirmar} className="sm-salvar" disabled={!!erro}>Confirmar</button>
-                    </div>
-                </div>
-
-            </div>
+  return (
+    <div className="sm-fundo" onClick={fechar}>
+      <div className="sm-card" onClick={e => e.stopPropagation()}>
+        <h2>Finalizar Saída</h2>
+        <div className="sm-caixinha-linha">
+          <p>Placa: <strong>{registro.placa}</strong></p>
+          <p>Valor: <strong style={{color: 'green'}}>R$ {valores.valor.toFixed(2)}</strong></p>
         </div>
-    );
+
+        <div className="sm-form">
+          <div className="sm-form-container">
+            <label className="sm-label">Horário de Saída</label>
+            <input 
+              type="datetime-local" 
+              className="sm-input"
+              value={dataSaida} 
+              onChange={e => setDataSaida(e.target.value)} 
+            />
+          </div>
+
+          <div className="sm-form-container">
+            <label className="sm-label">Forma de Pagamento</label>
+            <select className="sm-input" value={tipoPagamento} onChange={e => setTipoPagamento(e.target.value)}>
+              <option value="">Selecione</option>
+              <option value="Dinheiro">Dinheiro</option>
+              <option value="Pix">Pix</option>
+              <option value="Cartão">Cartão</option>
+            </select>
+          </div>
+
+          <div className="sm-caixinha-linha">
+            <p>Funcionário: <strong>{funcionario?.nome || "Desconhecido"}</strong></p>
+          </div>
+
+          {valores.erro && <p className="erro-texto">{valores.erro}</p>}
+
+          <div className="sm-form-acoes">
+            <button className="sm-cancelar" onClick={fechar}>Cancelar</button>
+            <button 
+              onClick={handleConfirmar} 
+              className="sm-salvar" 
+              disabled={!!valores.erro || !tipoPagamento}
+            >
+              Confirmar 
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }

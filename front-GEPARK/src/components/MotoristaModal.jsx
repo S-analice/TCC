@@ -1,155 +1,142 @@
 import "../styles/MotoristaModal.css";
 import { useState } from "react";
+import {
+  formatarCPF,
+  formatarPlaca,
+  formatarTelefone,
+  formatarCNPJ,
+} from "../utils/formatadores";
 
-export default function MotoristaModal({ modo, motorista, motoristas, fechar, salvar }) {
+export default function MotoristaModal({ modo, motorista, fechar, salvar }) {
+  const [formData, setFormData] = useState({
+    cpf: motorista?.cpf || "",
+    placa: motorista?.placa || "",
+    telefone: motorista?.telefone || "",
+    cnpj: motorista?.cnpj || "",
+    convenio: motorista?.convenio || "",
+    status: motorista?.status || "Ativo",
+  });
+  const [erro, setErro] = useState("");
 
-    const [cpf, setCpf] = useState(motorista?.cpf || "");
-    const [placa, setPlaca] = useState(motorista?.placa || "");
-    const [telefone, setTelefone] = useState(motorista?.telefone || "");
-    const [cnpj, setCnpj] = useState(motorista?.cnpj || "");
-    const [convenio, setConvenio] = useState(motorista?.convenio || "");
-    const [status, setStatus] = useState(motorista?.status || "Ativo");
+  const handleChange = (field, value) => {
+    setErro("");
+    let newValue = value;
 
-    const [erro, setErro] = useState("");
+    if (field === "placa") {
+      newValue = value.replace(/[^a-zA-Z0-9]/g, "").toUpperCase();
+    } else {
+      newValue = value.replace(/\D/g, "");
+    }
 
-    const validar = () => {
-        if (cpf.length < 7 || cpf.length > 11)
-            return "CPF deve ter entre 7 e 11 números!";
+    setFormData((prev) => ({ ...prev, [field]: newValue }));
+  };
 
-        if (cnpj.length !== 14)
-            return "CNPJ deve ter 14 números!";
-
-        if (telefone.length !== 11)
-            return "Telefone deve ter 11 números!";
-
-        if (placa.length !== 7)
-            return "Placa deve ter 7 caracteres!";
-
-        const motoristaExistente = motoristas?.find(
-            m => m.cpf === cpf 
-        );
-    
-        if (motoristaExistente)
-            return "Este motorista já possui um cadastro!";
-
-        return "";
-    };
-
-    const enviarFormulario = (e) => {
-        e.preventDefault();
-
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    try {
         setErro("");
+        
+        const telefoneLimpo = formData.telefone.replace(/\D/g, "");
 
-        const erroValidacao = validar();
+        if (formData.cpf.length !== 11)
+            throw new Error("CPF deve conter 11 dígitos.");
+        
+        if (formData.placa.length !== 7)
+            throw new Error("Placa deve conter 7 caracteres.");
 
-        if (erroValidacao) {
-            setErro(erroValidacao);
-            return;
+        if (telefoneLimpo.length !== 11) {
+            throw new Error("Telefone deve ter 11 dígitos.");
         }
 
-        salvar({ cpf, placa, telefone, cnpj, convenio, status });
-    };
+        if (formData.cnpj.length > 0 && formData.cnpj.length !== 14) {
+            throw new Error("CNPJ deve conter 14 dígitos.");
+        }
 
-    return (
-        <div className="mm-fundo" onClick={fechar}>
-            <div className="mm-card" onClick={(e) => e.stopPropagation()}>
+        salvar(formData);
+    } catch (err) {
+        setErro(err.message);
+    }
+};
 
-                <h2>
-                    {modo === "adicionar" ? "Adicionar Motorista" : "Editar Motorista"}
-                </h2>
+  return (
+    <div className="mm-fundo" onClick={fechar}>
+      <div className="mm-card" onClick={(e) => e.stopPropagation()}>
+        <h2>
+          {modo === "adicionar" ? "Adicionar Motorista" : "Editar Motorista"}
+        </h2>
+        <div className="mm-linha"></div>
 
-                <div className="mm-linha"></div>
+        <form onSubmit={handleSubmit} className="mm-form">
+          <div className="mm-form-container">
+            <label className="mm-label">CPF</label>
+            <input
+              className="mm-input"
+              value={formatarCPF(formData.cpf)}
+              onChange={(e) => handleChange("cpf", e.target.value)}
+              maxLength={14}
+              required
+            />
+          </div>
+          <div className="mm-form-container">
+            <label className="mm-label">Placa</label>
+            <input
+              className="mm-input"
+              value={formatarPlaca(formData.placa)}
+              onChange={(e) => handleChange("placa", e.target.value)}
+              maxLength={8}
+              required
+            />
+          </div>
 
-                <form onSubmit={enviarFormulario} className="mm-form">
+          <div className="mm-form-container">
+            <label className="mm-label">Telefone</label>
+            <input
+              className="mm-input"
+              value={formatarTelefone(formData.telefone)}
+              onChange={(e) => handleChange("telefone", e.target.value)}
+              maxLength={15}
+              required
+            />
+          </div>
+          <div className="mm-form-container">
+            <label className="mm-label">CNPJ (Opcional)</label>
+            <input
+              className="mm-input"
+              value={formatarCNPJ(formData.cnpj)}
+              onChange={(e) => handleChange("cnpj", e.target.value)}
+              maxLength={18}
+            />
+          </div>
 
-                    <div className="mm-form-container">
-                        <label className="mm-label">CPF</label>
-                        <input 
-                            type="text" 
-                            className="mm-input"
-                            placeholder="Digite o cpf"
-                            value={cpf}
-                            onChange={(e) => setCpf(e.target.value)}
-                            required
-                        />
-                    </div>
+          <div className="mm-form-container">
+            <label className="mm-label">Convênio</label>
+            <select
+              className="mm-input"
+              value={formData.convenio}
+              onChange={(e) =>
+                setFormData({ ...formData, convenio: e.target.value })
+              }
+              required
+            >
+              <option value="">Selecione</option>
+              <option value="Convênio A">Convênio A</option>
+              <option value="Convênio B">Convênio B</option>
+              <option value="Sem Convênio">Sem Convênio</option>
+            </select>
+          </div>
 
-                    <div className="mm-form-container">
-                        <label className="mm-label">Placa</label>
-                        <input 
-                            type="text" 
-                            className="mm-input"
-                            placeholder="Digite a placa"
-                            value={placa}
-                            onChange={(e) => setPlaca(e.target.value)}
-                            required
-                        />
-                    </div>
+          {erro && <p className="erro-texto">{erro}</p>}
 
-                    <div className="mm-form-container">
-                        <label className="mm-label">Telefone</label>
-                        <input 
-                            type="text" 
-                            className="mm-input"
-                            placeholder="Digite o telefone"
-                            value={telefone}
-                            onChange={(e) => setTelefone(e.target.value)}
-                            required
-                        />
-                    </div>
-
-                    <div className="mm-form-container">
-                        <label className="mm-label">CNPJ</label>
-                        <input 
-                            type="text" 
-                            className="mm-input"
-                            placeholder="Digite o cnpj"
-                            value={cnpj}
-                            onChange={(e) => setCnpj(e.target.value)}
-                            required
-                        />
-                    </div>
-
-                    <div className="mm-form-container">
-                        <label className="mm-label">Convênio</label>
-                        <select
-                            className="mm-input"
-                            value={convenio}
-                            onChange={(e) => setConvenio(e.target.value)}
-                            required
-                        >
-                            <option value="">Selecione</option>
-                            <option value="Convênio A">Convênio A</option>
-                            <option value="Convênio B">Convênio B</option>
-                            <option value="Sem Convênio">Sem Convênio</option>
-                        </select>
-                    </div>
-
-                    {modo === "editar" && (
-                        <div className="mm-form-container">
-                            <label className="mm-label">Status</label>
-                            <select
-                                className="mm-input"
-                                value={status}
-                                onChange={(e) => setStatus(e.target.value)}
-                            >
-                                <option value="Ativo">Ativo</option>
-                                <option value="Inativo">Inativo</option>
-                            </select>
-                        </div>
-                    )}
-
-                    {erro && <p className="erro-texto">{erro}</p>}
-
-                    <div className="mm-linha"></div>
-                    
-                    <div className="mm-form-acoes">
-                        <button type="button" onClick={fechar} className="mm-cancelar">Cancelar</button>
-                        <button type="submit" className="mm-salvar">Salvar</button>
-                    </div>
-
-                </form>
-            </div>
-        </div>
-    );
+          <div className="mm-form-acoes">
+            <button type="button" onClick={fechar} className="mm-cancelar">
+              Cancelar
+            </button>
+            <button type="submit" className="mm-salvar">
+              Salvar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
 }

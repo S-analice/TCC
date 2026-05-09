@@ -23,12 +23,6 @@
     gap: 24px; 
 }
 
-.mm-linha {
-    height:1px;
-    background:#e0e0e0;
-    margin:16px 0;
-}
-
 .mm-form-container {
     display: flex;
     flex-direction: column;

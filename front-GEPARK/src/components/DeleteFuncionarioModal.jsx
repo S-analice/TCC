@@ -16,8 +16,7 @@ export default function DeleteFuncionarioModal({ funcionario, fechar, confirmar 
                     <p>Nome:</p> 
                     <strong>{funcionario?.nome}</strong>
                 </div>
-
-                <div className="dfm-linha"></div>
+                
 
                 <div className="dfm-form-acoes">
                     <button onClick={fechar} className="dfm-cancelar">Cancelar</button>

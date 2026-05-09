@@ -23,16 +23,11 @@
     gap: 24px;
 }
 
-.fm-form-linha {
+.fm-lado-a-lado {
     display: flex;
-    align-items: center;
-    gap: 10px;
-}
+    justify-content: flex-end;
+    gap: 15px;
 
-.fm-linha{
-    height:1px;
-    background:#e0e0e0;
-    margin:16px 0;
 }
 
 .fm-form-container {
@@ -76,7 +71,8 @@
 
 .fm-upload-botao-acoes{
     display:flex;
-    gap:6px;
+    align-items: flex-start;
+    gap:10px;
 }
 
 .fm-upload-botao{
@@ -133,6 +129,7 @@
 .fm-upload-texto{
     font-size:12px;
     color:#7C7C7C;
+    text-align: center;
 }
 
 .fm-label {

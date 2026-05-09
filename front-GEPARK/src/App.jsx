@@ -1,90 +1,74 @@
-import Login from "./pages/Login"
-import EsqueceuSenha from "./pages/EsqueceuSenha";
+import React, { useState, useEffect } from "react";
+import Barra from "./components/Barra"; 
+import Home from "./views/Home";
+import Login from "./views/Login";
+import EsqueceuSenha from "./views/EsqueceuSenha"; 
+import RedefinirSenha from "./views/RedefinirSenha"; 
+import Funcionario from "./views/Funcionario";
+import Motorista from "./views/Motorista";
+import Movimentacao from "./views/Movimentacao";
+import Relatorio from "./views/Relatorio";
 
-import Barra from "./components/Barra";
+export default function App() {
+  const [telaAtual, setTelaAtual] = useState("home");
+  const [estaLogado, setEstaLogado] = useState(false); 
+  const [funcionarioLogado, setFuncionarioLogado] = useState(null);
 
-import Home from "./pages/Home";
-import Funcionario from "./pages/Funcionario";
-import Motorista from "./pages/Motorista";
-import Patio from "./pages/Patio";
-import Relatorio from "./pages/Relatorio";
-import RedefinirSenha from "./pages/RedefinirSenha";
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("token");
+    
+    if (token) {
+      setTimeout(() => {
+        setTelaAtual("redefinir-senha");
+        window.history.replaceState({}, document.title, "/");
+      }, 0);
+    }
+  }, []);
 
-import { useState } from "react";
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
-
-function App() {
-  const [funcionario, setFuncionario] = useState(null);
-  const [paginaInterna, setPaginaInterna] = useState("home");
-
-  // caminho de uma página a outra
-  const navigate = useNavigate();
-
-  const definirFuncionario = (funcionarioCompleto) => {
-    setFuncionario(funcionarioCompleto);
+  const logout = () => {
+    setEstaLogado(false);
+    setFuncionarioLogado(null);
+    setTelaAtual("home");
   };
 
-  const irParaEsqueceuSenha = () => {
-    navigate("/esqueceu-senha");
-  };
-
-  const irParaHome = () => {
-    navigate("/home");
-  };
-
-  const voltarParaLogin = () => {
-    setFuncionario(null);
-    navigate("/");
-  }
-
-  const renderizarPaginaInterna = () => {
-    switch (paginaInterna) {
-      case "home":
-        return <Home funcionario={funcionario} />;
-      case "funcionario":
-        return <Funcionario funcionario={funcionario} />;
-      case "motorista":
-        return <Motorista funcionario={funcionario} />;
-      case "patio":
-        return <Patio funcionario={funcionario} />;
-      case "relatorio":
-        return <Relatorio funcionario={funcionario} />;
-      default:
-        return <Home funcionario={funcionario} />;
+  const renderizarPaginaLogada = () => {
+    switch (telaAtual) {
+      case "home": return <Home funcionario={funcionarioLogado} />;
+      case "relatorio": return <Relatorio />;
+      case "funcionario": return <Funcionario />; 
+      case "motorista": return <Motorista />;   
+      case "patio": return <Movimentacao funcionario={funcionarioLogado}/>;
+      default: return <Home funcionario={funcionarioLogado} />;
     }
   };
 
+  if (!estaLogado) {
+    if (telaAtual === "esqueceu-senha") {
+      return <EsqueceuSenha voltarParaLogin={() => setTelaAtual("home")} />;
+    }
+    
+    if (telaAtual === "redefinir-senha") {
+      return <RedefinirSenha irParaLogin={() => setTelaAtual("home")} />;
+    }
+
+    return (
+      <Login 
+        definirFuncionario={setFuncionarioLogado} 
+        irParaHome={() => setEstaLogado(true)}
+        irParaEsqueceuSenha={() => setTelaAtual("esqueceu-senha")} 
+      />
+    );
+  }
 
   return (
-    <>
-      {/*mapa*/}
-      <Routes>
-        <Route path="/" element={<Login definirFuncionario={definirFuncionario} irParaEsqueceuSenha={irParaEsqueceuSenha} irParaHome={irParaHome} />} />
-        <Route path="/esqueceu-senha" element={<EsqueceuSenha voltarParaLogin={voltarParaLogin} />} />
-
-        <Route path="/home"
-          element={
-            <Barra
-              funcionario={funcionario}
-              paginaAtual={paginaInterna}
-              irParaPagina={setPaginaInterna}
-              voltarParaLogin={voltarParaLogin}
-            >
-              {renderizarPaginaInterna()}
-            </Barra>
-          }
-        />
-
-        <Route path="/redefinir-senha" element={<RedefinirSenha />} />
-      </Routes>
-    </>
-  );
-}
-
-export default function AppComRouter() {
-  return (
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <Barra
+      funcionario={funcionarioLogado}
+      paginaAtual={telaAtual}
+      irParaPagina={setTelaAtual}
+      voltarParaLogin={logout}
+    >
+      {renderizarPaginaLogada()}
+    </Barra>
   );
 }
