@@ -20,7 +20,7 @@ export function useEsqueceuSenhaViewModel(voltarParaLogin) {
             await new Promise(resolve => setTimeout(resolve, 1500));
             const existe = FuncionarioModel.buscarPorEmail(email);
 
-            if (!existe) throw new Error("E-mail não cadastrado!");
+            if (!existe) throw new Error("E-mail não cadastrado.");
 
             setMensagem({ mostrar: true, tipo: "sucesso", texto: "Instruções enviadas para seu e-mail!" });
             setEmail("");
