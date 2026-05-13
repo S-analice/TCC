@@ -122,6 +122,9 @@ Total de arquivos no projeto: 36/36
 **12/05**
 * Adição da funcionalidade empresa
 
+**13/05**
+* Arrumando conforme alterações feitas no banco
+
 
 
 **Tecnologias Utilizadas**

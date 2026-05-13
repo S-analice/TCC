@@ -35,29 +35,35 @@ export const MovimentacaoModel = {
     }
   ],
 
-  calcularValor: (dataEntrada, dataSaida, convenio) => {
+  calcularValor: (dataEntrada, dataSaida, convenioNome) => {
     try {
       if (!dataEntrada || !dataSaida) return { valor: 0, erro: "Datas incompletas" };
 
       const entrada = new Date(dataEntrada);
       const saida = new Date(dataSaida);
 
-      if (saida <= entrada) {
-        return { valor: 0, erro: "Horário de saída deve ser após a entrada!" };
-      }
+      if (saida <= entrada) return { valor: 0, erro: "Horário de saída deve ser após a entrada!" };
 
       const diferencaHoras = Math.ceil((saida - entrada) / (1000 * 60 * 60));
 
-      const temConvenio = convenio && convenio !== "Sem Convênio";
-      const valorHora = temConvenio ? 6 : 10;
-      const valorDiaria = temConvenio ? 60 : 100;
+      const tabelasPreco = {
+        "Novo Cliente": { hora: 10, diaria: 100 },
+        "Premium": { hora: 6, diaria: 60 },
+        "Sem Convênio": { hora: 48, diaria: null } 
+      };
 
-      // Se passar de 24h, cobra diária, senão cobra por hora
-      const valorFinal = diferencaHoras >= 24 ? valorDiaria : diferencaHoras * valorHora;
+      const regra = tabelasPreco[convenioNome] || tabelasPreco["Sem Convênio"];
+      let valorFinal = 0;
+
+      if (convenioNome === "Sem Convênio") {
+        valorFinal = diferencaHoras * regra.hora;
+      } else {
+        // Se passar de 24h ou se o custo por hora superar a diária, cobra diária
+        valorFinal = diferencaHoras >= 24 ? regra.diaria : Math.min(diferencaHoras * regra.hora, regra.diaria);
+      }
 
       return { valor: valorFinal, erro: null };
     } catch (error) {
-      console.error("Erro ao calcular valor:", error);
       return { valor: 0, erro: "Erro interno no cálculo." };
     }
   },

@@ -2,7 +2,7 @@ import "../styles/SaidaModal.css";
 import React, { useState, useEffect } from "react";
 import { MovimentacaoModel } from "../models/MovimentacaoModel";
 
-export default function SaidaModal({ registro, funcionario, fechar, confirmar }) {
+export default function SaidaModal({ registro, funcionario, fechar, confirmar, listaPagamentos }) {
   const [dataSaida, setDataSaida] = useState(new Date().toISOString().slice(0, 16));
   const [tipoPagamento, setTipoPagamento] = useState("");
   const [valores, setValores] = useState({ valor: 0, erro: null });
@@ -27,8 +27,10 @@ export default function SaidaModal({ registro, funcionario, fechar, confirmar })
     <div className="sm-fundo" onClick={fechar}>
       <div className="sm-card" onClick={e => e.stopPropagation()}>
         <h2>Finalizar Saída</h2>
+        
         <div className="sm-caixinha-linha">
           <p>Placa: <strong>{registro.placa}</strong></p>
+          <p>Convênio: <strong>{registro.convenio || "Sem Convênio"}</strong></p>
           <p>Valor: <strong style={{color: 'green'}}>R$ {valores.valor.toFixed(2)}</strong></p>
         </div>
 
@@ -47,14 +49,10 @@ export default function SaidaModal({ registro, funcionario, fechar, confirmar })
             <label className="sm-label">Forma de Pagamento</label>
             <select className="sm-input" value={tipoPagamento} onChange={e => setTipoPagamento(e.target.value)}>
               <option value="">Selecione</option>
-              <option value="Dinheiro">Dinheiro</option>
-              <option value="Pix">Pix</option>
-              <option value="Cartão">Cartão</option>
+              {listaPagamentos.map(pag => (
+                <option key={pag.id} value={pag.nome}>{pag.nome}</option>
+              ))}
             </select>
-          </div>
-
-          <div className="sm-caixinha-linha">
-            <p>Funcionário: <strong>{funcionario?.nome || "Desconhecido"}</strong></p>
           </div>
 
           {valores.erro && <p className="erro-texto">{valores.erro}</p>}

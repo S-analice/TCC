@@ -13,20 +13,23 @@ export default function Motorista() {
     return (
         <div className="motorista-container">
             {vm.carregando && <Carregando />}
-            
+
             {vm.mensagem.mostrar && (
-                <Mensagem 
-                    mensagem={vm.mensagem.texto} 
-                    modo={vm.mensagem.tipo} 
-                    fechar={vm.fecharMensagem} 
+                <Mensagem
+                    mensagem={vm.mensagem.texto}
+                    modo={vm.mensagem.tipo}
+                    fechar={vm.fecharMensagem}
                 />
             )}
 
             {vm.modal.aberto && vm.modal.tipo === "formulario" && (
                 <MotoristaModal
+                    modo={vm.modal.dado ? "editar" : "adicionar"}
                     motorista={vm.modal.dado}
                     fechar={vm.fecharModal}
                     salvar={vm.salvarMotorista}
+                    empresas={vm.empresas}
+                    convenios={vm.convenios}
                 />
             )}
 
@@ -68,7 +71,7 @@ export default function Motorista() {
                         <th>CPF</th>
                         <th>Placa</th>
                         <th>Telefone</th>
-                        <th>CNPJ</th>
+                        <th>Empresa</th>
                         <th>Convênio</th>
                         <th>Status</th>
                         <th>Ações</th>
@@ -80,7 +83,7 @@ export default function Motorista() {
                             <td>{formatarCPF(m.cpf)}</td>
                             <td>{formatarPlaca(m.placa)}</td>
                             <td>{formatarTelefone(m.telefone)}</td>
-                            <td>{formatarCNPJ(m.cnpj)}</td>
+                            <td>{m.empresa_nome || "Autônomo"}</td>
                             <td>
                                 <span className={`convenio ${m.convenio.toLowerCase().replace(/\s+/g, "-")}`}>
                                     {m.convenio}
@@ -93,18 +96,18 @@ export default function Motorista() {
                             </td>
                             <td>
                                 <div className="motorista-acoes">
-                                  
-                                    <button 
-                                        className="motorista-atualizar" 
+
+                                    <button
+                                        className="motorista-atualizar"
                                         onClick={() => vm.abrirModal("formulario", m)}
                                     >
                                         <Pencil size={16} />
                                     </button>
-                                    
-                                
+
+
                                     {m.status === "Ativo" && (
-                                        <button 
-                                            className="motorista-remover" 
+                                        <button
+                                            className="motorista-remover"
                                             onClick={() => vm.abrirModal("delete", m)}
                                         >
                                             <Trash2 size={16} />

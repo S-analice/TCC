@@ -15,20 +15,19 @@ export default function Movimentacao({ funcionario }) {
   const [modalEntrada, setModalEntrada] = useState({ aberta: false, modo: "adicionar", registro: null });
   const [modalSaida, setModalSaida] = useState({ aberta: false, registro: null });
 
-  const filtrados = vm.movimentacoes.filter(r => 
+  const filtrados = vm.movimentacoes.filter(r =>
     r.status === "No Pátio" && (r.cpf.includes(pesquisa) || r.placa.includes(pesquisa))
   );
 
   return (
     <div className="movimentacao-container">
       {vm.carregando && <Carregando />}
-      
-      {/* CORREÇÃO: Alterado de vm.notificacao para vm.mensagem */}
+
       {vm.mensagem?.mostrar && (
-        <Mensagem 
-          mensagem={vm.mensagem.texto} 
-          tipo={vm.mensagem.tipo} 
-          fechar={() => vm.setMensagem({ ...vm.mensagem, mostrar: false })} 
+        <Mensagem
+          mensagem={vm.mensagem.texto}
+          tipo={vm.mensagem.tipo}
+          fechar={() => vm.setMensagem({ ...vm.mensagem, mostrar: false })}
         />
       )}
 
@@ -36,11 +35,11 @@ export default function Movimentacao({ funcionario }) {
 
       <div className="patio-topo">
         <div className="patio-busca">
-          <Search size={18} className="patio-busca-icone"/>
-          <input 
-            placeholder="Buscar CPF ou Placa..." 
-            value={pesquisa} 
-            onChange={(e) => setPesquisa(e.target.value)} 
+          <Search size={18} className="patio-busca-icone" />
+          <input
+            placeholder="Buscar CPF ou Placa..."
+            value={pesquisa}
+            onChange={(e) => setPesquisa(e.target.value)}
           />
         </div>
         <div className="patio-botoes">
@@ -48,7 +47,7 @@ export default function Movimentacao({ funcionario }) {
             <LogIn size={18} /> Registrar Entrada
           </button>
           <button className="patio-topo-button-amarelo" onClick={vm.exportarDados}>
-              <Download size={18} />Exportar CSV
+            <Download size={18} />Exportar CSV
           </button>
         </div>
       </div>
@@ -84,7 +83,7 @@ export default function Movimentacao({ funcionario }) {
       </table>
 
       {modalEntrada.aberta && (
-        <EntradaModal 
+        <EntradaModal
           modo={modalEntrada.modo}
           registro={modalEntrada.registro}
           funcionario={funcionario}
@@ -94,9 +93,10 @@ export default function Movimentacao({ funcionario }) {
       )}
 
       {modalSaida.aberta && (
-        <SaidaModal 
+        <SaidaModal
           registro={modalSaida.registro}
           funcionario={funcionario}
+          listaPagamentos={vm.tiposPagamento} 
           fechar={() => setModalSaida({ aberta: false })}
           confirmar={(id, dados) => vm.finalizarSaida(id, dados, () => setModalSaida({ aberta: false }))}
         />

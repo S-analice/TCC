@@ -36,10 +36,10 @@ export default function App() {
   const renderizarPaginaLogada = () => {
     switch (telaAtual) {
       case "home": return <Home funcionario={funcionarioLogado} />;
-      case "relatorio": return <Relatorio />;
-      case "funcionario": return <Funcionario />; 
-      case "empresa": return <Empresa />; 
-      case "motorista": return <Motorista />;   
+      case "relatorio": return <Relatorio funcionario={funcionarioLogado}/>;
+      case "funcionario": return <Funcionario funcionario={funcionarioLogado}/>; 
+      case "empresa": return <Empresa funcionario={funcionarioLogado}/>; 
+      case "motorista": return <Motorista funcionario={funcionarioLogado}/>;   
       case "patio": return <Movimentacao funcionario={funcionarioLogado}/>;
       default: return <Home funcionario={funcionarioLogado} />;
     }

@@ -136,7 +136,8 @@ export default function EmpresaModal({ modo, empresa, empresas, fechar, salvar }
                             <label className="emm-label">CNPJ</label>
                             <input 
                                 className="emm-input" 
-                                value={formatarCNPJ(form.cnpj)} 
+                                value={formatarCNPJ(form.cnpj)}
+                                maxLength={18} 
                                 onChange={handleCNPJChange} 
                                 required 
                             />
@@ -146,6 +147,7 @@ export default function EmpresaModal({ modo, empresa, empresas, fechar, salvar }
                             <input 
                                 className="emm-input" 
                                 value={formatarTelefone(form.telefone)} 
+                                maxLength={15}
                                 onChange={handleTelefoneChange} 
                                 required 
                             />

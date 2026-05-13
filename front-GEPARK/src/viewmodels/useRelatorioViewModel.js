@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { MovimentacaoModel } from "../models/MovimentacaoModel";
-import { MotoristaModel } from "../models/MotoristaModel";
 
 export function useRelatorioViewModel() {
   const [dataInicio, setDataInicio] = useState("");
@@ -12,14 +11,15 @@ export function useRelatorioViewModel() {
 
   const gerarRelatorio = async () => {
     if (!dataInicio || !dataFim) {
-      setMensagem({ mostrar: true, texto: "Selecione as datas!", tipo: "erro" });
+      setMensagem({ mostrar: true, texto: "Por favor, selecione o período!", tipo: "erro" });
       return;
     }
 
     setCarregando(true);
+    setMostrarResultados(false); 
+    
     try {
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
+      await new Promise(resolve => setTimeout(resolve, 1000));
       const filtrados = MovimentacaoModel.filtrarPorPeriodo(
         MovimentacaoModel.registrosIniciais, 
         dataInicio, 
@@ -28,52 +28,53 @@ export function useRelatorioViewModel() {
 
       setRegistrosFiltrados(filtrados);
       setMostrarResultados(true);
-    } catch {
-      setMensagem({ mostrar: true, texto: "Erro ao gerar relatório", tipo: "erro" });
+      setMensagem({ mostrar: true, texto: "Relatório gerado com sucesso!", tipo: "sucesso" });
+    } catch (err) {
+      setMensagem({ mostrar: true, texto: "Erro ao processar dados.", tipo: "erro" });
     } finally {
       setCarregando(false);
     }
   };
 
-  const exportarRelatorio = async () => {
+  const exportarCSV = async () => {
     setCarregando(true);
     try {
       await new Promise(resolve => setTimeout(resolve, 1200));
-      
-      setMensagem({ 
-        mostrar: true, 
-        texto: "Relatório CSV exportado com sucesso!", 
-        tipo: "sucesso" 
-      });
-    } catch {
-      setMensagem({ 
-        mostrar: true, 
-        texto: "Erro ao exportar arquivo", 
-        tipo: "erro" 
-      });
+      setMensagem({ mostrar: true, texto: "Arquivo CSV baixado com sucesso!", tipo: "sucesso" });
+    } catch (err) {
+      setMensagem({ mostrar: true, texto: "Falha ao exportar arquivo.", tipo: "erro" });
     } finally {
       setCarregando(false);
     }
   };
+
+  const fecharMensagem = () => setMensagem({ ...mensagem, mostrar: false });
 
   const estatisticas = {
     total: registrosFiltrados.length,
     
+    faturamentoTotal: registrosFiltrados.reduce((acc, curr) => acc + (curr.valorFinal || 0), 0),
+    
+
     tempoMedio: (() => {
       const concluidos = registrosFiltrados.filter(r => r.dataSaida);
       if (concluidos.length === 0) return "-";
+      
       const totalMinutos = concluidos.reduce((acc, curr) => 
         acc + MovimentacaoModel.calcularTempoPermanencia(curr.dataEntrada, curr.dataSaida), 0);
+      
       const media = totalMinutos / concluidos.length;
-      return `${Math.floor(media / 60)}h ${Math.floor(media % 60)}min`;
+      const horas = Math.floor(media / 60);
+      const minutos = Math.floor(media % 60);
+      
+      return `${horas}h ${minutos}m`;
     })(),
 
-    clienteFrequente: (() => {
+    convenioMaisUsado: (() => {
       if (registrosFiltrados.length === 0) return "-";
       const contagem = {};
       registrosFiltrados.forEach(reg => {
-        const mot = MotoristaModel.buscarPorCPF(MotoristaModel.getInitialData(), reg.cpf);
-        const nome = mot?.convenio || "Desconhecido";
+        const nome = reg.convenio || "Sem Convênio";
         contagem[nome] = (contagem[nome] || 0) + 1;
       });
       return Object.keys(contagem).reduce((a, b) => contagem[a] > contagem[b] ? a : b);
@@ -102,9 +103,10 @@ export function useRelatorioViewModel() {
     registrosFiltrados,
     carregando,
     mensagem,
-    setMensagem,
+    setMensagem, 
+    fecharMensagem,
     gerarRelatorio,
-    exportarRelatorio, 
+    exportarCSV,
     estatisticas
   };
 }

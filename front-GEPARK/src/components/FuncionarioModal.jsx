@@ -106,7 +106,7 @@ export default function FuncionarioModal({ modo, funcionario, funcionarios, fech
 
                         <div className="fm-form-container">
                             <label className="fm-label">Telefone</label>
-                            <input className="fm-input" value={form.telefone} onChange={e => setForm({...form, telefone: e.target.value})} required />
+                            <input className="fm-input" value={form.telefone} maxLength={15} onChange={e => setForm({...form, telefone: e.target.value})} required />
                         </div>
                     </div>
 
