@@ -58,7 +58,7 @@ export default function Funcionario() {
                         <option value="inativos">Inativos</option>
                     </select>
                 </div>
-                <button onClick={() => vm.abrirModal("formulario")}>+ Adicionar</button>
+                <button onClick={() => vm.abrirModal("formulario")}>+ Adicionar Funcionário</button>
             </div>
 
             <table className="funcionario-tabela">

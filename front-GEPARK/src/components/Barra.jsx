@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { User, House, Users, Truck, FileText, Mail, Phone, Clock, LogOut } from "lucide-react";
+import { User, House, Users, Briefcase, Truck, FileText, Mail, Phone, Clock, LogOut } from "lucide-react";
 import "../styles/Barra.css";
 import { formatarTelefone } from "../utils/formatadores"; 
 
@@ -57,6 +57,7 @@ export default function Barra({ funcionario, paginaAtual, irParaPagina, voltarPa
                 <nav className="menu-navegacao">
                     <button className={paginaAtual === "home" ? "ativo" : ""} onClick={() => irParaPagina("home")}><House size={20}/>Home</button>
                     <button className={paginaAtual === "funcionario" ? "ativo" : ""} onClick={() => irParaPagina("funcionario")}><Users size={20}/>Funcionário</button>
+                    <button className={paginaAtual === "empresa" ? "ativo" : ""} onClick={() => irParaPagina("empresa")}><Briefcase size={20}/>Empresa</button>
                     <button className={paginaAtual === "motorista" ? "ativo" : ""} onClick={() => irParaPagina("motorista")}><User size={20}/>Motorista</button>
                     <button className={paginaAtual === "patio" ? "ativo" : ""} onClick={() => irParaPagina("patio")}><Truck size={20}/>Pátio</button>
                     <button className={paginaAtual === "relatorio" ? "ativo" : ""} onClick={() => irParaPagina("relatorio")}><FileText size={20}/>Relatório</button>

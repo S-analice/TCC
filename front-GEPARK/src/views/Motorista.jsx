@@ -58,7 +58,7 @@ export default function Motorista() {
                     </select>
                 </div>
                 <button className="verde-botao" onClick={() => vm.abrirModal("formulario")}>
-                    + Adicionar 
+                    + Adicionar Motorista
                 </button>
             </div>
 
