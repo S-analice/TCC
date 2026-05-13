@@ -4,9 +4,11 @@
 
 **Instalação do Projeto**
 ```bash
-
+cd back-GEPARK
+npm install
+npm run dev
 ```
-
+Acessar: http://localhost/phpmyadmin
 
 
 **Variáveis de Ambiente**
