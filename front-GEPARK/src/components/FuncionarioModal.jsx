@@ -2,7 +2,7 @@ import "../styles/FuncionarioModal.css";
 import { useState } from "react";
 import { Upload, Trash2, User } from "lucide-react";
 import { converterParaBase64 } from "../utils/formatadores";
-import Mensagem from "./Mensagem"; // Importe seu componente de mensagem
+import Mensagem from "./Mensagem";
 
 export default function FuncionarioModal({ modo, funcionario, funcionarios, fechar, salvar }) {
     const [form, setForm] = useState({
