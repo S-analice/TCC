@@ -1,3 +1,5 @@
+import { turnosMock } from "./FuncionarioModel";
+
 export const HomeModel = {
   // Busca dados de clima usando a API
   buscarClima: async (lat, lon) => {
@@ -18,16 +20,15 @@ export const HomeModel = {
   },
 
   obterSaudacaoCompleta: (funcionario) => {
-    const hoje = new Date();
-    const dataFormatada = hoje.toLocaleDateString("pt-BR");
-    const turno = funcionario?.turno || "... - ...";
-    const [inicio, fim] = turno.split(" - ");
-    
+    const dataAtual = new Date().toLocaleDateString("pt-BR");
+
+    const turnoDoFuncionario = turnosMock.find(t => t.id === Number(funcionario?.turnoId));
+
     return {
-      nome: funcionario?.nome || "Funcionário",
-      data: dataFormatada,
-      inicio,
-      fim
+      nome: funcionario?.nome || "Usuário",
+      data: dataAtual,
+      inicio: turnoDoFuncionario ? turnoDoFuncionario.inicio : "--:--",
+      fim: turnoDoFuncionario ? turnoDoFuncionario.fim : "--:--",
     };
-  }
+  },
 };

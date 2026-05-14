@@ -38,12 +38,14 @@ export function useEmpresaViewModel() {
                 status: "Ativo" 
             };
             setEmpresas(prev => [...prev, novo]);
+            setMensagem({ mostrar: true, texto: "Cadastrada com sucesso!", tipo: "sucesso" });
         } else { 
             setEmpresas(prev => prev.map(e => 
                 e.id === modal.dado.id ? { ...e, ...dados, estado_sigla } : e
             ));
+            setMensagem({ mostrar: true, texto: "Dados atualizados!", tipo: "sucesso" });
         }
-        setMensagem({ mostrar: true, texto: "Operação realizada!", tipo: "sucesso" });
+
     } catch {
         setMensagem({ mostrar: true, texto: "Erro ao salvar.", tipo: "erro" });
     } finally {

@@ -20,9 +20,9 @@ export function useHomeViewModel(funcionario) {
         try {
           const { latitude, longitude } = pos.coords;
           const dadosClima = await HomeModel.buscarClima(latitude, longitude);
-          setClima({ 
-            temp: dadosClima.temperatura, 
-            desc: dadosClima.descricao 
+          setClima({
+            temp: dadosClima.temperatura,
+            desc: dadosClima.descricao
           });
         } catch (error) {
           console.error("Erro ao buscar dados na API de Clima.");
@@ -37,36 +37,38 @@ export function useHomeViewModel(funcionario) {
   }, []);
 
   useEffect(() => {
-    setSaudacao(HomeModel.obterSaudacaoCompleta(funcionario));
+    const dadosSaudacao = HomeModel.obterSaudacaoCompleta(funcionario);
+    setSaudacao(dadosSaudacao);
+
     iniciarClima();
   }, [funcionario, iniciarClima]);
 
-  const registrosHoje = MovimentacaoModel.filtrarMovimentacoesHoje(registros);
-  const entradasHoje = registrosHoje.filter(r => r.tipo === "Entrada").length;
-  const saidasHoje = registrosHoje.filter(r => r.tipo === "Saída").length;
-  const noPatio = registros.filter(r => r.status === "No Pátio").length;
-  const totalMovimentacao = entradasHoje + saidasHoje;
+const registrosHoje = MovimentacaoModel.filtrarMovimentacoesHoje(registros);
+const entradasHoje = registrosHoje.filter(r => r.tipo === "Entrada").length;
+const saidasHoje = registrosHoje.filter(r => r.tipo === "Saída").length;
+const noPatio = registros.filter(r => r.status === "No Pátio").length;
+const totalMovimentacao = entradasHoje + saidasHoje;
 
-  const getStatusMovimentacao = () => {
-    if (totalMovimentacao <= 5) return { texto: "baixa", classe: "home-mov-baixa" };
-    if (totalMovimentacao <= 15) return { texto: "média", classe: "home-mov-media" };
-    return { texto: "alta", classe: "home-mov-alta" };
-  };
+const getStatusMovimentacao = () => {
+  if (totalMovimentacao <= 5) return { texto: "baixa", classe: "home-mov-baixa" };
+  if (totalMovimentacao <= 15) return { texto: "média", classe: "home-mov-media" };
+  return { texto: "alta", classe: "home-mov-alta" };
+};
 
-  const ultimasMovimentacoes = [...registros]
-    .sort((a, b) => new Date(b.dataSaida || b.dataEntrada) - new Date(a.dataSaida || a.dataEntrada))
-    .slice(0, 5);
+const ultimasMovimentacoes = [...registros]
+  .sort((a, b) => new Date(b.dataSaida || b.dataEntrada) - new Date(a.dataSaida || a.dataEntrada))
+  .slice(0, 5);
 
-  return {
-    saudacao,
-    clima,
-    indicadores: {
-      entradasHoje,
-      saidasHoje,
-      noPatio,
-      totalMotoristas: motoristas.length,
-      movimentacao: getStatusMovimentacao()
-    },
-    ultimasMovimentacoes
-  };
+return {
+  saudacao,
+  clima,
+  indicadores: {
+    entradasHoje,
+    saidasHoje,
+    noPatio,
+    totalMotoristas: motoristas.length,
+    movimentacao: getStatusMovimentacao()
+  },
+  ultimasMovimentacoes
+};
 }

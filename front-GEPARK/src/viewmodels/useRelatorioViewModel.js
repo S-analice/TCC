@@ -11,7 +11,7 @@ export function useRelatorioViewModel() {
 
   const gerarRelatorio = async () => {
     if (!dataInicio || !dataFim) {
-      setMensagem({ mostrar: true, texto: "Por favor, selecione o período!", tipo: "erro" });
+      setMensagem({ mostrar: true, texto: "Por favor, selecione o período.", tipo: "erro" });
       return;
     }
 
@@ -71,7 +71,7 @@ export function useRelatorioViewModel() {
     })(),
 
     convenioMaisUsado: (() => {
-      if (registrosFiltrados.length === 0) return "-";
+      if (registrosFiltrados.length === 0) return "--";
       const contagem = {};
       registrosFiltrados.forEach(reg => {
         const nome = reg.convenio || "Sem Convênio";

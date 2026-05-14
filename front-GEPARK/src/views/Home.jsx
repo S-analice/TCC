@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/Home.css";
 import { Truck, TrendingUp, TrendingDown, Users } from "lucide-react";
 import { useHomeViewModel } from "../viewmodels/useHomeViewModel";
-import { formatarCPF, formatarPlaca } from "../utils/formatadores"; // Importando das suas utils
+import { formatarCPF, formatarPlaca } from "../utils/formatadores"; 
 
 export default function Home({ funcionario }) {
   const { saudacao, clima, indicadores, ultimasMovimentacoes } = useHomeViewModel(funcionario);

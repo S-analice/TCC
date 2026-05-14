@@ -23,7 +23,7 @@ export function useMovimentacaoViewModel() {
       } else {
         setMovimentacoes((prev) => prev.map((m) => (m.id === idSelecionado ? { ...m, ...dados } : m)));
       }
-      setMensagem({ mostrar: true, texto: "Sucesso!", tipo: "sucesso" });
+      setMensagem({ mostrar: true, texto: "Entrada confirmada!", tipo: "sucesso" });
     } finally { setCarregando(false); }
   };
 

@@ -4,14 +4,14 @@ import { Upload, Trash2, User } from "lucide-react";
 import { converterParaBase64 } from "../utils/formatadores";
 import Mensagem from "./Mensagem";
 
-export default function FuncionarioModal({ modo, funcionario, funcionarios, fechar, salvar }) {
+export default function FuncionarioModal({ modo, funcionario, funcionarios, turnos, cargos, fechar, salvar }) {
     const [form, setForm] = useState({
         nome: funcionario?.nome || "",
         email: funcionario?.email || "",
         senha: funcionario?.senha || "",
         telefone: funcionario?.telefone || "",
-        turno: funcionario?.turno || "",
-        cargo: funcionario?.cargo || "",
+        turno: funcionario?.turnoId || "",
+        cargo: funcionario?.cargoId || "",
         status: funcionario?.status || "Ativo",
         foto: funcionario?.foto || ""
     });
@@ -35,7 +35,7 @@ export default function FuncionarioModal({ modo, funcionario, funcionarios, fech
 
         const telefoneNumeros = form.telefone.replace(/\D/g, "");
         if (telefoneNumeros.length > 11) {
-            setModalErro({ mostrar: true, texto: "11 dígitos." });
+            setModalErro({ mostrar: true, texto: "O telefone deve ter 11 dígitos." });
             return;
         }
 
@@ -45,7 +45,7 @@ export default function FuncionarioModal({ modo, funcionario, funcionarios, fech
         }
 
         if (modo === "adicionar") {
-            if (funcionarios.some(f => f.email === form.email)) {
+            if (funcionarios.some(f => f.email =form.email)) {
                 setModalErro({ mostrar: true, texto: "E-mail já cadastrado no sistema!" });
                 return;
             }
@@ -131,20 +131,25 @@ export default function FuncionarioModal({ modo, funcionario, funcionarios, fech
                     <div className="fm-lado-a-lado">
                         <div className="fm-form-container">
                             <label className="fm-label">Cargo</label>
-                            <select className="fm-input" value={form.cargo} onChange={e => setForm({...form, cargo: e.target.value})} required>
+                            <select className="fm-input" value={form.cargoId} onChange={e => setForm({...form, cargoId: e.target.value})} required>
                                 <option value="">Selecione</option>
-                                <option value="Líder">Líder</option>
-                                <option value="Equipe">Equipe</option>
+                                {cargos.map(c => (
+                                    <option key={c.id} value={c.id}>
+                                        {c.nome} 
+                                    </option>
+                                ))}
                             </select>
                         </div>
 
                         <div className="fm-form-container">
                             <label className="fm-label">Turno</label>
-                            <select className="fm-input" value={form.turno} onChange={e => setForm({...form, turno: e.target.value})} required>
+                            <select className="fm-input" value={form.turnoId} onChange={e => setForm({...form, turnoId: e.target.value})} required>
                                 <option value="">Selecione</option>
-                                <option value="06:00 - 18:00">Dia</option>
-                                <option value="18:00 - 06:00">Noite</option>
-                                <option value="08:00 - 17:00">Líder</option>
+                                {turnos.map(t => (
+                                    <option key={t.id} value={t.id}>
+                                        {t.nome} 
+                                    </option>
+                                ))}
                             </select>
                         </div>
                     </div>

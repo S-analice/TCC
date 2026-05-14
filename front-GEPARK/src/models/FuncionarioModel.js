@@ -1,3 +1,14 @@
+export const turnosMock = [
+    { id: 1, nome: "Diurno", inicio: "06:00", fim: "18:00" },
+    { id: 2, nome: "Noturno", inicio: "18:00", fim: "06:00" },
+    { id: 3, nome: "Administrativo", inicio: "08:00", fim: "17:00" }
+];
+
+export const cargosMock = [
+    { id: 1, nome: "Líder"},
+    { id: 2, nome: "Equipe"}
+];
+
 export const funcionariosMock = [
     {
         id: 1,
@@ -5,8 +16,8 @@ export const funcionariosMock = [
         email: "lilo@gmail.com",
         senha: "123456",
         telefone: "41991234567",
-        turno: "06:00 - 18:00",
-        cargo: "Líder",
+        turnoId: 3,
+        cargoId: 1,
         status: "Ativo",
         foto: "/lilo.jpg"
     },
@@ -16,8 +27,8 @@ export const funcionariosMock = [
         email: "analice.santos@gmail.com",
         senha: "123456",
         telefone: "41992587344",
-        turno: "08:00 - 18:00",
-        cargo: "Equipe",
+        turnoId: 1,
+        cargoId: 2,
         status: "Ativo",
         foto: ""
     },
@@ -27,8 +38,8 @@ export const funcionariosMock = [
         email: "joao.silva@gmail.com",
         senha: "123456",
         telefone: "41999991111",
-        turno: "06:00 - 18:00",
-        cargo: "Equipe",
+        turnoId: 1,
+        cargoId: 2,
         status: "Ativo",
         foto: "/joao.jpg"
     },
@@ -38,8 +49,8 @@ export const funcionariosMock = [
         email: "maria.santos@gmail.com",
         senha: "123456",
         telefone: "41988882222",
-        turno: "18:00 - 06:00",
-        cargo: "Equipe",
+        turnoId: 1,
+        cargoId: 2,
         status: "Ativo",
         foto: "/maria.jpg"
     }
@@ -47,6 +58,8 @@ export const funcionariosMock = [
 
 export const FuncionarioModel = {
     buscarTodos: () => funcionariosMock,
+    buscarTurnos: () => turnosMock,
+    buscarCarfos: () => cargosMock,
     validarLogin: (email, senha) => {
         return funcionariosMock.find(f => f.email === email && f.senha === senha);
     },

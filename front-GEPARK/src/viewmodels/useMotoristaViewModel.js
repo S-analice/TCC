@@ -48,11 +48,12 @@ export function useMotoristaViewModel() {
       if (!modal.dado) {
         if (motoristas.some(m => m.cpf === dados.cpf)) throw new Error("CPF já cadastrado.");
         setMotoristas(prev => [...prev, { id: Date.now(), ...payload, status: "Ativo" }]);
+        setMensagem({ mostrar: true, texto: "Cadastrado com sucesso!", tipo: "sucesso" });
       } else {
         setMotoristas(prev => prev.map(m => m.id === modal.dado.id ? { ...m, ...payload } : m));
+        setMensagem({ mostrar: true, texto: "Dados atualizados!", tipo: "sucesso" });
       }
 
-      setMensagem({ mostrar: true, texto: "Operação realizada!", tipo: "sucesso" });
     } catch (err) {
       setMensagem({ mostrar: true, texto: err.message, tipo: "erro" });
     } finally {

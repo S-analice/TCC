@@ -24,7 +24,7 @@ export function useFuncionarioViewModel() {
         fecharModal();
         setCarregando(true);
         try {
-            await new Promise(res => setTimeout(res, 1000)); // Simula API
+            await new Promise(res => setTimeout(res, 1000)); 
             
             if (modal.tipo === "formulario" && !modal.dado) { 
                 const novo = { id: Date.now(), ...dados, status: "Ativo" };

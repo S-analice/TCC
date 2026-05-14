@@ -54,9 +54,9 @@ export default function MotoristaModal({ modo, motorista, fechar, salvar, empres
   const handleSubmit = (e) => {
     e.preventDefault();
     try {
-      if (formData.cpf.length !== 11) throw new Error("CPF deve conter 11 dígitos.");
-      if (formData.placa.length !== 7) throw new Error("Placa deve conter 7 caracteres.");
-      if (formData.telefone.length !== 11) throw new Error("Telefone inválido.");
+      if (formData.cpf.length !== 11) throw new Error("O CPF deve conter 11 dígitos.");
+      if (formData.placa.length !== 7) throw new Error("A Placa deve conter 7 caracteres.");
+      if (formData.telefone.length !== 11) throw new Error("O Telefone deve ter 11 dígitos");
       if (!formData.autonomo && !formData.empresa_id) throw new Error("Selecione uma empresa válida.");
       if (!formData.convenio_id) throw new Error("Selecione um convênio.");
 

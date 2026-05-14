@@ -28,7 +28,7 @@ export default function EntradaModal({ modo, registro, fechar, salvar, funcionar
         }));
         setErro("");
       } else {
-        setErro("Motorista não cadastrado!");
+        setErro("Motorista não cadastrado.");
         setForm(prev => ({ ...prev, placa: "" }));
       }
     }
