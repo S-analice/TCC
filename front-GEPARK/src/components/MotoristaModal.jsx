@@ -1,5 +1,5 @@
 import "../styles/MotoristaModal.css";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import { formatarCPF, formatarPlaca, formatarTelefone } from "../utils/formatadores";
 
 export default function MotoristaModal({ modo, motorista, fechar, salvar, empresas, convenios }) {
@@ -17,7 +17,7 @@ export default function MotoristaModal({ modo, motorista, fechar, salvar, empres
   const [erro, setErro] = useState("");
   const [sugestoes, setSugestoes] = useState([]);
   const [mostrarSugestoes, setMostrarSugestoes] = useState(false);
-
+ 
   const handleChange = (field, value) => {
     setErro("");
     let newValue = value;
@@ -73,8 +73,8 @@ export default function MotoristaModal({ modo, motorista, fechar, salvar, empres
         <div className="mm-linha"></div>
 
         <form onSubmit={handleSubmit} className="mm-form">
-          <div className="mm-lado-a-lado">
-            <div className="mm-form-container">
+          
+          <div className="mm-form-container">
               <label className="mm-label">CPF</label>
               <input
                 className="mm-input"
@@ -83,7 +83,8 @@ export default function MotoristaModal({ modo, motorista, fechar, salvar, empres
                 maxLength={14}
                 required
               />
-            </div>
+          </div>
+
             <div className="mm-form-container">
               <label className="mm-label">Placa</label>
               <input
@@ -94,7 +95,6 @@ export default function MotoristaModal({ modo, motorista, fechar, salvar, empres
                 required
               />
             </div>
-          </div>
 
           <div className="mm-form-container">
             <label className="mm-label">Telefone</label>
@@ -114,8 +114,8 @@ export default function MotoristaModal({ modo, motorista, fechar, salvar, empres
               value={formData.autonomo}
               onChange={(e) => setFormData({...formData, autonomo: e.target.value === "true", empresa_id: "", empresa_nome: ""})}
             >
-              <option value="true">Sim, autônomo</option>
-              <option value="false">Não, vinculado à empresa</option>
+              <option value="true">Sim</option>
+              <option value="false">Não</option>
             </select>
           </div>
 
@@ -148,7 +148,7 @@ export default function MotoristaModal({ modo, motorista, fechar, salvar, empres
               onChange={(e) => setFormData({ ...formData, convenio_id: e.target.value })}
               required
             >
-              <option value="">Selecione um convênio</option>
+              <option value="">Selecione</option>
               {convenios.map(c => (
                 <option key={c.id} value={c.id}>{c.nome}</option>
               ))}

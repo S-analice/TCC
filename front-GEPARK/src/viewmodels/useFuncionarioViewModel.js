@@ -3,6 +3,8 @@ import { FuncionarioModel } from "../models/FuncionarioModel";
 
 export function useFuncionarioViewModel() {
     const [funcionarios, setFuncionarios] = useState(FuncionarioModel.buscarTodos());
+    const [turnos] = useState(FuncionarioModel.buscarTurnos());
+    const [cargos] = useState(FuncionarioModel.buscarCargos());
     const [pesquisa, setPesquisa] = useState("");
     const [filtroStatus, setFiltroStatus] = useState("todos");
     const [carregando, setCarregando] = useState(false);
@@ -65,6 +67,6 @@ export function useFuncionarioViewModel() {
     return {
         funcionariosFiltrados, pesquisa, setPesquisa, filtroStatus, setFiltroStatus,
         carregando, setCarregando, mensagem, fecharMensagem, modal, abrirModal, fecharModal,
-        salvarFuncionario, inativarFuncionario, funcionarios
+        salvarFuncionario, inativarFuncionario, funcionarios, turnos, cargos
     };
 }

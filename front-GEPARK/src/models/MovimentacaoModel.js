@@ -1,3 +1,5 @@
+import { MotoristaModel } from "./MotoristaModel";
+
 export const MovimentacaoModel = {
   registrosIniciais: [
     {
@@ -35,16 +37,25 @@ export const MovimentacaoModel = {
     }
   ],
 
-  calcularValor: (dataEntrada, dataSaida, convenioNome) => {
+  calcularValor: (dataEntrada, dataSaida, cpfMotorista) => {
     try {
-      if (!dataEntrada || !dataSaida) return { valor: 0, erro: "Datas incompletas" };
+      if (!dataEntrada || !dataSaida || !cpfMotorista) {
+        return { valor: 0, erro: "Dados insuficientes para cálculo" };
+      }
+      
+      const listaMotoristas = MotoristaModel.getInitialData();
+      const motorista = listaMotoristas.find(m => m.cpf === cpfMotorista);
+      const convenioNome = motorista ? motorista.convenio : "Sem Convênio";
 
       const entrada = new Date(dataEntrada);
       const saida = new Date(dataSaida);
 
-      if (saida <= entrada) return { valor: 0, erro: "Horário de saída deve ser após a entrada!" };
+      if (saida <= entrada) {
+        return { valor: 0, erro: "Horário de saída deve ser após a entrada!" };
+      }
 
-      const diferencaHoras = Math.ceil((saida - entrada) / (1000 * 60 * 60));
+      const diferencaMs = saida - entrada;
+      const totalHoras = Math.ceil(diferencaMs / (1000 * 60 * 60));
 
       const tabelasPreco = {
         "Novo Cliente": { hora: 10, diaria: 100 },
@@ -52,19 +63,34 @@ export const MovimentacaoModel = {
         "Sem Convênio": { hora: 48, diaria: null } 
       };
 
-      const regra = tabelasPreco[convenioNome] || tabelasPreco["Sem Convênio"];
+      const chave = Object.keys(tabelasPreco).find(
+        k => k.toLowerCase() === convenioNome.toLowerCase()
+      ) || "Sem Convênio";
+
+      const regra = tabelasPreco[chave];
       let valorFinal = 0;
 
-      if (convenioNome === "Sem Convênio") {
-        valorFinal = diferencaHoras * regra.hora;
+      if (chave === "Sem Convênio" || !regra.diaria) {
+        valorFinal = totalHoras * regra.hora;
       } else {
-        // Se passar de 24h ou se o custo por hora superar a diária, cobra diária
-        valorFinal = diferencaHoras >= 24 ? regra.diaria : Math.min(diferencaHoras * regra.hora, regra.diaria);
+        const diasCompletos = Math.floor(totalHoras / 24);
+        const horasExcedentes = totalHoras % 24;
+
+        const valorDiarias = diasCompletos * regra.diaria;
+
+        const valorHorasExtras = Math.min(horasExcedentes * regra.hora, regra.diaria);
+
+        valorFinal = valorDiarias + valorHorasExtras;
       }
 
-      return { valor: valorFinal, erro: null };
-    } catch (error) {
-      return { valor: 0, erro: "Erro interno no cálculo." };
+      return { 
+        valor: valorFinal, 
+        erro: null, 
+        convenioAplicado: chave,
+        tempoTotalHoras: totalHoras 
+      };
+    } catch {
+      return { valor: 0, erro: "Erro no processamento do cálculo." };
     }
   },
 

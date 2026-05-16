@@ -125,6 +125,12 @@ Total de arquivos no projeto: 36/36
 **13/05**
 * Arrumando conforme alterações feitas no banco
 
+**14/05**
+* Arrumando conforme alterações feitas no banco
+
+**16/05**
+* Arrumando coisas
+
 
 
 **Tecnologias Utilizadas**

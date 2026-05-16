@@ -12,18 +12,17 @@ import Relatorio from "./views/Relatorio";
 
 export default function App() {
   const [telaAtual, setTelaAtual] = useState("home");
-  const [estaLogado, setEstaLogado] = useState(false); 
+  const [estaLogado, setEstaLogado] = useState(false);
   const [funcionarioLogado, setFuncionarioLogado] = useState(null);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const token = params.get("token");
-    
-    if (token) {
-      setTimeout(() => {
-        setTelaAtual("redefinir-senha");
-        window.history.replaceState({}, document.title, "/");
-      }, 0);
+    const paginaSolicitada = params.get("p");
+
+    if (paginaSolicitada === "redefinir") {
+      setTelaAtual("redefinir-senha");
+      
+      window.history.replaceState({}, document.title, "/");
     }
   }, []);
 

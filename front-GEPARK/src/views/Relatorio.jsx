@@ -12,10 +12,10 @@ export default function Relatorio() {
   return (
     <div className="relatorio-container">
       {vm.mensagem.mostrar && (
-        <Mensagem 
-          mensagem={vm.mensagem.texto} 
-          tipo={vm.mensagem.tipo} 
-          fechar={vm.fecharMensagem} 
+        <Mensagem
+          mensagem={vm.mensagem.texto}
+          tipo={vm.mensagem.tipo}
+          fechar={vm.fecharMensagem}
         />
       )}
 
@@ -30,11 +30,21 @@ export default function Relatorio() {
         <div className="relatorio-grid">
           <div className="relatorio-input-group">
             <label>Início</label>
-            <input type="date" value={vm.dataInicio} onChange={(e) => vm.setDataInicio(e.target.value)} />
+            <input
+              className="input"
+              type="date"
+              value={vm.dataInicio}
+              onChange={(e) => vm.setDataInicio(e.target.value)}
+            />
           </div>
           <div className="relatorio-input-group">
             <label>Fim</label>
-            <input type="date" value={vm.dataFim} onChange={(e) => vm.setDataFim(e.target.value)} />
+            <input
+              className="input"
+              type="date"
+              value={vm.dataFim}
+              onChange={(e) => vm.setDataFim(e.target.value)}
+            />
           </div>
         </div>
 
@@ -53,6 +63,11 @@ export default function Relatorio() {
 
       {vm.mostrarResultados && (
         <div className="relatorio-resultados">
+          <div className="relatorio-header">
+            <h3>Resultados do Relatório</h3>
+            <p>Resumo</p>
+          </div>
+
           <div className="relatorio-cards">
             <div className="relatorio-card verde">
               <p>Movimentações</p>
@@ -75,30 +90,33 @@ export default function Relatorio() {
             </div>
           </div>
 
-          <div className="relatorio-secao-tabela">
-             <h3>Top 5 Motoristas (Frequência)</h3>
-             <div className="relatorio-tabela-container">
-                <table className="relatorio-tabela">
-                  <thead>
-                    <tr>
-                      <th>Rank</th>
-                      <th>CPF</th>
-                      <th>Placa</th>
-                      <th>Estadias</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {vm.estatisticas.topMotoristas.map((item, index) => (
-                      <tr key={item.cpf}>
-                        <td><strong>{index + 1}º</strong></td>
-                        <td>{formatarCPF(item.cpf)}</td>
-                        <td>{formatarPlaca(item.placa)}</td>
-                        <td>{item.frequencia} vezes</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-             </div>
+          <div className="relatorio-header">
+            <h3>Top 5 Motoristas</h3>
+            <p>Mais Frequentes</p>
+          </div>
+          <div className="relatorio-tabela-container">
+            <table className="relatorio-tabela">
+              <thead>
+                <tr>
+                  <th>Rank</th>
+                  <th>CPF</th>
+                  <th>Placa</th>
+                  <th>Estadias</th>
+                </tr>
+              </thead>
+              <tbody>
+                {vm.estatisticas.topMotoristas.map((item, index) => (
+                  <tr key={item.cpf}>
+                    <td>
+                      <strong>{index + 1}º</strong>
+                    </td>
+                    <td>{formatarCPF(item.cpf)}</td>
+                    <td>{formatarPlaca(item.placa)}</td>
+                    <td>{item.frequencia} vezes</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       )}

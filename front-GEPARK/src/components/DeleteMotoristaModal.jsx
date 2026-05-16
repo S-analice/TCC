@@ -9,8 +9,6 @@ export default function DeleteMotoristaModal({ motorista, fechar, confirmar }) {
                 <p>Deseja realmente marcar este motorista como inativo?</p>
                 <div className="dmm-caixinha">
                     <p>CPF: <strong>{formatarCPF(motorista?.cpf)}</strong></p>
-                </div>
-                <div className="dmm-caixinha">
                     <p>Placa: <strong>{formatarPlaca(motorista?.placa)}</strong></p>
                 </div>
                 <div className="dmm-form-acoes">

@@ -59,7 +59,7 @@ export const funcionariosMock = [
 export const FuncionarioModel = {
     buscarTodos: () => funcionariosMock,
     buscarTurnos: () => turnosMock,
-    buscarCarfos: () => cargosMock,
+    buscarCargos: () => cargosMock,
     validarLogin: (email, senha) => {
         return funcionariosMock.find(f => f.email === email && f.senha === senha);
     },

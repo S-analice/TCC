@@ -140,17 +140,17 @@ body {
     font-weight:bold;
 }
 
-.convenio.a{
+.convenio.premium{
     background:#dbeafe;
     color:#3b82f6;
 }
 
-.convenio.b{
+.convenio.novo-cliente{
     background:#ede9fe;
     color:#7c3aed;
 }
 
-.convenio.sem{
+.convenio.sem-convenio{
     background:#e0e0e0;
     color:#7C7C7C;
 }

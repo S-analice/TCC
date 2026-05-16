@@ -104,7 +104,7 @@
 
 .relatorio-cards {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 15px;
   margin-bottom: 20px;
 }
@@ -166,24 +166,6 @@
   border-bottom: 1px solid #eeeeee;
 }
 
-.convenio {
-  padding: 4px 10px;
-  border-radius: 8px;
-  font-size: 12px;
-  font-weight: bold;
-}
-
-.convenio.a {
-  background: #dbeafe;
-  color: #3b82f6;
-}
-
-.convenio.b {
-  background: #ede9fe;
-  color: #7c3aed;
-}
-
-.convenio.sem {
-  background: #e0e0e0;
+.h3 {
   color: #7C7C7C;
 }

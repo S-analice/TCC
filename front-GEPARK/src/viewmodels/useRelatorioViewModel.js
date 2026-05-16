@@ -29,7 +29,7 @@ export function useRelatorioViewModel() {
       setRegistrosFiltrados(filtrados);
       setMostrarResultados(true);
       setMensagem({ mostrar: true, texto: "Relatório gerado com sucesso!", tipo: "sucesso" });
-    } catch (err) {
+    } catch {
       setMensagem({ mostrar: true, texto: "Erro ao processar dados.", tipo: "erro" });
     } finally {
       setCarregando(false);
@@ -41,7 +41,7 @@ export function useRelatorioViewModel() {
     try {
       await new Promise(resolve => setTimeout(resolve, 1200));
       setMensagem({ mostrar: true, texto: "Arquivo CSV baixado com sucesso!", tipo: "sucesso" });
-    } catch (err) {
+    } catch {
       setMensagem({ mostrar: true, texto: "Falha ao exportar arquivo.", tipo: "erro" });
     } finally {
       setCarregando(false);

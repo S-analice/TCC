@@ -5,15 +5,14 @@ import { MovimentacaoModel } from "../models/MovimentacaoModel";
 export default function SaidaModal({ registro, funcionario, fechar, confirmar, listaPagamentos }) {
   const [dataSaida, setDataSaida] = useState(new Date().toISOString().slice(0, 16));
   const [tipoPagamento, setTipoPagamento] = useState("");
-  const [valores, setValores] = useState({ valor: 0, erro: null });
+ const [valores, setValores] = useState({ valor: 0, erro: null, convenioAplicado: "" });
 
   useEffect(() => {
-    const calc = MovimentacaoModel.calcularValor(registro.dataEntrada, dataSaida, registro.convenio);
+    const calc = MovimentacaoModel.calcularValor(registro.dataEntrada, dataSaida, registro.cpf);
     setValores(calc);
   }, [dataSaida, registro]);
 
   const handleConfirmar = () => {
-    if (!tipoPagamento) return alert("Selecione o pagamento");
     confirmar(registro.id, { 
       dataSaida, 
       tipoPagamento, 
@@ -30,8 +29,8 @@ export default function SaidaModal({ registro, funcionario, fechar, confirmar, l
         
         <div className="sm-caixinha-linha">
           <p>Placa: <strong>{registro.placa}</strong></p>
-          <p>Convênio: <strong>{registro.convenio || "Sem Convênio"}</strong></p>
-          <p>Valor: <strong style={{color: 'green'}}>R$ {valores.valor.toFixed(2)}</strong></p>
+          <p>Convênio: <strong>{valores.convenioAplicado || "Buscando..."}</strong></p>
+          <p>Valor: <strong style={{color: 'green'}}>R$ {(valores?.valor || 0).toFixed(2)}</strong></p>
         </div>
 
         <div className="sm-form">

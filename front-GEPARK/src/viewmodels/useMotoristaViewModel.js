@@ -37,7 +37,7 @@ export function useMotoristaViewModel() {
     try {
       await new Promise((r) => setTimeout(r, 800));
 
-      const convNome = conveniosMock.find(c => c.id === dados.convenio_id)?.nome || "N/A";
+      const convNome = conveniosMock.find(c => c.id === dados.convenio_id)?.nome || "";
       
       const payload = {
         ...dados,

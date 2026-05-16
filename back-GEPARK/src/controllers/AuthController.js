@@ -14,6 +14,7 @@ export const login = async (req, res) => {
 
         const senhaValida = await compararSenha(senha, funcionario.senha);
 
+
         if (!senhaValida) {
             return res.status(401).json({ message: "E-mail ou senha inválidos." });
         }
@@ -27,6 +28,7 @@ export const login = async (req, res) => {
 
         res.json({ funcionario, token });
     } catch (error) {
+        console.error(error);
         res.status(500).json({ message: "Erro no servidor." });
     }
 };

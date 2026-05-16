@@ -36,7 +36,7 @@
     margin-bottom: 10px;
     border-radius: 8px;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
 }
   
 .dmm-caixinha p {

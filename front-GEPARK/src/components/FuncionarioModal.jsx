@@ -45,7 +45,7 @@ export default function FuncionarioModal({ modo, funcionario, funcionarios, turn
         }
 
         if (modo === "adicionar") {
-            if (funcionarios.some(f => f.email =form.email)) {
+            if (funcionarios.some(f => f.email === form.email)) {
                 setModalErro({ mostrar: true, texto: "E-mail já cadastrado no sistema!" });
                 return;
             }
