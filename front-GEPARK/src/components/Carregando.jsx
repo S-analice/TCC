@@ -1,4 +1,4 @@
-import "../styles/Carregando.css";
+import "../styles/componentes/Carregando.css";
 
 export default function Carregando() {
     return (

@@ -1,8 +1,9 @@
 import "../styles/FuncionarioModal.css";
 import { useState } from "react";
 import { Upload, Trash2, User } from "lucide-react";
-import { converterParaBase64 } from "../utils/formatadores";
+import { converterParaBase64, formatarTelefone } from "../utils/formatadores";
 import Mensagem from "./Mensagem";
+import { MENSAGENS } from "../utils/mensagens";
 
 export default function FuncionarioModal({ modo, funcionario, funcionarios, turnos, cargos, fechar, salvar }) {
     const [form, setForm] = useState({
@@ -10,13 +11,14 @@ export default function FuncionarioModal({ modo, funcionario, funcionarios, turn
         email: funcionario?.email || "",
         senha: funcionario?.senha || "",
         telefone: funcionario?.telefone || "",
-        turno: funcionario?.turnoId || "",
-        cargo: funcionario?.cargoId || "",
+        turnoId: funcionario?.turnoId || "",
+        cargoId: funcionario?.cargoId || "",
         status: funcionario?.status || "Ativo",
         foto: funcionario?.foto || ""
     });
 
     const [modalErro, setModalErro] = useState({ mostrar: false, texto: "" });
+    const [erroTexto, setErroTexto] = useState("");
 
     const handleUpload = async (e) => {
         try {
@@ -26,33 +28,44 @@ export default function FuncionarioModal({ modo, funcionario, funcionarios, turn
                 setForm({ ...form, foto: base64 });
             }
         } catch {
-            setModalErro({ mostrar: true, texto: "Erro ao carregar imagem." });
+            setModalErro({ mostrar: true, texto: MENSAGENS.ERRO.CARREGAR });
         }
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setErroTexto("");
+
+        if (!form.nome || !form.email || (modo === "adicionar" && !form.senha)) {
+            setErroTexto(MENSAGENS.ERRO.CAMPOS_OBRIGATORIOS);
+            return;
+        }
+
+        if (!form.cargoId || !form.turnoId) {
+            setErroTexto(MENSAGENS.VALIDACAO.SELECIONE);
+            return;
+        }
 
         const telefoneNumeros = form.telefone.replace(/\D/g, "");
-        if (telefoneNumeros.length > 11) {
-            setModalErro({ mostrar: true, texto: "O telefone deve ter 11 dígitos." });
+        if (telefoneNumeros.length > 0 && telefoneNumeros.length !== 11) {
+            setErroTexto(MENSAGENS.VALIDACAO.TELEFONE_DIGITOS);
             return;
         }
 
         if (modo === "adicionar" && form.senha.length < 6) {
-            setModalErro({ mostrar: true, texto: "A senha deve conter no mínimo 6 dígitos." });
+            setErroTexto(MENSAGENS.VALIDACAO.SENHA_CURTA);
             return;
         }
 
         if (modo === "adicionar") {
             if (funcionarios.some(f => f.email === form.email)) {
-                setModalErro({ mostrar: true, texto: "E-mail já cadastrado no sistema!" });
+                setModalErro({ mostrar: true, texto: MENSAGENS.ERRO.EMAIL_DUPLICADO });
                 return;
             }
         } else if (modo === "editar") {
             const emailDuplicado = funcionarios.some(f => f.email === form.email && f.id !== funcionario.id);
             if (emailDuplicado) {
-                setModalErro({ mostrar: true, texto: "Este e-mail já está sendo usado por outro funcionário!" });
+                setModalErro({ mostrar: true, texto: MENSAGENS.ERRO.EMAIL_DUPLICADO });
                 return;
             }
         }
@@ -106,7 +119,7 @@ export default function FuncionarioModal({ modo, funcionario, funcionarios, turn
 
                         <div className="fm-form-container">
                             <label className="fm-label">Telefone</label>
-                            <input className="fm-input" value={form.telefone} maxLength={15} onChange={e => setForm({...form, telefone: e.target.value})} required />
+                            <input className="fm-input" value={formatarTelefone(form.telefone)} maxLength={15} onChange={e => setForm({...form, telefone: e.target.value})} required />
                         </div>
                     </div>
 
@@ -167,6 +180,8 @@ export default function FuncionarioModal({ modo, funcionario, funcionarios, turn
                             </select>
                         </div>
                     )}
+
+                    {erroTexto && <p className="erro-texto">{erroTexto}</p>}
 
                     <div className="fm-form-acoes">
                         <button className="fm-cancelar" type="button" onClick={fechar}>Cancelar</button>

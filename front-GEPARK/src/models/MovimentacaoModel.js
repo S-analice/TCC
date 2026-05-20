@@ -6,7 +6,7 @@ export const MovimentacaoModel = {
       id: 1,
       cpf: "12345678900",
       placa: "ABC1234",
-      dataEntrada: "2026-02-23T08:30:00",
+      dataEntrada: "2026-02-19T08:30:00",
       dataSaida: null,
       funcionarioEntrada: "João Silva",
       funcionarioSaida: null,
@@ -17,7 +17,7 @@ export const MovimentacaoModel = {
       id: 2,
       cpf: "98765432100",
       placa: "DEF5678",
-      dataEntrada: "2026-02-23T09:15:00",
+      dataEntrada: "2026-05-19T09:15:00",
       dataSaida: null,
       funcionarioEntrada: "Maria Santos",
       funcionarioSaida: null,
@@ -28,8 +28,8 @@ export const MovimentacaoModel = {
       id: 3,
       cpf: "45678912300",
       placa: "GHI9012",
-      dataEntrada: "2026-02-23T07:40:00",
-      dataSaida: "2026-02-23T11:10:00",
+      dataEntrada: "2026-05-18T07:40:00",
+      dataSaida: "2026-05-19T07:40:00",
       funcionarioEntrada: "Lilo",
       funcionarioSaida: "Analice Santos",
       tipo: "Saída",
@@ -51,7 +51,7 @@ export const MovimentacaoModel = {
       const saida = new Date(dataSaida);
 
       if (saida <= entrada) {
-        return { valor: 0, erro: "Horário de saída deve ser após a entrada!" };
+        return { valor: 0, erro: "Horário de saída deve ser após a entrada." };
       }
 
       const diferencaMs = saida - entrada;

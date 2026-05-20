@@ -1,4 +1,3 @@
-// scripts/seedIbge.js
 import axios from 'axios';
 import db from '../src/config/db.js';
 

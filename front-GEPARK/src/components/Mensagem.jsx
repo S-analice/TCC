@@ -1,4 +1,4 @@
-import "../styles/Mensagem.css";
+import "../styles/componentes/Mensagem.css";
 import { Check, X } from "lucide-react";
 
 export default function Mensagem({ mensagem, fechar, modo = "sucesso" }) {

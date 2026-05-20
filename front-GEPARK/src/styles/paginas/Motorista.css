@@ -1,0 +1,21 @@
+.m-convenio{
+    padding:4px 10px;
+    border-radius:8px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.m-convenio.premium{
+    background:#dbeafe;
+    color:#3b82f6;
+}
+
+.m-convenio.novo-cliente{
+    background:#ede9fe;
+    color:#7c3aed;
+}
+
+.m-convenio.sem-convenio{
+    background:#e0e0e0;
+    color:#7C7C7C;
+}

@@ -1,6 +1,7 @@
-import "../styles/MotoristaModal.css";
+import "../styles/TelaModal.css";
 import { useState} from "react";
 import { formatarCPF, formatarPlaca, formatarTelefone } from "../utils/formatadores";
+import { MENSAGENS } from "../utils/mensagens";
 
 export default function MotoristaModal({ modo, motorista, fechar, salvar, empresas, convenios }) {
   const [formData, setFormData] = useState({
@@ -54,11 +55,11 @@ export default function MotoristaModal({ modo, motorista, fechar, salvar, empres
   const handleSubmit = (e) => {
     e.preventDefault();
     try {
-      if (formData.cpf.length !== 11) throw new Error("O CPF deve conter 11 dígitos.");
-      if (formData.placa.length !== 7) throw new Error("A Placa deve conter 7 caracteres.");
-      if (formData.telefone.length !== 11) throw new Error("O Telefone deve ter 11 dígitos");
-      if (!formData.autonomo && !formData.empresa_id) throw new Error("Selecione uma empresa válida.");
-      if (!formData.convenio_id) throw new Error("Selecione um convênio.");
+      if (formData.cpf.length !== 11) throw new Error(MENSAGENS.VALIDACAO.CPF_DIGITOS);
+      if (formData.placa.length !== 7) throw new Error(MENSAGENS.VALIDACAO.PLACA_DIGITOS);
+      if (formData.telefone.length !== 11) throw new Error(MENSAGENS.VALIDACAO.TELEFONE_DIGITOS);
+      if (!formData.autonomo && !formData.empresa_id) throw new Error(MENSAGENS.VALIDACAO.EMPRESA_SELECIONE);
+      if (!formData.convenio_id) throw new Error(MENSAGENS.VALIDACAO.SELECIONE);
 
       salvar(formData);
     } catch (err) {
@@ -67,17 +68,16 @@ export default function MotoristaModal({ modo, motorista, fechar, salvar, empres
   };
 
   return (
-    <div className="mm-fundo" onClick={fechar}>
-      <div className="mm-card" onClick={(e) => e.stopPropagation()}>
+    <div className="tm-fundo" onClick={fechar}>
+      <div className="tm-card" onClick={(e) => e.stopPropagation()}>
         <h2>{modo === "adicionar" ? "Adicionar Motorista" : "Editar Motorista"}</h2>
-        <div className="mm-linha"></div>
 
-        <form onSubmit={handleSubmit} className="mm-form">
+        <form onSubmit={handleSubmit} className="tm">
           
-          <div className="mm-form-container">
-              <label className="mm-label">CPF</label>
+          <div className="tm-container">
+              <label className="tm-label">CPF</label>
               <input
-                className="mm-input"
+                className="tm-input"
                 value={formatarCPF(formData.cpf)}
                 onChange={(e) => handleChange("cpf", e.target.value)}
                 maxLength={14}
@@ -85,10 +85,10 @@ export default function MotoristaModal({ modo, motorista, fechar, salvar, empres
               />
           </div>
 
-            <div className="mm-form-container">
-              <label className="mm-label">Placa</label>
+            <div className="tm-container">
+              <label className="tm-label">Placa</label>
               <input
-                className="mm-input"
+                className="tm-input"
                 value={formatarPlaca(formData.placa)}
                 onChange={(e) => handleChange("placa", e.target.value)}
                 maxLength={8}
@@ -96,10 +96,10 @@ export default function MotoristaModal({ modo, motorista, fechar, salvar, empres
               />
             </div>
 
-          <div className="mm-form-container">
-            <label className="mm-label">Telefone</label>
+          <div className="tm-container">
+            <label className="tm-label">Telefone</label>
             <input
-              className="mm-input"
+              className="tm-input"
               value={formatarTelefone(formData.telefone)}
               onChange={(e) => handleChange("telefone", e.target.value)}
               maxLength={15}
@@ -107,10 +107,10 @@ export default function MotoristaModal({ modo, motorista, fechar, salvar, empres
             />
           </div>
 
-          <div className="mm-form-container">
-            <label className="mm-label">O motorista é autônomo?</label>
+          <div className="tm-container">
+            <label className="tm">O motorista é autônomo?</label>
             <select 
-              className="mm-input"
+              className="tm-input"
               value={formData.autonomo}
               onChange={(e) => setFormData({...formData, autonomo: e.target.value === "true", empresa_id: "", empresa_nome: ""})}
             >
@@ -120,10 +120,10 @@ export default function MotoristaModal({ modo, motorista, fechar, salvar, empres
           </div>
 
           {!formData.autonomo && (
-            <div className="mm-form-container" style={{ position: 'relative' }}>
-              <label className="mm-label">Empresa</label>
+            <div className="tm-container" style={{ position: 'relative' }}>
+              <label className="tm-label">Empresa</label>
               <input
-                className="mm-input"
+                className="tm-input"
                 placeholder="Digite o nome da empresa..."
                 value={formData.empresa_nome}
                 onChange={handleEmpresaBusca}

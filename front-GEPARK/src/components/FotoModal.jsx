@@ -1,4 +1,4 @@
-import "../styles/FotoModal.css";
+import "../styles/componentes/FotoModal.css";
 import { User } from "lucide-react";
 
 export default function FotoModal({ funcionario, fechar }) {

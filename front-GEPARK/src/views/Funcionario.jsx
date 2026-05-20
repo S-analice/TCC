@@ -1,4 +1,5 @@
-import "../styles/Funcionario.css";
+import "../styles/paginas/Funcionario.css";
+import "../styles/Tela.css";
 import { User, Pencil, Trash2, Search } from "lucide-react";
 import { useFuncionarioViewModel } from "../viewmodels/useFuncionarioViewModel";
 import { formatarTelefone } from "../utils/formatadores";
@@ -12,7 +13,7 @@ export default function Funcionario() {
   const vm = useFuncionarioViewModel();
 
   return (
-    <div className="funcionario-container">
+    <div className="t-container">
       {vm.carregando && <Carregando />}
       {vm.mensagem.mostrar && (
         <Mensagem
@@ -46,12 +47,12 @@ export default function Funcionario() {
         <FotoModal funcionario={vm.modal.dado} fechar={vm.fecharModal} />
       )}
 
-      <h2 className="funcionario-subtitulo">Lista de Funcionários</h2>
+      <h2 className="t-subtitulo">Lista de Funcionários</h2>
 
-      <div className="funcionario-topo">
-        <div className="funcionario-filtro-container">
-          <div className="funcionario-busca">
-            <Search size={18} className="funcionario-busca-icone" />
+      <div className="t-topo">
+        <div className="t-filtro-container">
+          <div className="t-busca">
+            <Search size={18} className="t-busca-icone" />
             <input
               placeholder="Pesquisar por nome..."
               value={vm.pesquisa}
@@ -59,7 +60,7 @@ export default function Funcionario() {
             />
           </div>
           <select
-            className="funcionario-filtro"
+            className="t-filtro"
             value={vm.filtroStatus}
             onChange={(e) => vm.setFiltroStatus(e.target.value)}
           >
@@ -73,7 +74,7 @@ export default function Funcionario() {
         </button>
       </div>
 
-      <table className="funcionario-tabela">
+      <table className="t-tabela">
         <thead>
           <tr>
             <th>Foto</th>
@@ -91,13 +92,13 @@ export default function Funcionario() {
             <tr key={f.id}>
               <td>
                 <div
-                  className="funcionario-foto"
+                  className="f-foto"
                   onClick={() => vm.abrirModal("foto", f)}
                 >
                   {f.foto ? (
                     <img src={f.foto} alt="Perfil Funcionário" />
                   ) : (
-                    <div className="funcionario-icone">
+                    <div className="f-icone">
                       <User size={20} />
                     </div>
                   )}
@@ -115,21 +116,21 @@ export default function Funcionario() {
               </td>
               <td>{formatarTelefone(f.telefone)}</td>
               <td>
-                <span className={`status ${f.status.toLowerCase()}`}>
+                <span className={`t-status ${f.status.toLowerCase()}`}>
                   {f.status}
                 </span>
               </td>
               <td>
-                <div className="funcionario-acoes">
+                <div className="t-acoes">
                   <button
-                    className="funcionario-atualizar"
+                    className="t-atualizar"
                     onClick={() => vm.abrirModal("formulario", f)}
                   >
                     <Pencil size={16} />
                   </button>
                   {f.status === "Ativo" && (
                     <button
-                      className="funcionario-remover"
+                      className="t-remover"
                       onClick={() => vm.abrirModal("delete", f)}
                     >
                       <Trash2 size={16} />

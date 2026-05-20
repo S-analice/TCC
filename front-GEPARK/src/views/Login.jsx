@@ -1,4 +1,4 @@
-import "../styles/Login.css";
+import "../styles/Auth.css";
 import { Mail, Lock } from "lucide-react";
 import Carregando from "../components/Carregando";
 import Mensagem from "../components/Mensagem";
@@ -8,7 +8,7 @@ export default function Login({ definirFuncionario, irParaEsqueceuSenha, irParaH
     const vm = useLoginViewModel(definirFuncionario, irParaHome);
 
     return (
-        <div className="login-container">
+        <div className="a-container">
             {vm.carregando && <Carregando />}
             {vm.mensagem.mostrar && (
                 <Mensagem 
@@ -18,22 +18,22 @@ export default function Login({ definirFuncionario, irParaEsqueceuSenha, irParaH
                 />
             )}
 
-            <div className="login-card">
-                <div className="login-logo">
-                    <img src="/logo.png" alt="Logo GEPARK" className="login-img" />
-                    <p className="login-descricao">Sistema de Gestão de Estacionamento</p>
+            <div className="a-card">
+                <div className="a-logo">
+                    <img src="/logo.png" alt="Logo GEPARK" className="a-img" />
+                    <p className="a-descricao">Sistema de Gestão de Estacionamento</p>
                 </div>
 
-                <h2 className="login-subtitulo">Entrar no Sistema</h2>
+                <h2 className="a-subtitulo">Entrar no Sistema</h2>
 
-                <form onSubmit={vm.enviarFormulario} className="login-form">
-                    <div className="login-form-container">
-                        <label className="login-label">Email</label>
-                        <div className="logo-input-icon">
+                <form onSubmit={vm.enviarFormulario} className="a-form">
+                    <div className="a-form-container">
+                        <label className="a-label">Email</label>
+                        <div className="a-input-icon">
                             <Mail size={18} />
                             <input
                                 type="email"
-                                className="login-input"
+                                className="a-input"
                                 placeholder="Digite seu e-mail"
                                 value={vm.email}
                                 onChange={(e) => vm.setEmail(e.target.value)}
@@ -42,13 +42,13 @@ export default function Login({ definirFuncionario, irParaEsqueceuSenha, irParaH
                         </div>
                     </div>
 
-                    <div className="login-form-container">
-                        <label className="login-label">Senha</label>
-                        <div className="logo-input-icon">
+                    <div className="a-form-container">
+                        <label className="a-label">Senha</label>
+                        <div className="a-input-icon">
                             <Lock size={18} />
                             <input
                                 type="password"
-                                className="login-input"
+                                className="a-input"
                                 placeholder="Digite sua senha"
                                 value={vm.senha}
                                 onChange={(e) => vm.setSenha(e.target.value)}
@@ -57,11 +57,11 @@ export default function Login({ definirFuncionario, irParaEsqueceuSenha, irParaH
                         </div>
                     </div>
 
-                    <div className="login-form-acoes">
-                        <button type="button" className="esqueceu-senha" onClick={irParaEsqueceuSenha}>
+                    <div className="a-acoes">
+                        <button type="button" className="a-ir-para" onClick={irParaEsqueceuSenha}>
                             Esqueceu a senha?
                         </button>
-                        <button type="submit" className="login-botao">Entrar</button>
+                        <button type="submit" className="a-botao">Entrar</button>
                     </div>
                 </form>
             </div>

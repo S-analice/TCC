@@ -1,4 +1,4 @@
-import "../styles/EsqueceuSenha.css";
+import "../styles/Auth.css";
 import { Mail, ArrowLeft } from "lucide-react";
 import Carregando from "../components/Carregando";
 import Mensagem from "../components/Mensagem";
@@ -8,7 +8,7 @@ export default function EsqueceuSenha({ voltarParaLogin }) {
     const vm = useEsqueceuSenhaViewModel(voltarParaLogin);
 
     return (
-        <div className="es-container">
+        <div className="a-container">
             {vm.carregando && <Carregando />}
 
             {vm.mensagem.mostrar && (
@@ -19,28 +19,28 @@ export default function EsqueceuSenha({ voltarParaLogin }) {
                 />
             )}
 
-            <div className="es-card">
-                <div className="es-logo">
-                    <img src="/logo.png" alt="Logo GEPARK" className="es-img" />
-                    <p className="es-descricao">
+            <div className="a-card">
+                <div className="a-logo">
+                    <img src="/logo.png" alt="Logo GEPARK" className="a-img" />
+                    <p className="a-descricao">
                         Sistema de Gestão de Estacionamento 
                     </p>
                 </div>
 
-                <h2 className="es-subtitulo">Esqueceu a senha?</h2>
+                <h2 className="a-subtitulo">Esqueceu a senha?</h2>
 
-                <p className="es-p">
+                <p className="a-p">
                     Digite seu e-mail para receber as instruções de recuperação
                 </p>
 
-                <form onSubmit={vm.enviarSolicitacao} className="es-form">
-                    <div className="es-form-container">
-                        <label className="es-label">Email</label>
-                        <div className="es-input-icon">
+                <form onSubmit={vm.enviarSolicitacao} className="a-form">
+                    <div className="a-form-container">
+                        <label className="a-label">Email</label>
+                        <div className="a-input-icon">
                             <Mail size={18} />
                             <input
                                 type="email"
-                                className="es-input"
+                                className="a-input"
                                 placeholder="Digite seu e-mail"
                                 value={vm.email}
                                 onChange={(e) => vm.setEmail(e.target.value)}
@@ -49,13 +49,13 @@ export default function EsqueceuSenha({ voltarParaLogin }) {
                         </div>
                     </div>
 
-                    <div className="es-form-acoes">
-                        <button type="button" className="es-voltar" onClick={voltarParaLogin}>
+                    <div className="a-acoes">
+                        <button type="button" className="a-ir-para" onClick={voltarParaLogin}>
                             <ArrowLeft size={16} />
                             Voltar para o login
                         </button>
 
-                        <button type="submit" className="es-enviar">Enviar</button>
+                        <button type="submit" className="a-botao">Enviar</button>
                     </div>
                 </form>
             </div>

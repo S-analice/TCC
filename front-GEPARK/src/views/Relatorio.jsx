@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/Relatorio.css";
+import "../styles/paginas/Relatorio.css";
 import { FileText, Download, Filter } from "lucide-react";
 import { useRelatorioViewModel } from "../viewmodels/useRelatorioViewModel";
 import { formatarCPF, formatarPlaca } from "../utils/formatadores";
@@ -31,7 +31,7 @@ export default function Relatorio() {
           <div className="relatorio-input-group">
             <label>Início</label>
             <input
-              className="input"
+              className="relatorio-input"
               type="date"
               value={vm.dataInicio}
               onChange={(e) => vm.setDataInicio(e.target.value)}
@@ -40,7 +40,7 @@ export default function Relatorio() {
           <div className="relatorio-input-group">
             <label>Fim</label>
             <input
-              className="input"
+              className="relatorio-input"
               type="date"
               value={vm.dataFim}
               onChange={(e) => vm.setDataFim(e.target.value)}
@@ -49,12 +49,12 @@ export default function Relatorio() {
         </div>
 
         <div className="relatorio-botoes">
-          <button className="verde-botao" onClick={vm.gerarRelatorio}>
+          <button className="relatorio-botao-verde" onClick={vm.gerarRelatorio}>
             <FileText size={18} /> Gerar Relatório
           </button>
 
           {vm.mostrarResultados && (
-            <button className="amarelo-botao" onClick={vm.exportarCSV}>
+            <button className="relatorio-botao-amarelo" onClick={vm.exportarCSV}>
               <Download size={18} /> Exportar CSV
             </button>
           )}

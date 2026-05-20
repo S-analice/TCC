@@ -1,0 +1,138 @@
+.tm-fundo {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial;
+  z-index: 1000;
+}
+
+.tm-card {
+  background: #ffffff;
+  color: #7c7c7c;
+  padding: 30px;
+  border-radius: 12px;
+  width: 450px;
+}
+
+.tm {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.tm-lado-a-lado {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+}
+
+.tm-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.tm-container select {
+  color: #7c7c7c;
+}
+
+.tm-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #7c7c7c;
+}
+
+.tm-input {
+  padding: 15px 16px;
+  border-radius: 6px;
+  border: 2px solid #e0e0e0;
+  font-size: 14px;
+  outline: none;
+  color: #7c7c7c;
+}
+
+.tm-input:focus {
+  border: 2px solid #436850;
+}
+
+.tm-acoes {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.tm-cancelar {
+  padding: 15px 32px;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  background-color: #ffffff;
+  color: #7c7c7c;
+}
+
+.tm-cancelar:hover {
+  background-color: #e0e0e0;
+}
+
+.tm-salvar {
+  padding: 15px 32px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  background-color: #436850;
+  color: #ffffff;
+}
+
+.tm-salvar:hover {
+  background-color: #35563f;
+}
+
+.erro-texto {
+  color: #c0392b;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 8px;
+}
+
+.autocomplete-lista {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-top: none;
+  border-radius: 0 0 6px 6px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 150px;
+  overflow-y: auto;
+  z-index: 10;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.autocomplete-lista li {
+  padding: 12px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #7c7c7c;
+}
+
+.autocomplete-lista::-webkit-scrollbar {
+  width: 6px;
+}
+
+.autocomplete-lista::-webkit-scrollbar-thumb {
+  background-color: #e0e0e0;
+  border-radius: 10px;
+}

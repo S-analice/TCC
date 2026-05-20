@@ -1,0 +1,22 @@
+.f-foto {
+    cursor: pointer;
+}
+
+.f-foto img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #436850;
+}
+
+.f-icone {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #436850;
+    color:#ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

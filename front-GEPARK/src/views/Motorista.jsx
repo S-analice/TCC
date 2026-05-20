@@ -1,4 +1,5 @@
-import "../styles/Motorista.css";
+import "../styles/paginas/Motorista.css";
+import "../styles/Tela.css";
 import { Pencil, Trash2, Search } from "lucide-react";
 import { useMotoristaViewModel } from "../viewmodels/useMotoristaViewModel";
 import {
@@ -15,7 +16,7 @@ export default function Motorista() {
   const vm = useMotoristaViewModel();
 
   return (
-    <div className="motorista-container">
+    <div className="t-container">
       {vm.carregando && <Carregando />}
 
       {vm.mensagem.mostrar && (
@@ -45,12 +46,12 @@ export default function Motorista() {
         />
       )}
 
-      <h2 className="motorista-subtitulo">Lista de Motoristas</h2>
+      <h2 className="t-subtitulo">Lista de Motoristas</h2>
 
-      <div className="motorista-topo">
-        <div className="motorista-filtro-container">
-          <div className="motorista-busca">
-            <Search size={18} className="motorista-busca-icone" />
+      <div className="t-topo">
+        <div className="t-filtro-container">
+          <div className="t-busca">
+            <Search size={18} className="t-busca-icone" />
             <input
               type="text"
               placeholder="Pesquisar por CPF ou Placa"
@@ -59,7 +60,7 @@ export default function Motorista() {
             />
           </div>
           <select
-            className="motorista-filtro"
+            className="t-filtro"
             value={vm.filtroStatus}
             onChange={(e) => vm.setFiltroStatus(e.target.value)}
           >
@@ -68,15 +69,12 @@ export default function Motorista() {
             <option value="Inativo">Inativos</option>
           </select>
         </div>
-        <button
-          className="verde-botao"
-          onClick={() => vm.abrirModal("formulario")}
-        >
+        <button onClick={() => vm.abrirModal("formulario")}>
           + Adicionar Motorista
         </button>
       </div>
 
-      <table className="motorista-tabela">
+      <table className="t-tabela">
         <thead>
           <tr>
             <th>CPF</th>
@@ -109,21 +107,21 @@ export default function Motorista() {
                   }
 
                   return (
-                    <span className={`convenio ${classeConvenio}`}>
+                    <span className={`m-convenio ${classeConvenio}`}>
                       {m.convenio}
                     </span>
                   );
                 })()}
               </td>
               <td>
-                <span className={`status ${m.status.toLowerCase()}`}>
+                <span className={`t-status ${m.status.toLowerCase()}`}>
                   {m.status}
                 </span>
               </td>
               <td>
-                <div className="motorista-acoes">
+                <div className="t-acoes">
                   <button
-                    className="motorista-atualizar"
+                    className="t-atualizar"
                     onClick={() => vm.abrirModal("formulario", m)}
                   >
                     <Pencil size={16} />
@@ -131,7 +129,7 @@ export default function Motorista() {
 
                   {m.status === "Ativo" && (
                     <button
-                      className="motorista-remover"
+                      className="t-remover"
                       onClick={() => vm.abrirModal("delete", m)}
                     >
                       <Trash2 size={16} />

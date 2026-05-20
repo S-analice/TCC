@@ -1,0 +1,170 @@
+body {
+  margin: 0;
+}
+
+.t-container {
+  min-height: 100vh;
+  font-family: Arial;
+}
+
+.t-subtitulo {
+  color: #7c7c7c;
+}
+
+.t-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.t-topo button {
+  padding: 15px 32px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background-color: #436850;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.t-topo button:hover {
+  background-color: #35563f;
+}
+
+.t-busca {
+  position: relative;
+  width: 350px;
+}
+
+.t-busca input {
+  width: 100%;
+  padding: 14px 12px 10px 36px;
+  border-radius: 6px;
+  border: 2px solid #e0e0e0;
+  color: #7c7c7c;
+  outline: none;
+  font-size: 14px;
+}
+
+.t-busca input:focus {
+  border-color: #436850;
+}
+
+.t-busca-icone {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #7c7c7c;
+}
+
+.t-filtro-container {
+  display: flex;
+  align-items: center;
+  gap: 70px;
+}
+
+.t-filtro {
+  padding: 12px 12px;
+  border-radius: 6px;
+  border: 2px solid #e0e0e0;
+  color: #7c7c7c;
+  font-size: 14px;
+  outline: none;
+  cursor: pointer;
+  background-color: #ffffff;
+  width: 140px;
+}
+
+.t-filtro:focus {
+  border-color: #436850;
+}
+
+.t-filtro:hover {
+  border-color: #436850;
+}
+
+.t-tabela {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.t-tabela th {
+  padding: 16px;
+  text-align: left;
+  background-color: #e0e0e0;
+  color: #7c7c7c;
+  font-weight: bold;
+}
+
+.t-tabela td {
+  padding: 15px 16px;
+  color: #7c7c7c;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.t-tabela tr:hover {
+  background-color: #f5f5f5;
+}
+
+.t-acoes {
+  display: flex;
+  gap: 2px;
+}
+
+.t-atualizar {
+  display: flex;
+  align-items: center;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  margin-right: 8px;
+  background-color: #f2c14e;
+  color: #ffffff;
+}
+
+.t-atualizar:hover {
+  background-color: #e0af3c;
+}
+
+.t-remover {
+  display: flex;
+  align-items: center;
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  margin-right: 8px;
+  background-color: #c0392b;
+  color: #ffffff;
+}
+
+.t-remover:hover {
+  background-color: #99211d;
+}
+
+.t-status {
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.t-status.ativo {
+  background: #d4edda;
+  color: #436850;
+}
+
+.t-status.inativo {
+  background: #e0e0e0;
+  color: #7c7c7c;
+}

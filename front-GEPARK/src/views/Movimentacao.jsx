@@ -1,8 +1,13 @@
-import "../styles/Patio.css";
+import "../styles/paginas/Movimentacao.css";
+import "../styles/Tela.css";
 import React, { useState } from "react";
 import { LogIn, LogOut, Search, Pencil, Download } from "lucide-react";
 import { useMovimentacaoViewModel } from "../viewmodels/useMovimentacaoViewModel";
-import { formatarCPF, formatarPlaca, formatarDataBR } from "../utils/formatadores";
+import {
+  formatarCPF,
+  formatarPlaca,
+  formatarDataBR,
+} from "../utils/formatadores";
 
 import Carregando from "../components/Carregando";
 import Mensagem from "../components/Mensagem";
@@ -12,15 +17,24 @@ import SaidaModal from "../components/SaidaModal";
 export default function Movimentacao({ funcionario }) {
   const vm = useMovimentacaoViewModel();
   const [pesquisa, setPesquisa] = useState("");
-  const [modalEntrada, setModalEntrada] = useState({ aberta: false, modo: "adicionar", registro: null });
-  const [modalSaida, setModalSaida] = useState({ aberta: false, registro: null });
+  const [modalEntrada, setModalEntrada] = useState({
+    aberta: false,
+    modo: "adicionar",
+    registro: null,
+  });
+  const [modalSaida, setModalSaida] = useState({
+    aberta: false,
+    registro: null,
+  });
 
-  const filtrados = vm.movimentacoes.filter(r =>
-    r.status === "No Pátio" && (r.cpf.includes(pesquisa) || r.placa.includes(pesquisa))
+  const filtrados = vm.movimentacoes.filter(
+    (r) =>
+      r.status === "No Pátio" &&
+      (r.cpf.includes(pesquisa) || r.placa.includes(pesquisa)),
   );
 
   return (
-    <div className="movimentacao-container">
+    <div className="t-container">
       {vm.carregando && <Carregando />}
 
       {vm.mensagem?.mostrar && (
@@ -31,28 +45,38 @@ export default function Movimentacao({ funcionario }) {
         />
       )}
 
-      <h2 className="patio-subtitulo">Gestão de Movimentação</h2>
+      <h2 className="t-subtitulo">Gestão de Movimentação</h2>
 
-      <div className="patio-topo">
-        <div className="patio-busca">
-          <Search size={18} className="patio-busca-icone" />
+      <div className="t-topo">
+        <div className="t-busca">
+          <Search size={18} className="t-busca-icone" />
           <input
             placeholder="Buscar CPF ou Placa..."
             value={pesquisa}
             onChange={(e) => setPesquisa(e.target.value)}
           />
         </div>
-        <div className="patio-botoes">
-          <button className="patio-topo-button-verde" onClick={() => setModalEntrada({ aberta: true, modo: "adicionar", registro: null })}>
+        <div className="m-botoes">
+          <button
+            className="m-topo-button-verde"
+            onClick={() =>
+              setModalEntrada({
+                aberta: true,
+                modo: "adicionar",
+                registro: null,
+              })
+            }
+          >
             <LogIn size={18} /> Registrar Entrada
           </button>
-          <button className="patio-topo-button-amarelo" onClick={vm.exportarDados}>
-            <Download size={18} />Exportar CSV
+          <button className="amarelo" onClick={vm.exportarDados}>
+            <Download size={18} />
+            Exportar CSV
           </button>
         </div>
       </div>
 
-      <table className="patio-tabela">
+      <table className="t-tabela">
         <thead>
           <tr>
             <th>CPF</th>
@@ -62,17 +86,29 @@ export default function Movimentacao({ funcionario }) {
           </tr>
         </thead>
         <tbody>
-          {filtrados.map(r => (
+          {filtrados.map((r) => (
             <tr key={r.id}>
               <td>{formatarCPF(r.cpf)}</td>
               <td>{formatarPlaca(r.placa)}</td>
               <td>{formatarDataBR(r.dataEntrada)}</td>
               <td>
-                <div className="patio-acoes">
-                  <button className="patio-atualizar" onClick={() => setModalEntrada({ aberta: true, modo: "editar", registro: r })}>
+                <div className="t-acoes">
+                  <button
+                    className="t-atualizar"
+                    onClick={() =>
+                      setModalEntrada({
+                        aberta: true,
+                        modo: "editar",
+                        registro: r,
+                      })
+                    }
+                  >
                     <Pencil size={16} />
                   </button>
-                  <button className="patio-remover" onClick={() => setModalSaida({ aberta: true, registro: r })}>
+                  <button
+                    className="t-remover"
+                    onClick={() => setModalSaida({ aberta: true, registro: r })}
+                  >
                     <LogOut size={16} />
                   </button>
                 </div>
@@ -88,7 +124,11 @@ export default function Movimentacao({ funcionario }) {
           registro={modalEntrada.registro}
           funcionario={funcionario}
           fechar={() => setModalEntrada({ ...modalEntrada, aberta: false })}
-          salvar={(dados, modo, id) => vm.salvarEntrada(dados, modo, id, () => setModalEntrada({ ...modalEntrada, aberta: false }))}
+          salvar={(dados, modo, id) =>
+            vm.salvarEntrada(dados, modo, id, () =>
+              setModalEntrada({ ...modalEntrada, aberta: false }),
+            )
+          }
         />
       )}
 
@@ -96,9 +136,11 @@ export default function Movimentacao({ funcionario }) {
         <SaidaModal
           registro={modalSaida.registro}
           funcionario={funcionario}
-          listaPagamentos={vm.tiposPagamento} 
+          listaPagamentos={vm.tiposPagamento}
           fechar={() => setModalSaida({ aberta: false })}
-          confirmar={(id, dados) => vm.finalizarSaida(id, dados, () => setModalSaida({ aberta: false }))}
+          confirmar={(id, dados) =>
+            vm.finalizarSaida(id, dados, () => setModalSaida({ aberta: false }))
+          }
         />
       )}
     </div>

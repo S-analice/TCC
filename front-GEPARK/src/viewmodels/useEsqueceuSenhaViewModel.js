@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FuncionarioModel } from "../models/FuncionarioModel";
+import { MENSAGENS } from "../utils/mensagens";
 
 export function useEsqueceuSenhaViewModel(voltarParaLogin) {
     const [email, setEmail] = useState("");
@@ -20,12 +21,12 @@ export function useEsqueceuSenhaViewModel(voltarParaLogin) {
             await new Promise(resolve => setTimeout(resolve, 1500));
             const existe = FuncionarioModel.buscarPorEmail(email);
 
-            if (!existe) throw new Error("E-mail não cadastrado.");
+            if (!existe) throw new Error(MENSAGENS.ERRO.EMAIL_INVALIDO);
 
-            setMensagem({ mostrar: true, tipo: "sucesso", texto: "Instruções enviadas para seu e-mail!" });
+            setMensagem({ mostrar: true, tipo: "sucesso", texto: MENSAGENS.SUCESSO.EMAIL_ENVIADO });
             setEmail("");
-        } catch (error) {
-            setMensagem({ mostrar: true, tipo: "erro", texto: error.message });
+        } catch {
+            setMensagem({ mostrar: true, tipo: "erro", texto: MENSAGENS.ERRO.GERAL });
         } finally {
             setCarregando(false);
         }

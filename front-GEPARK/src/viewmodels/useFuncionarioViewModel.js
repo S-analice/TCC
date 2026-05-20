@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FuncionarioModel } from "../models/FuncionarioModel";
+import { MENSAGENS } from "../utils/mensagens";
 
 export function useFuncionarioViewModel() {
     const [funcionarios, setFuncionarios] = useState(FuncionarioModel.buscarTodos());
@@ -31,15 +32,14 @@ export function useFuncionarioViewModel() {
             if (modal.tipo === "formulario" && !modal.dado) { 
                 const novo = { id: Date.now(), ...dados, status: "Ativo" };
                 setFuncionarios(prev => [...prev, novo]);
-                setMensagem({ mostrar: true, texto: "Cadastrado com sucesso!", tipo: "sucesso" });
+                setMensagem({ mostrar: true, texto: MENSAGENS.SUCESSO.CADASTRO, tipo: "sucesso" });
             } else { 
                 setFuncionarios(prev => prev.map(f => f.id === modal.dado.id ? { ...f, ...dados } : f));
-                setMensagem({ mostrar: true, texto: "Dados atualizados!", tipo: "sucesso" });
+                setMensagem({ mostrar: true, texto: MENSAGENS.SUCESSO.ATUALIZACAO, tipo: "sucesso" });
             }
             fecharModal();
-        } catch (error) {
-            console.error("Erro ao salvar funcionário:", error);
-            setMensagem({ mostrar: true, texto: "Erro ao processar dados.", tipo: "erro" });
+        } catch  {
+            setMensagem({ mostrar: true, texto: MENSAGENS.ERRO.SALVAR, tipo: "erro" });
         } finally {
             setCarregando(false);
         }
@@ -54,11 +54,11 @@ export function useFuncionarioViewModel() {
         try {
             await new Promise(res => setTimeout(res, 800));
             setFuncionarios(prev => prev.map(f => f.id === id ? { ...f, status: "Inativo" } : f));
-            setMensagem({ mostrar: true, texto: "Funcionário inativado!", tipo: "sucesso" });
+            setMensagem({ mostrar: true, texto: MENSAGENS.SUCESSO.INATIVACAO, tipo: "sucesso" });
             fecharModal();
         } catch (e) {
             console.error("Erro ao inativar funcionário:", e);
-            setMensagem({ mostrar: true, texto: "Erro ao inativar.", tipo: "erro" });
+            setMensagem({ mostrar: true, texto: MENSAGENS.ERRO.SALVAR, tipo: "erro" });
         } finally {
             setCarregando(false);
         }

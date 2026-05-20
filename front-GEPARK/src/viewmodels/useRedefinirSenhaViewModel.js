@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { MENSAGENS } from "../utils/mensagens";
 
 export function useRedefinirSenhaViewModel(irParaLogin) {
     const [senha, setSenha] = useState("");
@@ -19,8 +20,8 @@ export function useRedefinirSenhaViewModel(irParaLogin) {
     setErroValidacao("");
 
     try {
-        if (senha.length < 6) throw new Error("A senha deve ter no mínimo 6 caracteres!");
-        if (senha !== confirmarSenha) throw new Error("As senhas não coincidem!");
+        if (senha.length < 6) throw new Error(MENSAGENS.VALIDACAO.SENHA_CURTA);
+        if (senha !== confirmarSenha) throw new Error(MENSAGENS.VALIDACAO.SENHA_IGUAIS);
 
         setCarregando(true);
 
@@ -32,7 +33,7 @@ export function useRedefinirSenhaViewModel(irParaLogin) {
         setMensagem({
             mostrar: true,
             tipo: "sucesso",
-            texto: "Senha redefinida com sucesso!"
+            texto: MENSAGENS.SUCESSO.ATUALIZACAO
         });
 
     } catch (error) {

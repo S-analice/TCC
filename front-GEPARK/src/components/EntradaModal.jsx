@@ -1,7 +1,9 @@
-import "../styles/EntradaModal.css";
+import "../styles/componentes/EntradaModal.css";
+import "../styles/TelaModal.css";
 import React, { useState } from "react";
 import { formatarCPF, formatarPlaca } from "../utils/formatadores";
 import { MotoristaModel } from "../models/MotoristaModel"; 
+import { MENSAGENS } from "../utils/mensagens";
 
 export default function EntradaModal({ modo, registro, fechar, salvar, funcionario }) {
   const [form, setForm] = useState({
@@ -26,75 +28,92 @@ export default function EntradaModal({ modo, registro, fechar, salvar, funcionar
           placa: encontrado.placa, 
           convenio: encontrado.convenio 
         }));
-        setErro("");
+        setErro(""); 
       } else {
-        setErro("Motorista não cadastrado.");
+        setErro(MENSAGENS.ERRO.CPF_INVALIDO); 
         setForm(prev => ({ ...prev, placa: "" }));
       }
+    } else {
+      setErro(""); 
     }
   };
 
   const handleSalvar = (e) => {
     e.preventDefault();
+    setErro(""); 
+
     try {
-      if (!form.placa) throw new Error("CPF inválido ou motorista inexistente.");
+      if (!form.cpf) {
+        setErro(MENSAGENS.ERRO.CAMPOS_OBRIGATORIOS);
+        return;
+      }
+
+      if (form.cpf.length !== 11) {
+        setErro(MENSAGENS.VALIDACAO.CPF_DIGITOS);
+        return;
+      }
+
+      if (!form.placa) {
+        setErro(MENSAGENS.ERRO.CPF_INVALIDO);
+        return;
+      }
 
       const dadosCompletos = {
         ...form,
-        funcionarioEntrada: funcionario?.nome || "Desconhecido"
+        funcionarioEntrada: funcionario?.nome || "Sistema"
       };
 
       salvar(dadosCompletos, modo, registro?.id);
       fechar();
-    } catch (err) {
-      setErro(err.message);
+    } catch {
+      setErro(MENSAGENS.ERRO.SALVAR);
     }
   };
 
   return (
-    <div className="em-fundo" onClick={fechar}>
-      <div className="em-card" onClick={e => e.stopPropagation()}>
+    <div className="tm-fundo" onClick={fechar}>
+      <div className="tm-card" onClick={e => e.stopPropagation()}>
         <h2>{modo === "adicionar" ? "Nova Entrada" : "Editar Entrada"}</h2>
 
-        <form onSubmit={handleSalvar} className="em-form">
-          <div className="em-form-container">
+        <form onSubmit={handleSalvar} className="tm">
+          <div className="tm-container">
             <label className="em-label">CPF Motorista</label>
             <input 
-              className="em-input"
+              className="tm-input"
               value={formatarCPF(form.cpf)} 
               onChange={e => handleChangeCPF(e.target.value)}
               maxLength={14}
             />
           </div>
           
-          <div className="em-form-container">
-            <label className="em-label">Placa (Automática)</label>
+          <div className="tm-container">
+            <label className="tm-label">Placa (Automática)</label>
             <input 
-              className="em-input" 
+              className="tm-input" 
               value={formatarPlaca(form.placa)} 
               readOnly 
             />
           </div>
 
-          <div className="em-form-container">
-            <label className="em-label">Data e Hora de Entrada</label>
+          <div className="tm-container">
+            <label className="tm-label">Data e Hora de Entrada</label>
             <input 
               type="datetime-local"
-              className="em-input"
+              className="tm-input"
               value={form.dataEntrada}
               onChange={e => setForm(prev => ({ ...prev, dataEntrada: e.target.value }))}
             />
           </div>
 
           <div className="em-caixinha-linha">
-            <p>Funcionário: <strong>{funcionario?.nome || "Desconhecido"}</strong></p>
+            <p>Funcionário: <strong>{funcionario?.nome || "Sistema"}</strong></p>
           </div>
           
-          {erro && <p className="erro-texto" style={{color: 'red', marginTop: '10px'}}>{erro}</p>}
+          {erro && <p className="erro-texto">{erro}</p>}
 
-          <div className="em-form-acoes">
-            <button type="button" className="em-cancelar" onClick={fechar}>Cancelar</button>
-            <button type="submit" className="em-salvar" disabled={!form.placa}>Salvar</button>
+          <div className="tm-acoes">
+            <button type="button" className="tm-cancelar" onClick={fechar}>Cancelar</button>
+            <button type="submit" className="tm-salvar" disabled={!form.placa}>Salvar</button>
           </div>
         </form>
       </div>

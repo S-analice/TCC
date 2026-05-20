@@ -32,20 +32,20 @@
     gap:15px;
 }
     
-.home-info-card{
+.home-info-dia-card{
     background:#F5F5F5;
     padding:20px;
     border-radius:8px;
     text-align:center;
 }
     
-.home-info-label{
+.home-info-dia-label{
     font-size:14px;
     color:#7C7C7C;
     margin-bottom:5px;
 }
     
-.home-info-value{
+.home-info-dia-valor{
     font-size:24px;
     font-weight:bold;
     color:#7C7C7C;
@@ -74,7 +74,7 @@
     margin-bottom:5px;
 }
 
-.home-card-number{
+.home-card-numero{
     font-size:28px;
     font-weight:bold;
     color:#7C7C7C;
@@ -143,7 +143,7 @@
     border-bottom: 1px solid #eeeeee;
 }
 
-.tipo-entrada{
+.home-tipo-entrada{
     background:#d4edda;
     color:#155724;
     padding:3px 8px;
@@ -151,7 +151,7 @@
     font-size:12px;
 }
 
-.tipo-saida{
+.home-tipo-saida{
     background:#f8d7da;
     color:#721c24;
     padding:3px 8px;
@@ -159,7 +159,7 @@
     font-size:12px;
 }
 
-.status-patio{
+.home-status-patio{
     background:#fff3cd;
     color:#f2c14e;
     padding:3px 8px;
@@ -167,7 +167,7 @@
     font-size:12px;
 }
 
-.status-finalizado{
+.home-status-finalizado{
     background:#e2e3e5;
     color:#7C7C7C;
     padding:3px 8px;

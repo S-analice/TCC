@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { User, House, Users, Briefcase, Truck, FileText, Mail, Phone, Clock, LogOut } from "lucide-react";
-import "../styles/Barra.css";
+import "../styles/componentes/Barra.css";
 import { formatarTelefone } from "../utils/formatadores"; 
+import { turnosMock } from "../models/FuncionarioModel";
 
 export default function Barra({ funcionario, paginaAtual, irParaPagina, voltarParaLogin, children }) {
     const [mostrarMenuFuncionario, setMostrarMenuFuncionario] = useState(false);
+    const dadosTurno = turnosMock.find(t => t.id === funcionario?.turnoId);
 
     return (
         <div className="barra-container">
@@ -21,7 +23,7 @@ export default function Barra({ funcionario, paginaAtual, irParaPagina, voltarPa
                         <div className="menu-funcionario-topo">
                             <div className="avatar-funcionario">
                                 {funcionario?.foto ? 
-                                    <img src={funcionario.foto} alt="Foto" className="avatar-img"/> : 
+                                    <img src={funcionario.foto} alt="Foto Funcionário" className="avatar-img"/> : 
                                     <div className="avatar-icone"><User size={28}/></div>
                                 }
                             </div>
@@ -32,12 +34,23 @@ export default function Barra({ funcionario, paginaAtual, irParaPagina, voltarPa
                         </div>
 
                         <div className="menu-funcionario-detalhes">
-                            <div className="detalhe"><Mail size={20} /><span>{funcionario?.email}</span></div>
+                            <div className="detalhe">
+                                <Mail size={20} />
+                                <span>{funcionario?.email}</span>
+                            </div>
+                            
                             <div className="detalhe">
                                 <Phone size={20} />
                                 <span>{formatarTelefone(funcionario?.telefone)}</span>
                             </div>
-                            <div className="detalhe"><Clock size={20} /><span>{funcionario?.turno}</span></div>
+                            <div className="detalhe">
+                                <Clock size={20} />
+                                <span>
+                                    {dadosTurno ? 
+                                        `${dadosTurno.inicio} às ${dadosTurno.fim}` : 
+                                        "Não definido"}
+                                </span>
+                            </div>
                         </div>
 
                         <div className="menu-funcionario-acoes">

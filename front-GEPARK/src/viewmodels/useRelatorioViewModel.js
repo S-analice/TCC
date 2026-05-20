@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { MovimentacaoModel } from "../models/MovimentacaoModel";
+import { MENSAGENS } from "../utils/mensagens";
 
 export function useRelatorioViewModel() {
   const [dataInicio, setDataInicio] = useState("");
@@ -11,7 +12,7 @@ export function useRelatorioViewModel() {
 
   const gerarRelatorio = async () => {
     if (!dataInicio || !dataFim) {
-      setMensagem({ mostrar: true, texto: "Por favor, selecione o período.", tipo: "erro" });
+      setMensagem({ mostrar: true, texto: MENSAGENS.VALIDACAO.SELECIONE, tipo: "erro" });
       return;
     }
 
@@ -28,9 +29,9 @@ export function useRelatorioViewModel() {
 
       setRegistrosFiltrados(filtrados);
       setMostrarResultados(true);
-      setMensagem({ mostrar: true, texto: "Relatório gerado com sucesso!", tipo: "sucesso" });
+      setMensagem({ mostrar: true, texto: MENSAGENS.SUCESSO.GERAR, tipo: "sucesso" });
     } catch {
-      setMensagem({ mostrar: true, texto: "Erro ao processar dados.", tipo: "erro" });
+      setMensagem({ mostrar: true, texto: MENSAGENS.ERRO.CARREGAR, tipo: "erro" });
     } finally {
       setCarregando(false);
     }
@@ -40,9 +41,9 @@ export function useRelatorioViewModel() {
     setCarregando(true);
     try {
       await new Promise(resolve => setTimeout(resolve, 1200));
-      setMensagem({ mostrar: true, texto: "Arquivo CSV baixado com sucesso!", tipo: "sucesso" });
+      setMensagem({ mostrar: true, texto: MENSAGENS.SUCESSO.BAIXAR, tipo: "sucesso" });
     } catch {
-      setMensagem({ mostrar: true, texto: "Falha ao exportar arquivo.", tipo: "erro" });
+      setMensagem({ mostrar: true, texto: MENSAGENS.ERRO.CARREGAR, tipo: "erro" });
     } finally {
       setCarregando(false);
     }

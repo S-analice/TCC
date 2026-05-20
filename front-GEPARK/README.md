@@ -119,17 +119,25 @@ Total de arquivos no projeto: 36/36
 **09/05**
 * Continuando o transformando a arquitetura 
 
+
 **12/05**
 * Adição da funcionalidade empresa
+
 
 **13/05**
 * Arrumando conforme alterações feitas no banco
 
+
 **14/05**
 * Arrumando conforme alterações feitas no banco
 
+
 **16/05**
 * Arrumando coisas
+
+
+**19/05**
+* Arrumando pastas, css e mensagens
 
 
 

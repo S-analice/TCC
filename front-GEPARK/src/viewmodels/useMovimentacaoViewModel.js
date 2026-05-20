@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { MovimentacaoModel } from "../models/MovimentacaoModel";
+import { MENSAGENS } from "../utils/mensagens";
 
 export function useMovimentacaoViewModel() {
   const [movimentacoes, setMovimentacoes] = useState(MovimentacaoModel.registrosIniciais);
@@ -23,9 +24,9 @@ export function useMovimentacaoViewModel() {
       } else {
         setMovimentacoes((prev) => prev.map((m) => (m.id === idSelecionado ? { ...m, ...dados } : m)));
       }
-      setMensagem({ mostrar: true, texto: "Entrada confirmada!", tipo: "sucesso" });
+      setMensagem({ mostrar: true, texto: MENSAGENS.SUCESSO.ENTRADA, tipo: "sucesso" });
     } catch {
-      setMensagem({ mostrar: true, texto: "Erro ao salvar entrada.", tipo: "erro" });
+      setMensagem({ mostrar: true, texto: MENSAGENS.ERRO.SALVAR, tipo: "erro" });
     } finally { setCarregando(false); }
   };
 
@@ -35,9 +36,9 @@ export function useMovimentacaoViewModel() {
     try {
       await new Promise((res) => setTimeout(res, 800));
       setMovimentacoes((prev) => prev.map((m) => m.id === id ? { ...m, ...dadosSaida, status: "Finalizado" } : m));
-      setMensagem({ mostrar: true, texto: "Saída confirmada!", tipo: "sucesso" });
+      setMensagem({ mostrar: true, texto: MENSAGENS.SUCESSO.SAIDA, tipo: "sucesso" });
     } catch {
-      setMensagem({ mostrar: true, texto: "Erro ao finalizar saída.", tipo: "erro" });
+      setMensagem({ mostrar: true, texto: MENSAGENS.ERRO.SALVAR, tipo: "erro" });
     } finally { setCarregando(false); }
   };
 
@@ -48,13 +49,13 @@ export function useMovimentacaoViewModel() {
       
       setMensagem({ 
         mostrar: true, 
-        texto: "Arquivo CSV baixado com sucesso!", 
+        texto: MENSAGENS.SUCESSO.BAIXAR, 
         tipo: "sucesso" 
       });
     } catch {
       setMensagem({ 
         mostrar: true, 
-        texto: "Falha na exportação dos dados.", 
+        texto: MENSAGENS.ERRO.CARREGAR, 
         tipo: "erro" 
       });
     } finally {

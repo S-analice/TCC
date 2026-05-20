@@ -1,4 +1,4 @@
-import "../styles/RedefinirSenha.css";
+import "../styles/Auth.css";
 import { Lock } from "lucide-react";
 import Carregando from "../components/Carregando";
 import Mensagem from "../components/Mensagem";
@@ -9,7 +9,7 @@ export default function RedefinirSenha(irParaLogin) {
     const vm = useRedefinirSenhaViewModel(irParaLogin);
 
     return (
-        <div className="rs-container">
+        <div className="a-container">
             {vm.carregando && <Carregando />}
 
             {vm.mensagem.mostrar && (
@@ -20,23 +20,23 @@ export default function RedefinirSenha(irParaLogin) {
                 />
             )}
 
-            <div className="rs-card">
-                <div className="rs-logo">
-                    <img src="/logo.png" alt="Logo GEPARK" className="rs-img" />
-                    <p className="rs-descricao">
+            <div className="a-card">
+                <div className="a-logo">
+                    <img src="/logo.png" alt="Logo GEPARK" className="a-img" />
+                    <p className="a-descricao">
                         Sistema de Gestão de Estacionamento
                     </p>
                 </div>
 
-                <h2 className="rs-subtitulo">Redefinir Senha</h2>
+                <h2 className="a-subtitulo">Redefinir Senha</h2>
 
-                <form onSubmit={vm.redefinir} className="rs-form">
-                    <div className="rs-form-container">
-                        <label className="rs-label">Nova Senha</label>
-                        <div className="rs-input-icon">
+                <form onSubmit={vm.redefinir} className="a-form">
+                    <div className="a-form-container">
+                        <label className="a-label">Nova Senha</label>
+                        <div className="a-input-icon">
                             <Lock size={18} />
                             <input
-                                className="rs-input"
+                                className="a-input"
                                 type="password"
                                 value={vm.senha}
                                 onChange={(e) => vm.setSenha(e.target.value)}
@@ -46,12 +46,12 @@ export default function RedefinirSenha(irParaLogin) {
                         </div>
                     </div>
 
-                    <div className="rs-form-container">
-                        <label className="rs-label">Confirmar Senha</label>
-                        <div className="rs-input-icon">
+                    <div className="a-form-container">
+                        <label className="a-label">Confirmar Senha</label>
+                        <div className="a-input-icon">
                             <Lock size={18} />
                             <input
-                                className="rs-input"
+                                className="a-input"
                                 type="password"
                                 value={vm.confirmarSenha}
                                 onChange={(e) => vm.setConfirmarSenha(e.target.value)}
@@ -63,8 +63,8 @@ export default function RedefinirSenha(irParaLogin) {
 
                     {vm.erroValidacao && <p className="erro-texto">{vm.erroValidacao}</p>}
 
-                    <div className="rs-form-acoes">
-                        <button type="submit" className="rs-botao">
+                    <div className="a-acoes">
+                        <button type="submit" className="a-botao">
                             Redefinir
                         </button>
                     </div>
