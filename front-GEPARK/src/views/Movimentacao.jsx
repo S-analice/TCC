@@ -29,7 +29,7 @@ export default function Movimentacao({ funcionario }) {
 
   const filtrados = vm.movimentacoes.filter(
     (r) =>
-      r.status === "No Pátio" &&
+      !r.dataSaida && 
       (r.cpf.includes(pesquisa) || r.placa.includes(pesquisa)),
   );
 

@@ -140,6 +140,10 @@ Total de arquivos no projeto: 36/36
 * Arrumando pastas, css e mensagens
 
 
+**20/05**
+* Descobrindo e arrumando erros de logica 
+
+
 
 **Tecnologias Utilizadas**
 * Vite

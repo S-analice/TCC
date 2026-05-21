@@ -1,6 +1,7 @@
 import "../styles/componentes/SaidaModal.css";
 import React, { useState, useEffect } from "react";
 import { MovimentacaoModel } from "../models/MovimentacaoModel";
+import { MENSAGENS } from "../utils/mensagens"; 
 
 export default function SaidaModal({
   registro,
@@ -9,8 +10,15 @@ export default function SaidaModal({
   confirmar,
   listaPagamentos,
 }) {
+  const obterDataLocal = () => {
+    const agora = new Date();
+    const offset = agora.getTimezoneOffset() * 60000; 
+    const localISOTime = new Date(agora - offset).toISOString().slice(0, 16);
+    return localISOTime;
+  };
+
   const [dataSaida, setDataSaida] = useState(
-    new Date().toISOString().slice(0, 16),
+    obterDataLocal(),
   );
   const [tipoPagamento, setTipoPagamento] = useState("");
   const [valores, setValores] = useState({
@@ -29,6 +37,13 @@ export default function SaidaModal({
   }, [dataSaida, registro]);
 
   const handleConfirmar = () => {
+    if (!tipoPagamento) {
+      setValores(prev => ({ ...prev, erro: MENSAGENS.VALIDACAO.SELECIONE }));
+      return;
+    }
+
+    if (valores.erro) return;
+
     confirmar(registro.id, {
       dataSaida,
       tipoPagamento,
@@ -75,7 +90,11 @@ export default function SaidaModal({
             <select
               className="sm-input"
               value={tipoPagamento}
-              onChange={(e) => setTipoPagamento(e.target.value)}
+              onChange={(e) => {
+                setTipoPagamento(e.target.value);
+                // Limpa o erro se o usuário selecionar algo
+                if(e.target.value) setValores(prev => ({...prev, erro: null}));
+              }}
             >
               <option value="">Selecione</option>
               {listaPagamentos.map((pag) => (
@@ -85,7 +104,6 @@ export default function SaidaModal({
               ))}
             </select>
           </div>
-
           {valores.erro && <p className="erro-texto">{valores.erro}</p>}
 
           <div className="sm-acoes">
@@ -95,7 +113,8 @@ export default function SaidaModal({
             <button
               onClick={handleConfirmar}
               className="sm-confirmar"
-              disabled={!!valores.erro || !tipoPagamento}
+              // Removi o disabled do pagamento para o usuário clicar e ver o erro
+              disabled={!!valores.erro && valores.erro !== "Selecione uma forma de pagamento."}
             >
               Confirmar
             </button>

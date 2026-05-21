@@ -17,6 +17,8 @@ export const MENSAGENS = {
     CPF_DUPLICADO: "Este CPF já está cadastrado no sistema.",
     EMAIL_DUPLICADO: "Este e-mail já está sendo usado por outro funcionário!",
     CPF_INVALIDO: "CPF inválido ou motorista inexistente.",
+    CPF_INATIVO: "CPF inativo, Não é possível realizar a entrada.",
+    CPF_NOPATIO: "CPF já possui um veículo no pátio.",
     EMAIL_INVALIDO: "E-mail inválido ou inexistente.",
     EMAIL_SENHA_INVALIDO: "E-mail ou senha inválido",
     CAMPOS_OBRIGATORIOS: "Por favor, preencha todos os campos obrigatórios."

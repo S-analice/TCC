@@ -125,7 +125,7 @@ export default function EmpresaModal({
   };
 
   return (
-    <div className="t-fundo" onClick={fechar}>
+    <div className="tm-fundo" onClick={fechar}>
       {modalErro.mostrar && (
         <Mensagem
           mensagem={modalErro.texto}

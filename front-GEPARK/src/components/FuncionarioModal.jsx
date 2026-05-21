@@ -1,4 +1,4 @@
-import "../styles/FuncionarioModal.css";
+import "../styles/componentes/FuncionarioModal.css";
 import { useState } from "react";
 import { Upload, Trash2, User } from "lucide-react";
 import { converterParaBase64, formatarTelefone } from "../utils/formatadores";

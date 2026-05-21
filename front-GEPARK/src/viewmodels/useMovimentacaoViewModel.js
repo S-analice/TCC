@@ -20,7 +20,7 @@ export function useMovimentacaoViewModel() {
     try {
       await new Promise((res) => setTimeout(res, 800));
       if (modo === "adicionar") {
-        setMovimentacoes((prev) => [...prev, { ...dados, id: Date.now(), status: "No Pátio" }]);
+        setMovimentacoes((prev) => [...prev, { ...dados, id: Date.now(), dataSaida: null }]);
       } else {
         setMovimentacoes((prev) => prev.map((m) => (m.id === idSelecionado ? { ...m, ...dados } : m)));
       }
@@ -35,7 +35,7 @@ export function useMovimentacaoViewModel() {
     setCarregando(true);
     try {
       await new Promise((res) => setTimeout(res, 800));
-      setMovimentacoes((prev) => prev.map((m) => m.id === id ? { ...m, ...dadosSaida, status: "Finalizado" } : m));
+      setMovimentacoes((prev) => prev.map((m) => m.id === id ? { ...m, ...dadosSaida } : m));
       setMensagem({ mostrar: true, texto: MENSAGENS.SUCESSO.SAIDA, tipo: "sucesso" });
     } catch {
       setMensagem({ mostrar: true, texto: MENSAGENS.ERRO.SALVAR, tipo: "erro" });

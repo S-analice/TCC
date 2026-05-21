@@ -2,10 +2,12 @@ import React from "react";
 import "../styles/paginas/Home.css";
 import { Truck, TrendingUp, TrendingDown, Users } from "lucide-react";
 import { useHomeViewModel } from "../viewmodels/useHomeViewModel";
-import { formatarCPF, formatarPlaca } from "../utils/formatadores"; 
+import { formatarCPF, formatarPlaca } from "../utils/formatadores";
+import { MovimentacaoModel } from "../models/MovimentacaoModel";
 
 export default function Home({ funcionario }) {
-  const { saudacao, clima, indicadores, ultimasMovimentacoes } = useHomeViewModel(funcionario);
+  const { saudacao, clima, indicadores, ultimasMovimentacoes } =
+    useHomeViewModel(funcionario);
 
   return (
     <div className="home-container">
@@ -23,7 +25,9 @@ export default function Home({ funcionario }) {
         <div className="home-info-grid">
           <div className="home-info-dia-card">
             <div className="home-info-dia-label">Temperatura</div>
-            <div className="home-info-dia-valor">{clima.temp !== null ? `${clima.temp}°C` : "..."}</div>
+            <div className="home-info-dia-valor">
+              {clima.temp !== null ? `${clima.temp}°C` : "..."}
+            </div>
           </div>
           <div className="home-info-dia-card">
             <div className="home-info-dia-label">Clima</div>
@@ -31,7 +35,9 @@ export default function Home({ funcionario }) {
           </div>
           <div className="home-info-dia-card">
             <div className="home-info-dia-label">Movimentação</div>
-            <div className={`home-info-dia-valor ${indicadores.movimentacao.classe}`}>
+            <div
+              className={`home-info-dia-valor ${indicadores.movimentacao.classe}`}
+            >
               {indicadores.movimentacao.texto}
             </div>
           </div>
@@ -44,7 +50,9 @@ export default function Home({ funcionario }) {
             <h4>Veículos no Pátio</h4>
             <span className="home-card-numero">{indicadores.noPatio}</span>
           </div>
-          <div className="home-card-icon green"><Truck size={26} /></div>
+          <div className="home-card-icon green">
+            <Truck size={26} />
+          </div>
         </div>
 
         <div className="home-card">
@@ -52,7 +60,9 @@ export default function Home({ funcionario }) {
             <h4>Entradas Hoje</h4>
             <span className="home-card-numero">{indicadores.entradasHoje}</span>
           </div>
-          <div className="home-card-icon yellow"><TrendingUp size={26} /></div>
+          <div className="home-card-icon yellow">
+            <TrendingUp size={26} />
+          </div>
         </div>
 
         <div className="home-card">
@@ -60,18 +70,23 @@ export default function Home({ funcionario }) {
             <h4>Saídas Hoje</h4>
             <span className="home-card-numero">{indicadores.saidasHoje}</span>
           </div>
-          <div className="home-card-icon brown"><TrendingDown size={26} /></div>
+          <div className="home-card-icon brown">
+            <TrendingDown size={26} />
+          </div>
         </div>
 
         <div className="home-card">
           <div className="home-card-info">
             <h4>Motoristas</h4>
-            <span className="home-card-numero">{indicadores.totalMotoristas}</span>
+            <span className="home-card-numero">
+              {indicadores.totalMotoristas}
+            </span>
           </div>
-          <div className="home-card-icon blue"><Users size={26} /></div>
+          <div className="home-card-icon blue">
+            <Users size={26} />
+          </div>
         </div>
       </div>
-
 
       <div className="home-tabela-container">
         <h3>Últimas Movimentações</h3>
@@ -87,20 +102,43 @@ export default function Home({ funcionario }) {
             </tr>
           </thead>
           <tbody>
-            {ultimasMovimentacoes.map((r) => (
-              <tr key={r.id}>
-                <td>{formatarCPF(r.cpf)}</td>
-                <td>{formatarPlaca(r.placa)}</td>
-                <td>{new Date(r.tipo === "Entrada" ? r.dataEntrada : r.dataSaida).toLocaleString("pt-BR")}</td>
-                <td>
-                  <span className={r.tipo === "Entrada" ? "home-tipo-entrada" : "home-tipo-saida"}>{r.tipo}</span>
-                </td>
-                <td>
-                  <span className={r.status === "No Pátio" ? "home-status-patio" : "home-status-finalizado"}>{r.status}</span>
-                </td>
-                <td>{r.tipo === "Entrada" ? r.funcionarioEntrada : r.funcionarioSaida}</td>
-              </tr>
-            ))}
+            {ultimasMovimentacoes.map((r) => {
+              const situacao = MovimentacaoModel.getSituacao(r);
+              const dataExibicao = r.dataSaida || r.dataEntrada;
+
+              return (
+                <tr key={r.id}>
+                  <td>{formatarCPF(r.cpf)}</td>
+                  <td>{formatarPlaca(r.placa)}</td>
+                  <td>{new Date(dataExibicao).toLocaleString("pt-BR")}</td>
+                  <td>
+                    <span
+                      className={
+                        situacao.tipo === "Entrada"
+                          ? "home-tipo-entrada"
+                          : "home-tipo-saida"
+                      }
+                    >
+                      {situacao.tipo}
+                    </span>
+                  </td>
+                  <td>
+                    <span
+                      className={
+                        situacao.status === "No Pátio"
+                          ? "home-status-patio"
+                          : "home-status-finalizado"
+                      }
+                    >
+                      {situacao.status}
+                    </span>
+                  </td>
+                  <td>
+                    {r.dataSaida ? r.funcionarioSaida : r.funcionarioEntrada}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

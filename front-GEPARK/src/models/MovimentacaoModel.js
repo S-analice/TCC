@@ -6,46 +6,69 @@ export const MovimentacaoModel = {
       id: 1,
       cpf: "12345678900",
       placa: "ABC1234",
-      dataEntrada: "2026-02-19T08:30:00",
+      dataEntrada: "2026-05-20T08:30:00",
       dataSaida: null,
       funcionarioEntrada: "João Silva",
       funcionarioSaida: null,
-      tipo: "Entrada",
-      status: "No Pátio"
     },
     {
       id: 2,
       cpf: "98765432100",
       placa: "DEF5678",
-      dataEntrada: "2026-05-19T09:15:00",
+      dataEntrada: "2026-05-20T09:15:00",
       dataSaida: null,
       funcionarioEntrada: "Maria Santos",
       funcionarioSaida: null,
-      tipo: "Entrada",
-      status: "No Pátio"
     },
     {
       id: 3,
       cpf: "45678912300",
       placa: "GHI9012",
       dataEntrada: "2026-05-18T07:40:00",
-      dataSaida: "2026-05-19T07:40:00",
+      dataSaida: "2026-05-20T07:40:00",
       funcionarioEntrada: "Lilo",
       funcionarioSaida: "Analice Santos",
-      tipo: "Saída",
-      status: "Finalizado"
-    }
+    },
   ],
+
+  getSituacao: (registro) => {
+    if (registro.dataEntrada && !registro.dataSaida) {
+      return { tipo: "Entrada", status: "No Pátio" };
+    }
+    if (registro.dataEntrada && registro.dataSaida) {
+      return { tipo: "Saída", status: "Finalizado" };
+    }
+    return { tipo: "Desconhecido", status: "Indefinido" };
+  },
+
+  filtrarMovimentacoesHoje: (registros) => {
+    const agora = new Date();
+    const hojeISO =
+      agora.getFullYear() +
+      "-" +
+      String(agora.getMonth() + 1).padStart(2, "0") +
+      "-" +
+      String(agora.getDate()).padStart(2, "0");
+
+    return registros.filter(
+      (r) =>
+        (r.dataEntrada && r.dataEntrada.includes(hojeISO)) ||
+        (r.dataSaida && r.dataSaida.includes(hojeISO)),
+    );
+  },
 
   calcularValor: (dataEntrada, dataSaida, cpfMotorista) => {
     try {
       if (!dataEntrada || !dataSaida || !cpfMotorista) {
         return { valor: 0, erro: "Dados insuficientes para cálculo" };
       }
-      
+
       const listaMotoristas = MotoristaModel.getInitialData();
-      const motorista = listaMotoristas.find(m => m.cpf === cpfMotorista);
-      const convenioNome = motorista ? motorista.convenio : "Sem Convênio";
+      const motorista = listaMotoristas.find((m) => m.cpf === cpfMotorista);
+
+      const convenioNome = motorista
+        ? motorista.convenio || motorista.convenio_nome
+        : "Sem Convênio";
 
       const entrada = new Date(dataEntrada);
       const saida = new Date(dataSaida);
@@ -58,54 +81,50 @@ export const MovimentacaoModel = {
       const totalHoras = Math.ceil(diferencaMs / (1000 * 60 * 60));
 
       const tabelasPreco = {
-        "Novo Cliente": { hora: 10, diaria: 100 },
-        "Premium": { hora: 6, diaria: 60 },
-        "Sem Convênio": { hora: 48, diaria: null } 
+        "Novo Cliente": { valor_hora: 10, valor_diaria: 100 },
+        Premium: { valor_hora: 6, valor_diaria: 60 },
+        "Sem Convênio": { valor_hora: 48, valor_diaria: null },
       };
 
-      const chave = Object.keys(tabelasPreco).find(
-        k => k.toLowerCase() === convenioNome.toLowerCase()
-      ) || "Sem Convênio";
+      const chave =
+        Object.keys(tabelasPreco).find(
+          (k) => k.toLowerCase() === convenioNome.toLowerCase(),
+        ) || "Sem Convênio";
 
       const regra = tabelasPreco[chave];
       let valorFinal = 0;
 
-      if (chave === "Sem Convênio" || !regra.diaria) {
-        valorFinal = totalHoras * regra.hora;
+      if (chave === "Sem Convênio" || !regra.valor_diaria) {
+        valorFinal = totalHoras * regra.valor_hora;
       } else {
         const diasCompletos = Math.floor(totalHoras / 24);
         const horasExcedentes = totalHoras % 24;
 
-        const valorDiarias = diasCompletos * regra.diaria;
+        const valorDiarias = diasCompletos * regra.valor_diaria;
 
-        const valorHorasExtras = Math.min(horasExcedentes * regra.hora, regra.diaria);
+        const valorHorasExtras = Math.min(
+          horasExcedentes * regra.valor_hora,
+          regra.valor_diaria,
+        );
 
         valorFinal = valorDiarias + valorHorasExtras;
       }
 
-      return { 
-        valor: valorFinal, 
-        erro: null, 
+      return {
+        valor: valorFinal,
+        erro: null,
         convenioAplicado: chave,
-        tempoTotalHoras: totalHoras 
+        tempoTotalHoras: totalHoras,
       };
     } catch {
       return { valor: 0, erro: "Erro no processamento do cálculo." };
     }
   },
 
-  filtrarMovimentacoesHoje: (registros) => {
-    const hojeISO = new Date().toISOString().split("T")[0];
-    return registros.filter(r => 
-      (r.dataEntrada && r.dataEntrada.startsWith(hojeISO)) || 
-      (r.dataSaida && r.dataSaida.startsWith(hojeISO))
-    );
-  },
-
   filtrarPorPeriodo: (registros, dataInicio, dataFim) => {
     const inicio = new Date(dataInicio);
     const fim = new Date(dataFim);
-    fim.setHours(23, 59, 59); // Garante que pegue o dia inteiro do fim
+    fim.setHours(23, 59, 59);
 
     return registros.filter((item) => {
       const dataEntrada = new Date(item.dataEntrada);
@@ -116,5 +135,5 @@ export const MovimentacaoModel = {
   calcularTempoPermanencia: (entrada, saida) => {
     if (!saida) return 0;
     return (new Date(saida) - new Date(entrada)) / 60000; // Retorna em minutos
-  }
+  },
 };

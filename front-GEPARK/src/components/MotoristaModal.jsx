@@ -38,7 +38,7 @@ export default function MotoristaModal({ modo, motorista, fechar, salvar, empres
 
     if (busca.length > 1) {
       const filtradas = empresas.filter(emp => 
-        emp.nome.toLowerCase().includes(busca.toLowerCase())
+        emp.nome.toLowerCase().includes(busca.toLowerCase()) && emp.status === "Ativo"
       );
       setSugestoes(filtradas);
       setMostrarSugestoes(true);
@@ -52,8 +52,10 @@ export default function MotoristaModal({ modo, motorista, fechar, salvar, empres
     setMostrarSugestoes(false);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setErro("");
+
     try {
       if (formData.cpf.length !== 11) throw new Error(MENSAGENS.VALIDACAO.CPF_DIGITOS);
       if (formData.placa.length !== 7) throw new Error(MENSAGENS.VALIDACAO.PLACA_DIGITOS);
@@ -61,9 +63,9 @@ export default function MotoristaModal({ modo, motorista, fechar, salvar, empres
       if (!formData.autonomo && !formData.empresa_id) throw new Error(MENSAGENS.VALIDACAO.EMPRESA_SELECIONE);
       if (!formData.convenio_id) throw new Error(MENSAGENS.VALIDACAO.SELECIONE);
 
-      salvar(formData);
-    } catch (err) {
-      setErro(err.message);
+      await salvar(formData);
+    } catch {
+      setErro(MENSAGENS.ERRO.SALVAR);
     }
   };
 
@@ -140,10 +142,10 @@ export default function MotoristaModal({ modo, motorista, fechar, salvar, empres
             </div>
           )}
 
-          <div className="mm-form-container">
-            <label className="mm-label">Convênio</label>
+          <div className="tm-container">
+            <label className="tm-label">Convênio</label>
             <select
-              className="mm-input"
+              className="tm-input"
               value={formData.convenio_id}
               onChange={(e) => setFormData({ ...formData, convenio_id: e.target.value })}
               required
@@ -157,9 +159,9 @@ export default function MotoristaModal({ modo, motorista, fechar, salvar, empres
 
           {erro && <p className="erro-texto">{erro}</p>}
 
-          <div className="mm-form-acoes">
-            <button type="button" onClick={fechar} className="mm-cancelar">Cancelar</button>
-            <button type="submit" className="mm-salvar">Salvar</button>
+          <div className="tm-acoes">
+            <button type="button" onClick={fechar} className="tm-cancelar">Cancelar</button>
+            <button type="submit" className="tm-salvar">Salvar</button>
           </div>
         </form>
       </div>
