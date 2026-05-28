@@ -1,0 +1,27 @@
+.m-botoes{
+    display:flex;
+    gap:10px;
+    align-items:center;
+}
+
+.m-botoes svg{
+    color:#ffffff;
+}
+
+.t-topo button.amarelo{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    padding:12px 20px;
+    border-radius:6px;
+    border:none;
+    cursor:pointer;
+    font-size:14px;
+    font-weight:600;
+    color:#ffffff;
+    background-color: #f2c14e;
+}
+
+.t-topo button.amarelo:hover {
+    background-color: #e0af3c;
+}

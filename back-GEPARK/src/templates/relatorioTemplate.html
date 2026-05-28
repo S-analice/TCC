@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            color: #4F4F4F;
+            background-color: #E5E5E5;
+        }
+        
+        .page {
+            background-color: #E5E5E5;
+            page-break-after: always;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .page:last-child {
+            page-break-after: auto;
+        }
+
+        .header-banner {
+            width: 100%;
+            background-color: #FFFFFF;
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 4px solid #2F6B2F;
+        }
+        
+        .logo {
+            max-height: 70px;
+            width: auto;
+            background-color: #FFFFFF;
+        }
+        
+        .sub-header {
+            text-align: center;
+            color: #9A9A9A;
+            font-size: 10pt;
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+       
+        .content {
+            flex: 1;
+            padding: 20px 0 20px 0;
+            background-color: #E5E5E5;
+            width: 100%;
+        }
+        
+        .inner-content {
+            max-width: 100%;
+            padding: 0 20px;
+        }
+        
+        h1 {
+            color: #2F6B2F;
+            font-size: 20pt;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .section-title {
+            border-left: 4px solid #2F6B2F;
+            padding-left: 12px;
+            margin: 25px 0 15px 0;
+            font-size: 14pt;
+            color: #2F6B2F;
+            font-weight: bold;
+        }
+        
+        .period-box {
+            background: #FFFFFF;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #F2C300;
+            font-size: 11pt;
+            color: #4F4F4F;
+        }
+        
+        .cards-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+        }
+        
+        .cards-table td {
+            padding: 8px;
+        }
+        
+        .card {
+            background: #FFFFFF;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border: 1px solid #D0D0D0;
+        }
+        
+        .card-faturamento {
+            background: #FFFFFF;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border: 1px solid #D0D0D0;
+            border-bottom: 3px solid #4C8B3B;
+        }
+        
+        .card-label {
+            font-size: 9pt;
+            color: #9A9A9A;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+        
+        .card-value {
+            font-size: 16pt;
+            color: #2F6B2F;
+            font-weight: bold;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #FFFFFF;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 25px;
+            border: 1px solid #D0D0D0;
+        }
+        
+        .data-table th {
+            background-color: #2F6B2F;
+            color: #FFFFFF;
+            text-align: left;
+            padding: 12px 12px;
+            font-size: 10pt;
+            font-weight: bold;
+        }
+        
+        .data-table td {
+            padding: 10px 12px;
+            font-size: 10pt;
+            border-bottom: 1px solid #E5E5E5;
+        }
+        
+        .data-table tr:nth-child(even) {
+            background-color: #F9F9F9;
+        }
+        
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .rank-badge {
+            background: #F2C300;
+            color: #2F6B2F;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 9pt;
+            display: inline-block;
+        }
+        
+        .footer {
+            text-align: center;
+            font-size: 9pt;
+            color: #9A9A9A;
+            padding: 12px 20px;
+            background-color: #E5E5E5;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<div class="page">
+    <div class="header-banner">
+        {{#if logoBase64}}
+        <img src="{{logoBase64}}" alt="GE Park Logo" class="logo">
+        {{else}}
+        <div style="font-size: 24pt; font-weight: bold; color: #2F6B2F;">GE PARK</div>
+        {{/if}}
+        <div class="sub-header">Sistema para Gerenciamento de Estacionamento de Veículos Pesados</div>
+    </div>
+
+    <div class="content">
+        <div class="inner-content">
+            <h1>Relatório Operacional</h1>
+            
+            <div class="period-box">
+                <strong>PERÍODO SELECIONADO:</strong> {{dataInicio}} — {{dataFim}}
+            </div>
+
+            <div class="section-title">1. Resumo Geral</div>
+            
+            <table class="cards-table">
+                <tr>
+                    <td width="25%">
+                        <div class="card">
+                            <div class="card-label">Movimentações</div>
+                            <div class="card-value">{{estatisticas.total}}</div>
+                        </div>
+                    </td>
+                    <td width="25%">
+                        <div class="card">
+                            <div class="card-label">Permanência Média</div>
+                            <div class="card-value">{{estatisticas.tempoMedio}}</div>
+                        </div>
+                    </td>
+                    <td width="25%">
+                        <div class="card">
+                            <div class="card-label">Convênio Top</div>
+                            <div class="card-value">{{estatisticas.convenioMaisUsado}}</div>
+                        </div>
+                    </td>
+                    <td width="25%">
+                        <div class="card-faturamento">
+                            <div class="card-label">Faturamento</div>
+                            <div class="card-value">R$ {{estatisticas.faturamentoTotal}}</div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+            <div class="section-title">Ranking de Motoristas Frequentes</div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th style="width: 60px;">Rank</th>
+                        <th>CPF / Placa</th>
+                        <th>Estadias</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each topMotoristas}}
+                    <tr>
+                        <td><span class="rank-badge">{{add @index 1}}º</span></td>
+                         <td>{{this.cpf}}<br><small>{{formatarPlaca this.placa}}</small></td>
+                        <td>{{this.frequencia}}</td>
+                    </tr>
+                    {{/each}}
+                    {{#unless topMotoristas.length}}
+                    <tr>
+                        <td colspan="4" style="text-align: center;">Nenhuma movimentação no período</td>
+                    </tr>
+                    {{/unless}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div class="footer">
+        Gerado por: {{usuarioNome}} - {{dataGeracao}} | Página 1 de {{totalPaginas}}
+    </div>
+</div>
+
+{{#each paginasDetalhamento}}
+<div class="page">
+    <div class="content">
+        <div class="inner-content">
+            <div class="section-title">2. Detalhamento do Período</div>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Entrada</th>
+                        <th>Saída</th>
+                        <th>Permanência</th>
+                        <th>CPF / Placa</th>
+                        <th>Valor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each movimentacoes}}
+                    <tr>
+                        <td>{{this.dataEntradaFormatada}}</td>
+                        <td>{{this.dataSaidaFormatada}}</td>
+                        <td>{{this.tempoPermanencia}}</td>
+                        <td>{{this.cpf}}<br><small>{{this.placa}}</small></td>
+                        <td><strong>R$ {{this.valorFormatado}}</strong></td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div class="footer">
+        Gerado por: {{../usuarioNome}} - {{../dataGeracao}} | Página {{pagina}} de {{../totalPaginas}}
+    </div>
+</div>
+{{/each}}
+
+{{#unless hasMovimentacoes}}
+<div class="page">
+    <div class="content">
+        <div class="inner-content">
+            <div style="text-align: center; padding: 50px; background: #FFFFFF; border-radius: 8px;">
+                <h3>Nenhuma movimentação encontrada no período selecionado.</h3>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        Gerado por: {{usuarioNome}} - {{dataGeracao}} | Página 1 de 1
+    </div>
+</div>
+{{/unless}}
+
+</body>
+</html>

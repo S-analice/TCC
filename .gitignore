@@ -1,0 +1,8 @@
+﻿node_modules/
+back-GEPARK/node_modules/
+front-GEPARK/node_modules/
+*.dll
+*.exe
+*.pdf
+uploads/relatorios/*.pdf
+.env

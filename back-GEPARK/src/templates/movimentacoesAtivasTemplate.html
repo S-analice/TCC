@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            color: #4F4F4F;
+            background-color: #E5E5E5;
+        }
+        
+        .page {
+            background-color: #E5E5E5;
+            page-break-after: always;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .page:last-child {
+            page-break-after: auto;
+        }
+    
+        .header-banner {
+            width: 100%;
+            background-color: #FFFFFF;
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 4px solid #2F6B2F;
+        }
+        
+        .logo {
+            max-height: 70px;
+            width: auto;
+            background-color: #FFFFFF;
+        }
+        
+        .sub-header {
+            text-align: center;
+            color: #9A9A9A;
+            font-size: 10pt;
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+    
+        .content {
+            flex: 1;
+            padding: 20px 0 20px 0;
+            background-color: #E5E5E5;
+            width: 100%;
+        }
+        
+        .inner-content {
+            max-width: 100%;
+            padding: 0 20px;
+        }
+        
+        h1 {
+            color: #2F6B2F;
+            font-size: 20pt;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .section-title {
+            border-left: 4px solid #2F6B2F;
+            padding-left: 12px;
+            margin: 25px 0 15px 0;
+            font-size: 14pt;
+            color: #2F6B2F;
+            font-weight: bold;
+        }
+        
+        .info-box {
+            background: #FFFFFF;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #F2C300;
+            font-size: 11pt;
+            color: #4F4F4F;
+        }
+        
+        /* Espaçamento entre as linhas do info-box */
+        .info-box strong {
+            display: inline-block;
+            min-width: 180px;
+        }
+        
+        .info-line {
+            margin-bottom: 8px;
+        }
+        
+        .info-line:last-child {
+            margin-bottom: 0;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #FFFFFF;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 25px;
+            border: 1px solid #D0D0D0;
+        }
+        
+        .data-table th {
+            background-color: #2F6B2F;
+            color: #FFFFFF;
+            text-align: left;
+            padding: 12px 12px;
+            font-size: 10pt;
+            font-weight: bold;
+        }
+        
+        .data-table td {
+            padding: 10px 12px;
+            font-size: 10pt;
+            border-bottom: 1px solid #E5E5E5;
+        }
+        
+        .data-table tr:nth-child(even) {
+            background-color: #F9F9F9;
+        }
+        
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .status-patio {
+            display: inline-block;
+            background: #F2C300;
+            color: #2F6B2F;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 9pt;
+        }
+        
+        .footer {
+            text-align: center;
+            font-size: 9pt;
+            color: #9A9A9A;
+            padding: 12px 20px;
+            background-color: #E5E5E5;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+{{#each paginas}}
+<div class="page">
+    <div class="header-banner">
+        {{#if ../logoBase64}}
+        <img src="{{../logoBase64}}" alt="GE Park Logo" class="logo">
+        {{else}}
+        <div style="font-size: 24pt; font-weight: bold; color: #2F6B2F;">GE PARK</div>
+        {{/if}}
+        <div class="sub-header">Sistema para Gerenciamento de Estacionamento de Veículos Pesados</div>
+    </div>
+
+    <div class="content">
+        <div class="inner-content">
+            <h1>Veículos Estacionados</h1>
+            
+            <div class="info-box">
+                <div class="info-line">
+                    <strong>DATA/HORA DA EMISSÃO:</strong> {{../dataGeracao}}
+                </div>
+                <div class="info-line">
+                    <strong>TOTAL DE VEÍCULOS NO PÁTIO:</strong> {{../totalVeiculos}}
+                </div>
+            </div>
+
+            <div class="section-title">Lista de Veículos Estacionados</div>
+            
+            {{#if movimentacoes.length}}
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Entrada</th>
+                        <th>Tempo Estacionado</th>
+                        <th>CPF / Placa</th>
+                        <th>Convênio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each movimentacoes}}
+                    <tr>
+                        <td>{{this.dataEntradaFormatada}}</td>
+                        <td>{{this.tempoEstacionado}}</td>
+                        <td>{{this.cpf}}<br><small>{{formatarPlaca this.placa}}</small></td>
+                        <td>{{this.convenioNome}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+            {{else}}
+            <div style="text-align: center; padding: 50px; background: #FFFFFF; border-radius: 8px;">
+                <h3>Nenhum veículo no pátio no momento.</h3>
+            </div>
+            {{/if}}
+        </div>
+    </div>
+    
+    <div class="footer">
+        Gerado por: {{../usuarioNome}} | Página {{pagina}} de {{totalPaginas}}
+    </div>
+</div>
+{{/each}}
+
+</body>
+</html>

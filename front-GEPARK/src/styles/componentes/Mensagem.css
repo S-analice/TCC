@@ -1,0 +1,73 @@
+.msg-container {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial;
+  z-index: 100;
+}
+  
+.msg-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  padding: 32px;
+  max-width: 400px;
+  width: 100vw;
+  margin: 0 16px;
+}
+  
+.msg-retangulo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+  
+.msg-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: #436850;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+  
+.msg-texto {
+  font-size: 18px;
+  text-align: center;
+  margin-bottom: 24px;
+  color: #7C7C7C;
+}
+  
+.msg-botao {
+  padding: 12px 32px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background-color: #436850;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 14px;
+}
+  
+.msg-botao:hover {
+  background-color: #35563f;
+}
+
+.msg-retangulo.erro .msg-icon {
+  background: #c0392b;
+}
+
+.msg-retangulo.erro .msg-botao {
+  background-color: #c0392b;
+
+}
+  
+.msg-retangulo.erro .msg-botao:hover {
+  background-color: #99211d;
+}
