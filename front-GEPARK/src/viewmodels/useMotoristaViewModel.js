@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { MotoristaModel } from "../models/MotoristaModel";
 import { MENSAGENS } from "../utils/mensagens";
+import { ChecklistModel } from "../models/ChecklistModel";
 
 const empresasMock = [
   { id: 1, nome: "Transportadora IFPR", status: "Ativo" },
@@ -9,7 +10,7 @@ const empresasMock = [
 
 const conveniosMock = [
   { id: "1", nome: "Novo Cliente" },
-  { id: "2", nome: "Premium " },
+  { id: "2", nome: "Premium" },
   { id: "3", nome: "Sem Convênio" },
 ];
 
@@ -24,11 +25,28 @@ export function useMotoristaViewModel() {
     tipo: "sucesso",
   });
   const [modal, setModal] = useState({ tipo: null, aberto: false, dado: null });
+  const [modalInfo, setModalInfo] = useState({
+    aberta: false,
+    motorista: null,
+    checklist: null,
+  });
+  const [checklists, setChecklists] = useState(ChecklistModel.getInitialData());
 
   const fecharMensagem = () => setMensagem({ ...mensagem, mostrar: false });
   const abrirModal = (tipo, dado = null) =>
     setModal({ tipo, aberto: true, dado });
   const fecharModal = () => setModal({ tipo: null, aberto: false, dado: null });
+
+  const abrirModalInfo = (motorista) => {
+    const checklist = checklists.find(
+      (c) => c.motorista_id === motorista.id && c.status === "Bloqueado",
+    );
+    setModalInfo({ aberta: true, motorista, checklist });
+  };
+
+  const fecharModalInfo = () => {
+    setModalInfo({ aberta: false, motorista: null, checklist: null });
+  };
 
   const motoristasFiltrados = motoristas.filter((m) => {
     const matchesBusca =
@@ -49,7 +67,7 @@ export function useMotoristaViewModel() {
         (c) => String(c.id) === String(dados.convenio_id),
       );
       const convNome = ConvEncontrado ? ConvEncontrado.nome : "Sem Convênio";
-  
+
       const payload = {
         ...dados,
         convenio_nome: convNome,
@@ -89,6 +107,36 @@ export function useMotoristaViewModel() {
     }
   };
 
+  const salvarChecklist = async (dados) => {
+    setCarregando(true);
+    try {
+      await new Promise((r) => setTimeout(r, 800));
+
+      const novosChecklists = ChecklistModel.salvarChecklist(checklists, dados);
+      setChecklists(novosChecklists);
+
+      setMotoristas((prev) =>
+        prev.map((m) =>
+          m.id === dados.motorista_id ? { ...m, status: "Bloqueado" } : m,
+        ),
+      );
+
+      setMensagem({
+        mostrar: true,
+        texto: MENSAGENS.SUCESSO.CADASTRO,
+        tipo: "sucesso",
+      });
+    } catch {
+      setMensagem({
+        mostrar: true,
+        texto: MENSAGENS.ERRO.SALVAR,
+        tipo: "erro",
+      });
+    } finally {
+      setCarregando(false);
+    }
+  };
+
   return {
     motoristasFiltrados,
     pesquisa,
@@ -102,6 +150,11 @@ export function useMotoristaViewModel() {
     abrirModal,
     fecharModal,
     salvarMotorista,
+    checklists,
+    salvarChecklist,
+    modalInfo,
+    abrirModalInfo,
+    fecharModalInfo,
     empresas: empresasMock,
     convenios: conveniosMock,
   };

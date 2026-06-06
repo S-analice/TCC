@@ -63,10 +63,12 @@
   background: #436850;
   color: white;
   font-weight: bold;
+  transition: all 0.2s;
 }
 
 .relatorio-botao-verde:hover {
   background: #35563f;
+  transform: scale(1.05);
 }
 
 .relatorio-botao-amarelo {
@@ -80,10 +82,12 @@
   background: #f2c14e;
   color: white;
   font-weight: bold;
+  transition: all 0.2s;
 }
 
 .relatorio-botao-amarelo:hover {
   background: #e0af3c;
+  transform: scale(1.05);
 }
 
 .relatorio-header {

@@ -54,8 +54,8 @@ export default function Relatorio() {
           </button>
 
           {vm.mostrarResultados && (
-            <button className="relatorio-botao-amarelo" onClick={vm.exportarCSV}>
-              <Download size={18} /> Exportar CSV
+            <button className="relatorio-botao-amarelo" onClick={vm.exportarPDF}>
+              <Download size={18} /> Exportar PDF
             </button>
           )}
         </div>

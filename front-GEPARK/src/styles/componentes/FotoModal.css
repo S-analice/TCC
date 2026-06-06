@@ -58,8 +58,10 @@
     cursor: pointer;
     font-size: 14px;
     font-weight: 600;
+    transition: all 0.2s;
   }
   
   .foto-botao-fechar:hover {
     background-color: #35563f; 
+    transform: scale(1.05);
   }

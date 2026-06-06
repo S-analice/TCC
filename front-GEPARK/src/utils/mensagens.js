@@ -31,6 +31,8 @@ export const MENSAGENS = {
     SENHA_IGUAIS: "As senhas não coincidem..",
     PLACA_DIGITOS: "A placa deve conter 7 dígitos",
     SELECIONE: "Por favor, selecione.",
+    DATA: "A data de início não pode ser maior que a data de fim.",
+    INFORME: "Por favor, informe.",
     EMPRESA_SELECIONE: "Por favor, selecione uma empresa válida."
   }
 };

@@ -142,10 +142,12 @@ body {
 .botao-sair{
     background: #c0392b !important;
     color: #ffffff;
+    transition: all 0.2s;
 }
 
 .botao-sair:hover{
     background: #99211d !important;
+    transform: scale(1.05);
 }
 
 .barra-navegacao {

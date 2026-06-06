@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { MovimentacaoModel } from "../models/MovimentacaoModel";
+import { ChecklistModel } from "../models/ChecklistModel";
 import { MENSAGENS } from "../utils/mensagens";
 
-export function useMovimentacaoViewModel() {
+export function useMovimentacaoViewModel(checklistsFromParent) {
   const [movimentacoes, setMovimentacoes] = useState(MovimentacaoModel.registrosIniciais);
   const [carregando, setCarregando] = useState(false);
   const [mensagem, setMensagem] = useState({ mostrar: false, tipo: "sucesso", texto: "" });
+  const [checklists, setChecklists] = useState(checklistsFromParent || ChecklistModel.getInitialData());
 
   const tiposPagamento = [
     { id: 1, nome: "Dinheiro" },
@@ -13,6 +15,28 @@ export function useMovimentacaoViewModel() {
     { id: 3, nome: "Cartão de Crédito" },
     { id: 4, nome: "Cartão de Débito" }
   ];
+
+  const salvarChecklist = async (dados) => {
+    setCarregando(true);
+    try {
+      await new Promise((r) => setTimeout(r, 800));
+      const novosChecklists = ChecklistModel.salvarChecklist(checklists, dados);
+      setChecklists(novosChecklists);
+      setMensagem({ 
+        mostrar: true, 
+        texto: "Motorista bloqueado com sucesso!", 
+        tipo: "sucesso" 
+      });
+    } catch {
+      setMensagem({ 
+        mostrar: true, 
+        texto: MENSAGENS.ERRO.SALVAR, 
+        tipo: "erro" 
+      });
+    } finally {
+      setCarregando(false);
+    }
+  };
 
   const salvarEntrada = async (dados, modo, idSelecionado, fechar) => {
     if (fechar) fechar();
@@ -46,21 +70,10 @@ export function useMovimentacaoViewModel() {
     setCarregando(true);
     try {
       await new Promise((res) => setTimeout(res, 1500));
-      
-      setMensagem({ 
-        mostrar: true, 
-        texto: MENSAGENS.SUCESSO.BAIXAR, 
-        tipo: "sucesso" 
-      });
+      setMensagem({ mostrar: true, texto: MENSAGENS.SUCESSO.BAIXAR, tipo: "sucesso" });
     } catch {
-      setMensagem({ 
-        mostrar: true, 
-        texto: MENSAGENS.ERRO.CARREGAR, 
-        tipo: "erro" 
-      });
-    } finally {
-      setCarregando(false);
-    }
+      setMensagem({ mostrar: true, texto: MENSAGENS.ERRO.CARREGAR, tipo: "erro" });
+    } finally { setCarregando(false); }
   };
 
   const fecharMensagem = () => setMensagem({ ...mensagem, mostrar: false });
@@ -74,6 +87,8 @@ export function useMovimentacaoViewModel() {
     salvarEntrada, 
     finalizarSaida, 
     exportarDados, 
-    tiposPagamento
+    tiposPagamento,
+    salvarChecklist,
+    checklists
   };
 }

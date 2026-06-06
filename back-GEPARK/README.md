@@ -25,7 +25,7 @@ DB_NAME=gepark
 JWT_SECRET=gepark_secret_key_2026_@TCC
 
 VITE_API_URL=https://api.openweathermap.org/data/2.5
-VITE_API_KEY=SEU_API_KEY_AQUI
+VITE_API_KEY=ad5c2867dcf6cc19700761baeb1b120c
 
 **Estrutura Atual**
 Total de arquivos no projeto: /

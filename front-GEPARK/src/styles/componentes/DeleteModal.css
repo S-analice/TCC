@@ -67,10 +67,12 @@
   margin-right: 8px;
   background-color: #ffffff;
   color: #7c7c7c;
+  transition: all 0.2s;
 }
 
 .dm-cancelar:hover {
   background-color: #e0e0e0;
+  transform: scale(1.05);
 }
 
 .dm-confirmar {
@@ -83,10 +85,12 @@
   margin-right: 8px;
   background-color: #436850;
   color: #ffffff;
+  transition: all 0.2s;
 }
 
 .dm-confirmar:hover {
   background-color: #35563f;
+  transform: scale(1.05);
 }
 
 .erro-texto {

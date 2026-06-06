@@ -107,15 +107,25 @@ body {
 }
 
 .a-ir-para {
-    border: none;
-    cursor: pointer;
-    color: #436850;
-    background: none;
-    font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  cursor: pointer;
+  color: #436850;
+  background: none;
+  font-size: 12px;
+  padding: 0;
+}
+
+.a-ir-para svg {
+  width: 14px;
+  height: 14px;
+  color: #436850;
 }
 
 .a-ir-para:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .a-botao {
@@ -127,12 +137,13 @@ body {
     color: #ffffff;
     font-weight: 600;
     font-size: 14px;
+    transition: all 0.2s;
 }
 
 .a-botao:hover {
     background-color: #35563f;
+    transform: scale(1.05);
 }
-
 
 .erro-texto {
     color: #c0392b;

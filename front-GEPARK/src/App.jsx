@@ -9,11 +9,15 @@ import Empresa from "./views/Empresa"
 import Motorista from "./views/Motorista";
 import Movimentacao from "./views/Movimentacao";
 import Relatorio from "./views/Relatorio";
+import { useMotoristaViewModel } from "./viewmodels/useMotoristaViewModel"; // Importe o ViewModel
 
 export default function App() {
   const [telaAtual, setTelaAtual] = useState("home");
   const [estaLogado, setEstaLogado] = useState(false);
   const [funcionarioLogado, setFuncionarioLogado] = useState(null);
+  
+  // Instancie o ViewModel de motorista para ter acesso aos dados
+  const motoristaVM = useMotoristaViewModel();
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -39,7 +43,13 @@ export default function App() {
       case "funcionario": return <Funcionario funcionario={funcionarioLogado}/>; 
       case "empresa": return <Empresa funcionario={funcionarioLogado}/>; 
       case "motorista": return <Motorista funcionario={funcionarioLogado}/>;   
-      case "patio": return <Movimentacao funcionario={funcionarioLogado}/>;
+      case "patio": return (
+        <Movimentacao 
+          funcionario={funcionarioLogado}
+          motoristas={motoristaVM.motoristasFiltrados} 
+          checklistsFromParent={motoristaVM.checklists}  
+        />
+      );
       default: return <Home funcionario={funcionarioLogado} />;
     }
   };

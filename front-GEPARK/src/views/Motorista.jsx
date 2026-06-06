@@ -1,6 +1,6 @@
 import "../styles/paginas/Motorista.css";
 import "../styles/Tela.css";
-import { Pencil, Trash2, Search } from "lucide-react";
+import { Pencil, Trash2, Search, Info } from "lucide-react";
 import { useMotoristaViewModel } from "../viewmodels/useMotoristaViewModel";
 import {
   formatarCPF,
@@ -11,6 +11,7 @@ import Carregando from "../components/Carregando";
 import Mensagem from "../components/Mensagem";
 import MotoristaModal from "../components/MotoristaModal";
 import DeleteMotoristaModal from "../components/DeleteMotoristaModal";
+import InfoMotoristaModal from "../components/InfoMotoristaModal"; // Adicione esta importação
 
 export default function Motorista() {
   const vm = useMotoristaViewModel();
@@ -22,7 +23,7 @@ export default function Motorista() {
       {vm.mensagem.mostrar && (
         <Mensagem
           mensagem={vm.mensagem.texto}
-          modo={vm.mensagem.tipo}
+          tipo={vm.mensagem.tipo}
           fechar={vm.fecharMensagem}
         />
       )}
@@ -43,6 +44,14 @@ export default function Motorista() {
           motorista={vm.modal.dado}
           fechar={vm.fecharModal}
           confirmar={vm.inativarMotorista}
+        />
+      )}
+
+      {vm.modalInfo.aberta && (
+        <InfoMotoristaModal
+          motorista={vm.modalInfo.motorista}
+          checklist={vm.modalInfo.checklist}
+          fechar={vm.fecharModalInfo}
         />
       )}
 
@@ -67,6 +76,7 @@ export default function Motorista() {
             <option value="todos">Todos</option>
             <option value="Ativo">Ativos</option>
             <option value="Inativo">Inativos</option>
+            <option value="bloqueado">Bloqueados</option>
           </select>
         </div>
         <button onClick={() => vm.abrirModal("formulario")}>
@@ -96,7 +106,7 @@ export default function Motorista() {
               <td>
                 {(() => {
                   let classeConvenio = "";
-                  const conv = m.convenio.toLowerCase();
+                  const conv = (m.convenio || "").toLowerCase();
 
                   if (conv === "premium") {
                     classeConvenio = "premium";
@@ -108,14 +118,14 @@ export default function Motorista() {
 
                   return (
                     <span className={`m-convenio ${classeConvenio}`}>
-                      {m.convenio}
+                      {m.convenio || "Sem Convênio"}
                     </span>
                   );
                 })()}
               </td>
               <td>
-                <span className={`t-status ${m.status.toLowerCase()}`}>
-                  {m.status}
+                <span className={`t-status ${(m.status || "").toLowerCase()}`}>
+                  {m.status || "Ativo"}
                 </span>
               </td>
               <td>
@@ -133,6 +143,16 @@ export default function Motorista() {
                       onClick={() => vm.abrirModal("delete", m)}
                     >
                       <Trash2 size={16} />
+                    </button>
+                  )}
+
+                  {m.status === "Bloqueado" && (
+                    <button
+                      className="t-info-check"
+                      onClick={() => vm.abrirModalInfo(m)}
+                      title="Ver informações"
+                    >
+                      <Info size={16} />
                     </button>
                   )}
                 </div>

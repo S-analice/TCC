@@ -1,7 +1,7 @@
 import "../styles/componentes/SaidaModal.css";
 import React, { useState, useEffect } from "react";
 import { MovimentacaoModel } from "../models/MovimentacaoModel";
-import { MENSAGENS } from "../utils/mensagens"; 
+import { MENSAGENS } from "../utils/mensagens";
 
 export default function SaidaModal({
   registro,
@@ -12,14 +12,12 @@ export default function SaidaModal({
 }) {
   const obterDataLocal = () => {
     const agora = new Date();
-    const offset = agora.getTimezoneOffset() * 60000; 
+    const offset = agora.getTimezoneOffset() * 60000;
     const localISOTime = new Date(agora - offset).toISOString().slice(0, 16);
     return localISOTime;
   };
 
-  const [dataSaida, setDataSaida] = useState(
-    obterDataLocal(),
-  );
+  const [dataSaida, setDataSaida] = useState(obterDataLocal());
   const [tipoPagamento, setTipoPagamento] = useState("");
   const [valores, setValores] = useState({
     valor: 0,
@@ -38,7 +36,7 @@ export default function SaidaModal({
 
   const handleConfirmar = () => {
     if (!tipoPagamento) {
-      setValores(prev => ({ ...prev, erro: MENSAGENS.VALIDACAO.SELECIONE }));
+      setValores((prev) => ({ ...prev, erro: MENSAGENS.VALIDACAO.SELECIONE }));
       return;
     }
 
@@ -54,11 +52,11 @@ export default function SaidaModal({
   };
 
   return (
-    <div className="sm-fundo" onClick={fechar}>
-      <div className="sm-card" onClick={(e) => e.stopPropagation()}>
+    <div className="tm-fundo" onClick={fechar}>
+      <div className="tm-card" onClick={(e) => e.stopPropagation()}>
         <h2>Finalizar Saída</h2>
 
-        <div className="sm-caixinha-linha">
+        <div className="tm-caixinha-linha">
           <p>
             Placa: <strong>{registro.placa}</strong>
           </p>
@@ -74,26 +72,26 @@ export default function SaidaModal({
           </p>
         </div>
 
-        <div className="sm">
-          <div className="sm-container">
-            <label className="sm-label">Horário de Saída</label>
+        <div className="tm">
+          <div className="tm-container">
+            <label className="tm-label">Horário de Saída</label>
             <input
               type="datetime-local"
-              className="sm-input"
+              className="tm-input"
               value={dataSaida}
               onChange={(e) => setDataSaida(e.target.value)}
             />
           </div>
 
-          <div className="sm-container">
+          <div className="tm-container">
             <label className="sm-label">Forma de Pagamento</label>
             <select
-              className="sm-input"
+              className="tm-input"
               value={tipoPagamento}
               onChange={(e) => {
                 setTipoPagamento(e.target.value);
-                // Limpa o erro se o usuário selecionar algo
-                if(e.target.value) setValores(prev => ({...prev, erro: null}));
+                if (e.target.value)
+                  setValores((prev) => ({ ...prev, erro: null }));
               }}
             >
               <option value="">Selecione</option>
@@ -104,17 +102,25 @@ export default function SaidaModal({
               ))}
             </select>
           </div>
+
+          <div className="tm-caixinha-linha">
+            <p>
+              Funcionário: <strong>{funcionario?.nome || "Sistema"}</strong>
+            </p>
+          </div>
           {valores.erro && <p className="erro-texto">{valores.erro}</p>}
 
-          <div className="sm-acoes">
-            <button className="sm-cancelar" onClick={fechar}>
+          <div className="tm-acoes">
+            <button className="tm-cancelar" onClick={fechar}>
               Cancelar
             </button>
             <button
               onClick={handleConfirmar}
-              className="sm-confirmar"
-              // Removi o disabled do pagamento para o usuário clicar e ver o erro
-              disabled={!!valores.erro && valores.erro !== "Selecione uma forma de pagamento."}
+              className="tm-salvar"
+              disabled={
+                !!valores.erro &&
+                valores.erro !== "Selecione uma forma de pagamento."
+              }
             >
               Confirmar
             </button>

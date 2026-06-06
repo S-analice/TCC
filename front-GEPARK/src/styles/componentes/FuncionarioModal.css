@@ -91,11 +91,12 @@
     display:flex;
     align-items:center;
     gap: 6px;
-    
+    transition: all 0.2s;
 }
 
 .fm-upload-remover:hover{
     background:#99211d;
+    transform: scale(1.05);
 }
 
 .fm-upload-label{
@@ -112,18 +113,22 @@
 
 .fm-upload-label.carregar{
     background:#436850;
+    transition: all 0.2s;
 }
 
 .fm-upload-label.carregar:hover{
     background:#35563f;
+    transform: scale(1.05);
 }
 
 .fm-upload-label.alterar{
     background:#f2c14e;
+    transition: all 0.2s;
 }
 
 .fm-upload-label.alterar:hover{
     background:#e0af3c;
+    transform: scale(1.05);
 }
 
 .fm-upload-texto{
@@ -167,10 +172,12 @@
     font-weight: 600;
     background-color: #ffffff;
     color: #7C7C7C;
+    transition: all 0.2s;
 }
 
 .fm-cancelar:hover {
     background-color: #e0e0e0;
+    transform: scale(1.05);
 }
 
 .fm-salvar {
@@ -182,10 +189,12 @@
     font-weight: 600;
     background-color: #436850;
     color: #ffffff;
+    transition: all 0.2s;
 }
 
 .fm-salvar:hover {
     background-color: #35563f;
+    transform: scale(1.05);
 }
 
 .erro-texto {

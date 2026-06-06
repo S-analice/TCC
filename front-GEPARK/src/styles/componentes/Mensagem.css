@@ -53,10 +53,12 @@
   color: #ffffff;
   font-weight: 600;
   font-size: 14px;
+  transition: all 0.2s;
 }
   
 .msg-botao:hover {
   background-color: #35563f;
+  transform: scale(1.05);
 }
 
 .msg-retangulo.erro .msg-icon {

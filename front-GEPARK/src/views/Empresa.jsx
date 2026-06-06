@@ -16,7 +16,7 @@ export default function Empresa() {
       {vm.mensagem.mostrar && (
         <Mensagem
           mensagem={vm.mensagem.texto}
-          modo={vm.mensagem.tipo}
+          tipo={vm.mensagem.tipo}
           fechar={vm.fecharMensagem}
         />
       )}

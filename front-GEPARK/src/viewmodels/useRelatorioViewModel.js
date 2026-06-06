@@ -11,7 +11,7 @@ export function useRelatorioViewModel() {
   const [mensagem, setMensagem] = useState({
     mostrar: false,
     texto: "",
-    tipo: "",
+    tipo: "sucesso",
   });
 
   const gerarRelatorio = async () => {
@@ -19,6 +19,18 @@ export function useRelatorioViewModel() {
       setMensagem({
         mostrar: true,
         texto: MENSAGENS.VALIDACAO.SELECIONE,
+        tipo: "erro",
+      });
+      return;
+    }
+
+    const dataInicioObj = new Date(dataInicio);
+    const dataFimObj = new Date(dataFim);
+
+    if (dataInicioObj > dataFimObj) {
+      setMensagem({
+        mostrar: true,
+        texto: MENSAGENS.VALIDACAO.DATA,
         tipo: "erro",
       });
       return;
@@ -34,6 +46,17 @@ export function useRelatorioViewModel() {
         dataInicio,
         dataFim,
       );
+
+      if (filtrados.length === 0) {
+        setMensagem({
+          mostrar: true,
+          texto: MENSAGENS.ERRO.CARREGAR,
+          tipo: "erro",
+        });
+        setMostrarResultados(false);
+        setCarregando(false);
+        return;
+      }
 
       setRegistrosFiltrados(filtrados);
       setMostrarResultados(true);
@@ -53,7 +76,7 @@ export function useRelatorioViewModel() {
     }
   };
 
-  const exportarCSV = async () => {
+  const exportarPDF = async () => {
     setCarregando(true);
     try {
       await new Promise((resolve) => setTimeout(resolve, 1200));
@@ -154,7 +177,7 @@ export function useRelatorioViewModel() {
     setMensagem,
     fecharMensagem,
     gerarRelatorio,
-    exportarCSV,
+    exportarPDF,
     estatisticas,
   };
 }

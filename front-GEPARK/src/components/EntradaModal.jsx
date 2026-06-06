@@ -1,4 +1,3 @@
-import "../styles/componentes/EntradaModal.css";
 import "../styles/TelaModal.css";
 import React, { useState } from "react";
 import { formatarCPF, formatarPlaca } from "../utils/formatadores";
@@ -112,7 +111,7 @@ export default function EntradaModal({ modo, registro, fechar, salvar, funcionar
             />
           </div>
 
-          <div className="em-caixinha-linha">
+          <div className="tm-caixinha-linha">
             <p>Funcionário: <strong>{funcionario?.nome || "Sistema"}</strong></p>
           </div>
           

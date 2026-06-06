@@ -17,7 +17,7 @@ npm run dev
 
 Crie um arquivo **.env** na raiz do projeto:
 VITE_API_URL=https://api.openweathermap.org/data/2.5
-VITE_API_KEY=SEU_API_KEY_AQUI
+VITE_API_KEY=ad5c2867dcf6cc19700761baeb1b120c
 
 
 
@@ -145,6 +145,10 @@ Total de arquivos no projeto: 36/36
 * Descobrindo e arrumando erros de logica 
 
 
+**06/06**
+* Adicionando a funcionalidade checklist
+
+
 
 **Tecnologias Utilizadas**
 * Vite
@@ -153,4 +157,3 @@ Total de arquivos no projeto: 36/36
 * CSS
 * API WetherMap
 * MVVM
- 

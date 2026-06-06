@@ -1,0 +1,14 @@
+.cl-textarea {
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 14px;
+  resize: vertical;
+  color: #7c7c7c;
+  transition: all 0.2s;
+}
+
+.cl-textarea:focus {
+  outline: none;
+  border-color: #436850;
+}

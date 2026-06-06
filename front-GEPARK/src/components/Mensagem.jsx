@@ -1,15 +1,15 @@
 import "../styles/componentes/Mensagem.css";
 import { Check, X } from "lucide-react";
 
-export default function Mensagem({ mensagem, fechar, modo = "sucesso" }) {
+export default function Mensagem({ mensagem, fechar, tipo = "sucesso" }) {
 
-    const icone = modo === "sucesso" ? <Check size={32}/> : <X size={32}/>;
+    const icone = tipo === "sucesso" ? <Check size={32}/> : <X size={32}/>;
 
     return (
         <div className="msg-container" onClick={fechar}>
             <div className="msg-card" onClick={(e) => e.stopPropagation()}>
 
-                <div className={`msg-retangulo ${modo}`}>
+                <div className={`msg-retangulo ${tipo}`}>
 
                     <div className="msg-icon">
                         {icone}
