@@ -1,8 +1,24 @@
-﻿node_modules/
+﻿# Dependências
+node_modules/
+*/node_modules/
+**/node_modules/
+
+# Backend
 back-GEPARK/node_modules/
+back-GEPARK/*.dll
+back-GEPARK/*.exe
+back-GEPARK/uploads/relatorios/*.pdf
+back-GEPARK/.env
+
+# Frontend
 front-GEPARK/node_modules/
-*.dll
-*.exe
-*.pdf
-uploads/relatorios/*.pdf
+front-GEPARK/.env
+front-GEPARK/dist/
+front-GEPARK/build/
+
+# Arquivos gerais
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
 .env
