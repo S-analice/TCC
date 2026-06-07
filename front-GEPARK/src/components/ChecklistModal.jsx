@@ -37,10 +37,10 @@ export default function ChecklistModal({
 
     try {
       if (!formData.motivo.trim()) {
-        throw new Error("Por favor, informe o motivo do bloqueio.");
+        throw new Error(MENSAGENS.VALIDACAO.INFORME);
       }
       if (!formData.data_desbloqueio) {
-        throw new Error("Por favor, informe a data de desbloqueio.");
+        throw new Error(MENSAGENS.VALIDACAO.INFORME);
       }
 
       const dataDesbloqueio = new Date(formData.data_desbloqueio);
@@ -53,7 +53,6 @@ export default function ChecklistModal({
       }
 
       await salvar(formData);
-      fechar();
     } catch (error) {
       setErro(error.message);
     }

@@ -54,6 +54,10 @@ Total de arquivos no projeto: /
 * Arrumando fotos e pdfs
 
 
+**06/06**
+* Adicionando o Checklist
+
+
 
 **Tecnologias Utilizadas**
 * XAMPP

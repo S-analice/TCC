@@ -40,7 +40,8 @@ export const buscarPorId = async (req, res) => {
 export const listarAtivas = async (req, res) => {
   try {
     const movimentacoes = await MovimentacaoModel.buscarMovimentacoesAtivas();
-    res.json(movimentacoes);
+    const ativas = movimentacoes.filter(m => m.status !== 'Cancelado');
+    res.json(ativas);
   } catch (error) {
     console.error('Erro ao buscar movimentações ativas:', error);
     res.status(500).json({ message: 'Erro ao buscar veículos no pátio' });
@@ -65,6 +66,21 @@ export const registrarEntrada = async (req, res) => {
     
     if (!motorista) {
       return res.status(404).json({ message: 'Motorista não encontrado' });
+    }
+    
+    // VERIFICAR SE MOTORISTA ESTÁ BLOQUEADO
+    if (motorista.status === 'Bloqueado') {
+      // Verificar se o bloqueio já expirou
+      if (motorista.data_fim_bloqueio && new Date(motorista.data_fim_bloqueio) <= new Date()) {
+        // Bloqueio expirado - atualizar automaticamente
+        await MotoristaModel.atualizarBloqueiosExpirados();
+        motorista.status = 'Ativo';
+      } else {
+        const diasRestantes = Math.ceil((new Date(motorista.data_fim_bloqueio) - new Date()) / (1000 * 60 * 60 * 24));
+        return res.status(403).json({ 
+          message: `Motorista bloqueado por checklist. Desbloqueio em ${diasRestantes} dias.` 
+        });
+      }
     }
     
     if (motorista.status !== 'Ativo') {
@@ -210,5 +226,37 @@ export const listarTiposPagamento = async (req, res) => {
   } catch (error) {
     console.error('Erro ao buscar tipos de pagamento:', error);
     res.status(500).json({ message: 'Erro ao buscar tipos de pagamento' });
+  }
+};
+
+export const cancelarMovimentacao = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { motivo } = req.body;
+    const funcionarioId = req.usuarioId;
+    
+    const movimentacao = await MovimentacaoModel.buscarPorId(id);
+    if (!movimentacao) {
+      return res.status(404).json({ message: 'Movimentação não encontrada' });
+    }
+    
+    if (movimentacao.data_saida) {
+      return res.status(400).json({ message: 'Movimentação já finalizada' });
+    }
+    
+    if (movimentacao.status === 'Cancelado') {
+      return res.status(400).json({ message: 'Movimentação já cancelada' });
+    }
+    
+    const cancelado = await MovimentacaoModel.cancelarMovimentacao(id, funcionarioId);
+    
+    if (!cancelado) {
+      return res.status(400).json({ message: 'Erro ao cancelar movimentação' });
+    }
+    
+    res.json({ message: 'Movimentação cancelada com sucesso' });
+  } catch (error) {
+    console.error('Erro ao cancelar movimentação:', error);
+    res.status(500).json({ message: 'Erro ao cancelar movimentação' });
   }
 };

@@ -46,9 +46,7 @@ export default function Movimentacao({ funcionario, motoristas = [], checklistsF
   };
 
   const abrirModalBloqueio = (movimentacao) => {
-    console.log("Abrindo modal para movimentação:", movimentacao);
     const motorista = encontrarMotoristaPorCPF(movimentacao.cpf);
-    console.log("Motorista encontrado:", motorista);
     
     if (motorista) {
       setModalChecklist({
@@ -64,7 +62,7 @@ export default function Movimentacao({ funcionario, motoristas = [], checklistsF
 
   const filtrados = vm.movimentacoes.filter(
     (r) =>
-      !r.dataSaida && 
+      !r.dataSaida && r.status !== "Cancelado" &&
       (r.cpf?.includes(pesquisa) || r.placa?.toUpperCase().includes(pesquisa.toUpperCase())),
   );
 

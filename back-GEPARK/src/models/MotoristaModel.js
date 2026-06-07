@@ -262,3 +262,54 @@ export const buscarConvenios = async () => {
     throw error;
   }
 };
+
+export const bloquear = async (id, dataFimBloqueio) => {
+  try {
+    const [result] = await db.query(`
+      UPDATE motorista 
+      SET status = 'Bloqueado', data_fim_bloqueio = ?, updated_at = NOW()
+      WHERE id = ? AND deleted_at IS NULL
+    `, [dataFimBloqueio, id]);
+    
+    return result.affectedRows > 0;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const atualizarBloqueiosExpirados = async () => {
+  try {
+    const [result] = await db.query(`
+      UPDATE motorista 
+      SET status = 'Ativo', data_fim_bloqueio = NULL, updated_at = NOW()
+      WHERE status = 'Bloqueado' 
+        AND data_fim_bloqueio IS NOT NULL 
+        AND data_fim_bloqueio <= NOW()
+        AND deleted_at IS NULL
+    `);
+    
+    return result.affectedRows;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const buscarBloqueados = async () => {
+  try {
+    const [rows] = await db.query(`
+      SELECT 
+        m.id, m.cpf, m.placa, m.telefone, m.status, m.data_fim_bloqueio,
+        e.nome as empresa_nome,
+        c.nome as convenio_nome
+      FROM motorista m
+      LEFT JOIN empresa e ON m.empresa_id = e.id
+      LEFT JOIN convenio c ON m.convenio_id = c.id
+      WHERE m.status = 'Bloqueado' AND m.deleted_at IS NULL
+      ORDER BY m.data_fim_bloqueio ASC
+    `);
+    
+    return rows;
+  } catch (error) {
+    throw error;
+  }
+};

@@ -10,6 +10,7 @@ export const MovimentacaoModel = {
       dataSaida: null,
       funcionarioEntrada: "João Silva",
       funcionarioSaida: null,
+      status: "Ativo"
     },
     {
       id: 2,
@@ -19,6 +20,7 @@ export const MovimentacaoModel = {
       dataSaida: null,
       funcionarioEntrada: "Maria Santos",
       funcionarioSaida: null,
+      status: "Cancelado"
     },
     {
       id: 3,
@@ -28,6 +30,7 @@ export const MovimentacaoModel = {
       dataSaida: "2026-05-20T07:40:00",
       funcionarioEntrada: "Lilo",
       funcionarioSaida: "Analice Santos",
+      status: "Ativo"
     },
   ],
 

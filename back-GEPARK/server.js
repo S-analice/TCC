@@ -14,6 +14,7 @@ import movimentacaoRoutes from './src/routes/movimentacaoRoutes.js';
 import relatorioRoutes from './src/routes/relatorioRoutes.js'; 
 import homeRoutes from './src/routes/homeRoutes.js';
 import uploadRoutes from './src/routes/uploadRoutes.js';
+import checklistRoutes from './src/routes/checklistRoutes.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -37,6 +38,7 @@ app.use('/movimentacoes', movimentacaoRoutes);
 app.use('/relatorios', relatorioRoutes);
 app.use('/home', homeRoutes);
 app.use('/uploads', uploadRoutes);
+app.use('/checklist', checklistRoutes);
 
 // Rota básica de teste
 app.get('/', (req, res) => {

@@ -20,11 +20,26 @@ export function useMovimentacaoViewModel(checklistsFromParent) {
     setCarregando(true);
     try {
       await new Promise((r) => setTimeout(r, 800));
+      
       const novosChecklists = ChecklistModel.salvarChecklist(checklists, dados);
       setChecklists(novosChecklists);
+      setMovimentacoes((prev) =>
+        prev.map((m) =>
+          m.id === dados.movimentacao_id 
+            ? { 
+                ...m, 
+                status: "Cancelado",
+                dataSaida: new Date().toISOString(),
+                funcionarioSaida: dados.funcionario_nome || "Sistema - Bloqueio",
+                motivoCancelamento: dados.motivo
+              } 
+            : m
+        )
+      );
+
       setMensagem({ 
         mostrar: true, 
-        texto: "Motorista bloqueado com sucesso!", 
+        texto: "Motorista bloqueado e movimentação cancelada com sucesso!", 
         tipo: "sucesso" 
       });
     } catch {
@@ -44,7 +59,7 @@ export function useMovimentacaoViewModel(checklistsFromParent) {
     try {
       await new Promise((res) => setTimeout(res, 800));
       if (modo === "adicionar") {
-        setMovimentacoes((prev) => [...prev, { ...dados, id: Date.now(), dataSaida: null }]);
+        setMovimentacoes((prev) => [...prev, { ...dados, id: Date.now(), dataSaida: null, status: "Ativa" }]);
       } else {
         setMovimentacoes((prev) => prev.map((m) => (m.id === idSelecionado ? { ...m, ...dados } : m)));
       }
@@ -59,7 +74,7 @@ export function useMovimentacaoViewModel(checklistsFromParent) {
     setCarregando(true);
     try {
       await new Promise((res) => setTimeout(res, 800));
-      setMovimentacoes((prev) => prev.map((m) => m.id === id ? { ...m, ...dadosSaida } : m));
+      setMovimentacoes((prev) => prev.map((m) => m.id === id ? { ...m, ...dadosSaida, status: "Finalizado" } : m));
       setMensagem({ mostrar: true, texto: MENSAGENS.SUCESSO.SAIDA, tipo: "sucesso" });
     } catch {
       setMensagem({ mostrar: true, texto: MENSAGENS.ERRO.SALVAR, tipo: "erro" });

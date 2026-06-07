@@ -17,6 +17,8 @@ export const listar = async (req, res) => {
   try {
     const { status = 'todos', busca = '', page = 1, limit = 100 } = req.query;
     
+    await MotoristaModel.atualizarBloqueiosExpirados();
+    
     const resultado = await MotoristaModel.buscarComFiltros({
       pesquisa: busca,
       status,
@@ -212,5 +214,36 @@ export const listarConvenios = async (req, res) => {
   } catch (error) {
     console.error('Erro ao buscar convênios:', error);
     res.status(500).json({ message: 'Erro ao buscar convênios' });
+  }
+};
+
+export const bloquear = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { data_fim_bloqueio } = req.body;
+    
+    const motoristaExistente = await MotoristaModel.buscarPorId(id);
+    if (!motoristaExistente) {
+      return res.status(404).json({ message: 'Motorista não encontrado' });
+    }
+    
+    if (motoristaExistente.status === 'Bloqueado') {
+      return res.status(400).json({ message: 'Motorista já está bloqueado' });
+    }
+    
+    const atualizado = await MotoristaModel.bloquear(id, data_fim_bloqueio);
+    
+    if (!atualizado) {
+      return res.status(400).json({ message: 'Erro ao bloquear motorista' });
+    }
+    
+    const motoristaAtualizado = await MotoristaModel.buscarPorId(id);
+    res.json({
+      message: 'Motorista bloqueado com sucesso',
+      motorista: motoristaAtualizado
+    });
+  } catch (error) {
+    console.error('Erro ao bloquear motorista:', error);
+    res.status(500).json({ message: 'Erro ao bloquear motorista' });
   }
 };

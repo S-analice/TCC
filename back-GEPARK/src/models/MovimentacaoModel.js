@@ -66,8 +66,8 @@ export const registrarEntrada = async (dados) => {
     const { motorista_id, funcionario_entrada_id, data_entrada } = dados;
     
     const [result] = await db.query(`
-      INSERT INTO movimentacao (motorista_id, funcionario_entrada_id, data_entrada)
-      VALUES (?, ?, ?)
+      INSERT INTO movimentacao (motorista_id, funcionario_entrada_id, data_entrada, status)
+      VALUES (?, ?, ?, 'Ativo')
     `, [motorista_id, funcionario_entrada_id, data_entrada]);
     
     return { id: result.insertId, ...dados };
@@ -96,13 +96,15 @@ export const buscarMovimentacoesAtivas = async () => {
   try {
     const [rows] = await db.query(`
       SELECT 
-        mov.id, mov.data_entrada,
+        mov.id, mov.data_entrada, mov.status,
         m.id as motorista_id, m.cpf, m.placa,
         c.nome as convenio_nome
       FROM movimentacao mov
       LEFT JOIN motorista m ON mov.motorista_id = m.id
       LEFT JOIN convenio c ON m.convenio_id = c.id
-      WHERE mov.data_saida IS NULL AND m.status = 'Ativo'
+      WHERE mov.data_saida IS NULL 
+        AND mov.status != 'Cancelado'
+        AND m.status = 'Ativo'
       ORDER BY mov.data_entrada
     `);
     return rows;
@@ -363,6 +365,23 @@ export const buscarIndicadoresHome = async () => {
       saidas_hoje: result[0].saidas_hoje || 0,
       total_motoristas: totalMotoristas[0].total || 0
     };
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const cancelarMovimentacao = async (id, funcionarioId) => {
+  try {
+    const [result] = await db.query(`
+      UPDATE movimentacao 
+      SET status = 'Cancelado', 
+          data_saida = NOW(),
+          funcionario_saida_id = ?,
+          updated_at = NOW()
+      WHERE id = ? AND data_saida IS NULL
+    `, [funcionarioId, id]);
+    
+    return result.affectedRows > 0;
   } catch (error) {
     throw error;
   }
