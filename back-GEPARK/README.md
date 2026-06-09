@@ -15,6 +15,7 @@ Acessar: http://localhost/phpmyadmin
 
 **Variáveis de Ambiente**
 Crie um arquivo **.env** na raiz do projeto:
+
 PORT=3001
 
 DB_HOST=localhost
@@ -28,7 +29,7 @@ VITE_API_URL=https://api.openweathermap.org/data/2.5
 VITE_API_KEY=ad5c2867dcf6cc19700761baeb1b120c
 
 **Estrutura Atual**
-Total de arquivos no projeto: /
+Total de arquivos no projeto: 40/44
 
 
 
@@ -61,15 +62,18 @@ Total de arquivos no projeto: /
 
 **Tecnologias Utilizadas**
 * XAMPP
-* PhpMyAdmin
-* MySql
-* AXIOS
-* EXPRESS
-* NODE.JS
-* DOTENV
-* API Ibge
-* CORS
+* phpMyAdmin
+* MySQL
+* Node.js
+* Express
+* Axios
+* API IBGE
+* Bcryptjs
+* JSON Web Token
+* Dotenv
+* Cors
 * Multer
 * Sharp
-* Html Pdf Node
+* Html-pdf-node
 * Handlebars
+* Nodemailer
