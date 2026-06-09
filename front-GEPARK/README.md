@@ -155,5 +155,6 @@ Total de arquivos no projeto: 36/36
 * React
 * JavaScript
 * CSS
-* API WetherMap
+* Lucide React
+* API OpenWeatherMap
 * MVVM
