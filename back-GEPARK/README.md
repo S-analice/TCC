@@ -28,6 +28,14 @@ JWT_SECRET=gepark_secret_key_2026_@TCC
 VITE_API_URL=https://api.openweathermap.org/data/2.5
 VITE_API_KEY=ad5c2867dcf6cc19700761baeb1b120c
 
+EMAIL_USER=analice.santos200308@gmail.com
+EMAIL_PASS=bobx tviv gxbo ipwy
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+
+
+FRONTEND_URL=http://localhost:5173
+
 **Estrutura Atual**
 Total de arquivos no projeto: 40/44
 

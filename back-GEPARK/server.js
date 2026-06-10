@@ -15,6 +15,7 @@ import relatorioRoutes from './src/routes/relatorioRoutes.js';
 import homeRoutes from './src/routes/homeRoutes.js';
 import uploadRoutes from './src/routes/uploadRoutes.js';
 import checklistRoutes from './src/routes/checklistRoutes.js';
+import recuperacaoRoutes from './src/routes/recuperacaoRoutes.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -39,6 +40,7 @@ app.use('/relatorios', relatorioRoutes);
 app.use('/home', homeRoutes);
 app.use('/uploads', uploadRoutes);
 app.use('/checklist', checklistRoutes);
+app.use('/recuperacao', recuperacaoRoutes);
 
 // Rota básica de teste
 app.get('/', (req, res) => {
