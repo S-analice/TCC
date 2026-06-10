@@ -67,6 +67,10 @@ Total de arquivos no projeto: 40/44
 * Adicionando o Checklist
 
 
+**10/06**
+* Adicionando o recuperar senha
+
+
 
 **Tecnologias Utilizadas**
 * XAMPP
